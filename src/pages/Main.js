@@ -1,14 +1,15 @@
 import React from "react";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Calendar from "../components/Calendar";
+import Footer from "../components/Footer"
+import Schedule from "../components/Schedule"
+
 
 const Main = () => {
   return (
     <div>
       <Header />
       <div>
-        <Calendar />
+        <Schedule />
       </div>
       <Footer />
     </div>
