@@ -1,19 +1,20 @@
 import React from "react";
 import Header from "../components/Header";
-import Footer from "../components/Footer"
-import Schedule from "../components/Schedule"
-import { MainWrap } from "../style/MainCss";
+import Footer from "../components/Footer";
+import Schedule from "../components/Schedule";
+import ShoppingList from "../components/ShoppingList";
 
 
 const Main = () => {
   return (
-    <MainWrap>
+    <div>
       <Header />
       <div>
         <Schedule />
+        <ShoppingList />
       </div>
       <Footer />
-    </MainWrap>
+    </div>
   );
 };
 

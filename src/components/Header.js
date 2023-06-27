@@ -1,16 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Wrap } from "../style/HeaderCss";
 
 const Header = () => {
   return (
-    <div>
-      <div>
-        <Link to="/about">
-          <img src="" alt="" />
-          UserName
-        </Link>
-      </div>
-    </div>
+    <Wrap>
+        <div>
+          <Link to="/about">
+            <img src="" alt="" />
+            UserName
+          </Link>
+        </div>
+        <div>
+          <Link to="/group">LogOut</Link>
+        </div>
+    </Wrap>
   );
 };
 

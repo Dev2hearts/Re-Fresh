@@ -1,5 +1,4 @@
-@charset 'UTF-8';
-
+@charset "UTF-8";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -31,4 +30,6 @@ body {
   word-break: keep-all;
   max-width: 720px;
   margin: 0 auto;
+  height: 100vh;
+  position: relative;
 }
