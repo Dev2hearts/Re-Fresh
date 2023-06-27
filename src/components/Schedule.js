@@ -3,7 +3,6 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import locale from "antd/es/calendar/locale/ko_KR";
 import "../style/schedule.css";
-import moment from "moment";
 
 const Schedule = () => {
   const hi = [
