@@ -6,10 +6,10 @@ export const Wrap = styled.header`
   padding: 0 10px;
   height: 40px;
   align-items: center;
-  background: #82c32e;
+  background: #fff;
   font-size: 15px;
   a {
-    color: #fff;
+    color: #006127;
     font-weight: 400;
   }
 `;
