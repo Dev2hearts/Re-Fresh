@@ -30,6 +30,9 @@ body {
   word-break: keep-all;
   max-width: 720px;
   margin: 0 auto;
-  height: 100vh;
+
   position: relative;
+}
+#root {
+  height: 100vh;
 }
