@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import locale from "antd/es/calendar/locale/ko_KR";
 import "../style/schedule.css";
+import FirstItem from "./FirstItem";
 
 const Schedule = () => {
   const hi = [
@@ -62,7 +63,9 @@ const Schedule = () => {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-      ></Modal>
+      >
+        <FirstItem />
+      </Modal>
       <Calendar
         locale={locale}
         value={value}
@@ -70,7 +73,7 @@ const Schedule = () => {
         onPanelChange={onPanelChange}
         cellRender={cellRender}
       />
-      <Alert message={`${selectedValue?.format("YYYY-MM-DD")}`} />
+      {selectedValue?.format("YYYY-MM-DD")}
     </div>
   );
 };
