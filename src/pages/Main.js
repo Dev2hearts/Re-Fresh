@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import Schedule from "../components/Schedule";
 import ShoppingList from "../components/ShoppingList";
 
+
 const Main = () => {
   return (
     <div>
