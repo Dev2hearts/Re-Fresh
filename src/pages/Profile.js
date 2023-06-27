@@ -18,12 +18,12 @@ const Profile = () => {
         <GITitle>Account Selection</GITitle>
         <div>
           <GIUl>
-            <GILi><Link to="/main">임시</Link></GILi>
-            <GILi><Link to="/main">임시</Link></GILi>
-            <GILi><Link to="/main">임시</Link></GILi>
-            <GILi><Link to="/main">임시</Link></GILi>
-            <GILi><Link to="/main">임시</Link></GILi>
-            <GILi><Link to="/main">임시</Link></GILi>
+            <GILi><Link to="/group">임시</Link></GILi>
+            <GILi><Link to="/group">임시</Link></GILi>
+            <GILi><Link to="/group">임시</Link></GILi>
+            <GILi><Link to="/group">임시</Link></GILi>
+            <GILi><Link to="/group">임시</Link></GILi>
+            <GILi><Link to="/group">임시</Link></GILi>
           </GIUl>
         </div>
       </GIStyles>

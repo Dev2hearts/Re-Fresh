@@ -18,9 +18,9 @@ const Group = () => {
         <GITitle>Group Selection</GITitle>
         <div>
           <GIUl>
-            <GILi><Link to="/profile">임시</Link></GILi>
-            <GILi><Link to="/profile">임시</Link></GILi>
-            <GILi><Link to="/profile">임시</Link></GILi>
+            <GILi><Link to="/main">임시</Link></GILi>
+            <GILi><Link to="/main">임시</Link></GILi>
+            <GILi><Link to="/main">임시</Link></GILi>
           </GIUl>
         </div>
       </GIStyles>
