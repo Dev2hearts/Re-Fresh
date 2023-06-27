@@ -6,13 +6,14 @@ import About from "./pages/About";
 import Profile from "./pages/Profile";
 import Group from "./pages/Group";
 import NotFound from "./pages/NotFound";
-
+import Intro from "./pages/Intro";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Navigate to="/profile" />}></Route>
+        <Route path="/" element={<Navigate to="/intro" />}></Route>
+        <Route path="/intro" element={<Intro />}></Route>
         <Route path="/group" element={<Group />}></Route>
         <Route path="/main" element={<Main />}></Route>
         <Route path="/about" element={<About />}></Route>
