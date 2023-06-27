@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Navigate to="/group" />}></Route>
+        <Route path="/" element={<Navigate to="/profile" />}></Route>
         <Route path="/group" element={<Group />}></Route>
         <Route path="/main" element={<Main />}></Route>
         <Route path="/about" element={<About />}></Route>

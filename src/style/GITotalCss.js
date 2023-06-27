@@ -2,14 +2,14 @@ import styled from "@emotion/styled";
 
 export const GIContainer = styled.div`
   position: relative;
-  width: 720px;
-  height: 1050px;
+  max-width: 720px;
+  height: 100vh;
 `;
 
 export const GIStyles = styled.div`
   box-sizing: border-box;
   position: absolute;
-  width: 720px;
+  width: 100%;
   height: 80%;
   left: 0px;
   top: 0px;
@@ -28,19 +28,19 @@ export const GITitle = styled.p`
   text-align: center;
   display: flex;
   justify-content: center;
-  margin: 30% 0 10%;
+  margin: 220px 0 50px;
 `;
 export const GIUl = styled.ul`
   display: grid;
-  grid-template-columns: 125px 125px 125px;
-  grid-template-rows: 125px 125px;
+  grid-template-columns: repeat(3, minmax(0, 125px));
+  grid-template-rows: repeat(2, minmax(0, 125px));
   grid-gap: 20px;
   justify-content: center;
   width: auto;
 `;
 export const GILi = styled.li`
-  width: 125px;
-  height: 125px;
+  max-width: 125px;
+  max-height: 125px;
   border-radius: 20%;
   background: #fff;
   overflow: hidden;
