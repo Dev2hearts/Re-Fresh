@@ -15,13 +15,16 @@ export const GIStyles = styled.div`
   top: 0px;
   background: linear-gradient(
     180deg,
-    rgba(106, 189, 0, 0.65) 0%,
-    rgba(106, 189, 0, 0) 100%
+    rgba(218, 218, 218, 0.65) 0%,
+    rgba(204, 204, 204, 0) 100%
   );
 `;
+
 export const GITitle = styled.p`
   font-weight: 700;
-  font-size: 30px;
+  height: auto;
+  font-size: 38px;
+  padding: 0 0 0.1vw 0;
   line-height: 20px;
   letter-spacing: 3px;
   color: #305569;
@@ -29,30 +32,85 @@ export const GITitle = styled.p`
   display: flex;
   justify-content: center;
   margin: 220px 0 50px;
+
+  @media (max-width: 1100px) {
+    font-size: 3.5vw;
+  }
+  @media (max-width: 920px) {
+    font-size: 2rem;
+  }
+  @media (max-height: 470px) {
+    margin-bottom: 0;
+  }
+  @media (max-height: 412px) {
+    margin-top: 60%;
+  }
+  @media (max-width: 318px) {
+    font-size: 1rem;
+  }
 `;
+
 export const GIUl = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 125px));
-  grid-template-rows: repeat(2, minmax(0, 125px));
-  grid-gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  width: auto;
+  align-items: center;
+  gap: 15px;
+  padding: 0 20%;
+  @media (max-width: 191px) {
+    padding: 0 5%;
+  }
+  @media (max-width: 174px) {
+    padding: 0;
+  }
+  @media (max-height: 500px) {
+    gap: 5px;
+  }
+  @media (max-width: 115px) {
+    gap: 5px;
+  }
+  @media (max-height: 470px) {
+    gap: 0px;
+  }
+  @media (max-width: 104px) {
+    gap: 0px;
+  }
 `;
+
 export const GILi = styled.li`
-  max-width: 125px;
-  max-height: 125px;
+  width: calc((100% - 30px) / 3);
+  min-height: 50px;
+  min-width: 50px;
+  border: 1px solid rgb(0, 97, 39);
   border-radius: 20%;
   background: #fff;
   overflow: hidden;
   text-align: center;
+  position: relative;
+
+  ::after {
+    padding-bottom: 100%;
+    content: "";
+    display: block;
+  }
+
+  img {
+    position: absolute;
+  }
 `;
+
 export const GILogoDiv = styled.div`
   position: absolute;
-  bottom: 10%;
+  padding-bottom: 5vh;
+  bottom: 0;
   width: 100%;
 `;
+
 export const GILogo = styled.img`
-  width: 25%;
+  width: 30%;
   height: auto;
   margin: 0 auto;
+  @media (max-width: 300px) {
+    width: 70px;
+  }
 `;

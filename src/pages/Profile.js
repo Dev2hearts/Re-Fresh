@@ -17,24 +17,12 @@ const Profile = () => {
         <GITitle>Account Selection</GITitle>
         <div>
           <GIUl>
-            <GILi>
-              <Link to="/group">임시</Link>
-            </GILi>
-            <GILi>
-              <Link to="/group">임시</Link>
-            </GILi>
-            <GILi>
-              <Link to="/group">임시</Link>
-            </GILi>
-            <GILi>
-              <Link to="/group">임시</Link>
-            </GILi>
-            <GILi>
-              <Link to="/group">임시</Link>
-            </GILi>
-            <GILi>
-              <Link to="/group">임시</Link>
-            </GILi>
+            <GILi><Link to="/group"><img src="../image/Test.png" /></Link></GILi>
+            <GILi><Link to="/group"><img src="../image/Test.png" /></Link></GILi>
+            <GILi><Link to="/group"><img src="../image/Test.png" /></Link></GILi>
+            <GILi><Link to="/group"><img src="../image/Test.png" /></Link></GILi>
+            <GILi><Link to="/group"><img src="../image/Test.png" /></Link></GILi>
+            <GILi><Link to="/group"><img src="../image/Test.png" /></Link></GILi>
           </GIUl>
         </div>
       </GIStyles>
