@@ -1,9 +1,11 @@
-import { Alert, Calendar, Modal } from "antd";
+import { Calendar, Modal } from "antd";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import locale from "antd/es/calendar/locale/ko_KR";
 import "../style/schedule.css";
 import FirstItem from "./FirstItem";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const Schedule = () => {
   const hi = [
@@ -15,6 +17,7 @@ const Schedule = () => {
   const [value, setValue] = useState(() => dayjs(Date.now()));
   const [selectedValue, setSelectedValue] = useState(() => dayjs(Date.now()));
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const cellRender = date => {
     const dateString = date.format("YYYY-MM-DD");
 
@@ -38,6 +41,9 @@ const Schedule = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  const handlePlusClick = () => {
+    
+  }
   const onSelect = newValue => {
     setValue(newValue);
     setSelectedValue(newValue);
@@ -56,6 +62,13 @@ const Schedule = () => {
   const onPanelChange = newValue => {
     setValue(newValue);
   };
+  useEffect(() => {
+    const th = document.querySelectorAll(".ant-picker-content th");
+    const day = ["일", "월", "화", "수", "목", "금", "토"];
+    th.forEach((item, index) => {
+      item.innerHTML = day[index];
+    });
+  }, []);
   return (
     <div>
       <Modal
@@ -63,7 +76,14 @@ const Schedule = () => {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        closable={false}
       >
+        <button className="block float-right mr-10 text-xl"
+        onClick={handlePlusClick}
+        >
+          <FontAwesomeIcon icon={faPlus} />
+        </button>
+        <FirstItem />
         <FirstItem />
       </Modal>
       <Calendar
@@ -73,7 +93,7 @@ const Schedule = () => {
         onPanelChange={onPanelChange}
         cellRender={cellRender}
       />
-      {selectedValue?.format("YYYY-MM-DD")}
+      <p>{selectedValue?.format("YYYY-MM-DD")}</p>
     </div>
   );
 };
