@@ -102,7 +102,6 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
         onPanelChange={onPanelChange}
         cellRender={cellRender}
       />
-      <p>{selectedValue?.format("YYYY-MM-DD")}</p>
       <div style={openShopList ? { display: "none" } : { display: "block" }}>
         {selectedValue?.format("YYYY-MM-DD")}
       </div>
