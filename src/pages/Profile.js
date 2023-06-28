@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   GIStyles,
   GITitle,
@@ -11,32 +11,48 @@ import {
 import { Link } from "react-router-dom";
 
 const Profile = () => {
+  const [profiles, setProfiles] = useState([
+    <GILi key={0}>
+      <Link to="/group">
+        <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
+      </Link>
+    </GILi>,
+    <GILi key={1}>
+      <Link to="/group">
+        <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
+      </Link>
+    </GILi>,
+    <GILi key={2}>
+      <Link to="/group">
+        <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
+      </Link>
+    </GILi>,
+    <GILi key={3}>
+      <Link to="/group">
+        <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
+      </Link>
+    </GILi>,
+    <GILi key={4}>
+    <Link to="/group">
+      <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
+    </Link>
+  </GILi>,
+  ]);
+
   return (
     <GIContainer>
       <GIStyles>
         <GITitle>Account Selection</GITitle>
         <div>
           <GIUl>
-            <GILi>
-              <Link to="/group">
-                <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
-              </Link>
-            </GILi>
-            <GILi>
-              <Link to="/group">
-                <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
-              </Link>
-            </GILi>
-            <GILi>
-              <Link to="/group">
-                <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
-              </Link>
-            </GILi>
+            {profiles.map((item, index) => (
+              <React.Fragment key={index}>{item}</React.Fragment>
+            ))}
           </GIUl>
         </div>
       </GIStyles>
       <GILogoDiv>
-        <GILogo src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="logo" />
+        <GILogo src={`${process.env.PUBLIC_URL}/images/Logo.png`} alt="logo" />
       </GILogoDiv>
     </GIContainer>
   );
