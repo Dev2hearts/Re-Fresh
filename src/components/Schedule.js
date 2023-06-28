@@ -9,12 +9,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 // 손정민 추가 코드(쇼핑리스트 출력 : state 전달)
 const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
-  const hi = [
-    { date: "2023-06-20" },
-    { date: "2023-06-03" },
-    { date: "2023-06-10" },
-    { date: "2023-06-29" },
-  ];
+  const hi = [{ date: "2023-06-29" }, { date: "2023-07-07" }];
   const [value, setValue] = useState(() => dayjs(Date.now()));
   const [selectedValue, setSelectedValue] = useState(() => dayjs(Date.now()));
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,9 +37,7 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const handlePlusClick = () => {
-    
-  }
+  const handlePlusClick = () => {};
   const onSelect = newValue => {
     setValue(newValue);
     setSelectedValue(newValue);
@@ -87,8 +80,9 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
         onCancel={handleCancel}
         closable={false}
       >
-        <button className="block float-right mr-10 text-xl"
-        onClick={handlePlusClick}
+        <button
+          className="block float-right mr-10 text-xl"
+          onClick={handlePlusClick}
         >
           <FontAwesomeIcon icon={faPlus} />
         </button>

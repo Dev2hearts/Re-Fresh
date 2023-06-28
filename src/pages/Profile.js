@@ -16,6 +16,7 @@ const Profile = () => {
       <GIStyles>
         <GITitle>Account Selection</GITitle>
         <div>
+          
           <GIUl>
             <GILi>
               <Link to="/group">
