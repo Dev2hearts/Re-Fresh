@@ -5,7 +5,8 @@ import locale from "antd/es/calendar/locale/ko_KR";
 import "../style/schedule.css";
 import FirstItem from "./FirstItem";
 
-const Schedule = () => {
+// 손정민 추가 코드(쇼핑리스트 출력 : state 전달)
+const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
   const hi = [
     { date: "2023-06-20" },
     { date: "2023-06-03" },
@@ -49,9 +50,17 @@ const Schedule = () => {
     });
     if (!result) {
       showModal();
+      // 손정민 추가 코드(쇼핑리스트 출력)
+      setOpenShopListDate("");
+      setOpenShopList(false);
+    } else {
+      // 손정민 추가 코드(쇼핑리스트 출력)
+      setOpenShopList(true);
     }
     setValue(newValue);
     setSelectedValue(newValue);
+    // 손정민 추가 코드(쇼핑리스트 출력)
+    setOpenShopListDate(newValue.format("YYYY/MM/DD"));
   };
   const onPanelChange = newValue => {
     setValue(newValue);
@@ -73,7 +82,9 @@ const Schedule = () => {
         onPanelChange={onPanelChange}
         cellRender={cellRender}
       />
-      {selectedValue?.format("YYYY-MM-DD")}
+      <div style={openShopList ? { display: "none" } : { display: "block" }}>
+        {selectedValue?.format("YYYY-MM-DD")}
+      </div>
     </div>
   );
 };
