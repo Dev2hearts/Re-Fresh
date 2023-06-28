@@ -17,9 +17,21 @@ const Group = () => {
         <GITitle>Group Selection</GITitle>
         <div>
           <GIUl>
-            <GILi><Link to="/main"><img src={`${process.env.PUBLIC_URL}/images/Test.png`} /></Link></GILi>
-            <GILi><Link to="/main"><img src={`${process.env.PUBLIC_URL}/images/Test.png`} /></Link></GILi>
-            <GILi><Link to="/main"><img src={`${process.env.PUBLIC_URL}/images/Test.png`} /></Link></GILi>
+            <GILi>
+              <Link to="/main">
+                <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
+              </Link>
+            </GILi>
+            <GILi>
+              <Link to="/main">
+                <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
+              </Link>
+            </GILi>
+            <GILi>
+              <Link to="/main">
+                <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
+              </Link>
+            </GILi>
           </GIUl>
         </div>
       </GIStyles>
