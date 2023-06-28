@@ -1,9 +1,11 @@
-import { Alert, Calendar, Modal } from "antd";
+import { Calendar, Modal } from "antd";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import locale from "antd/es/calendar/locale/ko_KR";
 import "../style/schedule.css";
 import FirstItem from "./FirstItem";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 // 손정민 추가 코드(쇼핑리스트 출력 : state 전달)
 const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
@@ -16,6 +18,7 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
   const [value, setValue] = useState(() => dayjs(Date.now()));
   const [selectedValue, setSelectedValue] = useState(() => dayjs(Date.now()));
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const cellRender = date => {
     const dateString = date.format("YYYY-MM-DD");
 
@@ -39,6 +42,9 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  const handlePlusClick = () => {
+    
+  }
   const onSelect = newValue => {
     setValue(newValue);
     setSelectedValue(newValue);
@@ -65,6 +71,13 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
   const onPanelChange = newValue => {
     setValue(newValue);
   };
+  useEffect(() => {
+    const th = document.querySelectorAll(".ant-picker-content th");
+    const day = ["일", "월", "화", "수", "목", "금", "토"];
+    th.forEach((item, index) => {
+      item.innerHTML = day[index];
+    });
+  }, []);
   return (
     <div>
       <Modal
@@ -72,7 +85,14 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        closable={false}
       >
+        <button className="block float-right mr-10 text-xl"
+        onClick={handlePlusClick}
+        >
+          <FontAwesomeIcon icon={faPlus} />
+        </button>
+        <FirstItem />
         <FirstItem />
       </Modal>
       <Calendar
@@ -82,6 +102,7 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
         onPanelChange={onPanelChange}
         cellRender={cellRender}
       />
+      <p>{selectedValue?.format("YYYY-MM-DD")}</p>
       <div style={openShopList ? { display: "none" } : { display: "block" }}>
         {selectedValue?.format("YYYY-MM-DD")}
       </div>
