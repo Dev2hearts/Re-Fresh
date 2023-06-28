@@ -44,6 +44,7 @@ const Profile = () => {
       <GIStyles>
         <GITitle>Account Selection</GITitle>
         <div>
+          
           <GIUl>
             {profiles.map((item, index) => (
               <React.Fragment key={index}>{item}</React.Fragment>
