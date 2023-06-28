@@ -8,7 +8,6 @@ import {
   GILogoDiv,
   GIContainer,
 } from "../style/GITotalCss";
-import companyLogo from "../image/Logo.png";
 import { Link } from "react-router-dom";
 import TestImage from "../image/Test.png"
 
@@ -22,11 +21,20 @@ const Group = () => {
             <GILi><Link to="/main"><img src={TestImage} /></Link></GILi>
             <GILi><Link to="/main"><img src={TestImage} /></Link></GILi>
             <GILi><Link to="/main"><img src={TestImage} /></Link></GILi>
+            <GILi>
+              <Link to="/main">임시</Link>
+            </GILi>
+            <GILi>
+              <Link to="/main">임시</Link>
+            </GILi>
+            <GILi>
+              <Link to="/main">임시</Link>
+            </GILi>
           </GIUl>
         </div>
       </GIStyles>
       <GILogoDiv>
-        <GILogo src={companyLogo} alt="logo" />
+        <GILogo src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="logo" />
       </GILogoDiv>
     </GIContainer>
   );

@@ -1,0 +1,12 @@
+.shop-list {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  border: 5px solid red;
+  z-index: 99999;
+  transition: top 0.5s;
+}
+.shop-list-open {
+  top: 475px;
+}
