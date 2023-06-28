@@ -17,12 +17,21 @@ const Profile = () => {
         <GITitle>Account Selection</GITitle>
         <div>
           <GIUl>
-            <GILi><Link to="/group"><img src="../image/Test.png" /></Link></GILi>
-            <GILi><Link to="/group"><img src="../image/Test.png" /></Link></GILi>
-            <GILi><Link to="/group"><img src="../image/Test.png" /></Link></GILi>
-            <GILi><Link to="/group"><img src="../image/Test.png" /></Link></GILi>
-            <GILi><Link to="/group"><img src="../image/Test.png" /></Link></GILi>
-            <GILi><Link to="/group"><img src="../image/Test.png" /></Link></GILi>
+            <GILi>
+              <Link to="/group">
+                <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
+              </Link>
+            </GILi>
+            <GILi>
+              <Link to="/group">
+                <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
+              </Link>
+            </GILi>
+            <GILi>
+              <Link to="/group">
+                <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
+              </Link>
+            </GILi>
           </GIUl>
         </div>
       </GIStyles>
