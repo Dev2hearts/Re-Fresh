@@ -5,14 +5,18 @@ import { useState } from "react";
 import { ShoppingWrap, ShoppingDiv } from "../style/ShoppingListCss";
 import ListItem from "./ListItem";
 
-const ShoppingList = ({ openShopListDate, openShopList,setOpenShopListDate }) => {
+const ShoppingList = ({ openShopListDate, openShopList }) => {
   const [isClicked, setIsClicked] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(dayjs(openShopListDate, "YYYY/MM/DD"));
   const handleClick = () => {
     setIsClicked(!isClicked);
   };
-  const onChange = (date, dateString,) => {
-    console.log(date, dateString);
+  const onChange = (date, dateString) => {
+    setSelectedDate(date)
+
+    console.log(dateString);
   };
+
 
   return (
     <ShoppingWrap
@@ -23,7 +27,8 @@ const ShoppingList = ({ openShopListDate, openShopList,setOpenShopListDate }) =>
       >
         <DatePicker
           onChange={onChange}
-          value={dayjs(setOpenShopListDate, "YYYY/MM/DD")}
+          // onClick={onClick}
+          value={selectedDate}
           defaultValue={dayjs(openShopListDate, "YYYY/MM/DD")}
         />
         <div className="listOpen">
