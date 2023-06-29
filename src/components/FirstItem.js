@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { ItemBox } from "../style/FirstItemCss";
-import { InputNumber, Input, Space, Select } from "antd";
+import { InputNumber, Input, Select } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const FirstItem = () => {
+const FirstItem = ({ onDelete, index, cateList }) => {
   const [isEdit, setIsEdit] = useState(true);
   const handleSaveClick = () => {
     setIsEdit(false);
@@ -19,6 +19,9 @@ const FirstItem = () => {
   const handleCancelClick = () => {
     setIsEdit(false);
   };
+  const handleRemoveClick = () => {
+    onDelete(index);
+  };
   if (isEdit) {
     // 편집중
     return (
@@ -31,26 +34,13 @@ const FirstItem = () => {
             }}
             onChange={handleChange}
             disabled={false}
-            options={[
-              {
-                value: "냉동식품",
-                label: "냉동식품",
-              },
-              {
-                value: "과일/채소",
-                label: "과일/채소",
-              },
-              {
-                value: "유제품",
-                label: "유제품",
-              },
-            ]}
+            options={cateList}
           />
-
           <button className="text-base">
-            <FontAwesomeIcon icon={faTrash} />
+            <FontAwesomeIcon icon={faTrash} onClick={handleRemoveClick} />
           </button>
         </div>
+
         <div className="flex flex-wrap gap-1">
           <Input placeholder="구매 목록" disabled={false} />
           <InputNumber className="flex-1" defaultValue={1} disabled={false} />
@@ -96,23 +86,10 @@ const FirstItem = () => {
             }}
             onChange={handleChange}
             disabled={true}
-            options={[
-              {
-                value: "냉동식품",
-                label: "냉동식품",
-              },
-              {
-                value: "과일/채소",
-                label: "과일/채소",
-              },
-              {
-                value: "유제품",
-                label: "유제품",
-              },
-            ]}
+            // options={cateList}
           />
           <button className="text-base">
-            <FontAwesomeIcon icon={faTrash} />
+            <FontAwesomeIcon icon={faTrash} onClick={handleRemoveClick} />
           </button>
         </div>
         <div className="flex flex-wrap gap-1">
