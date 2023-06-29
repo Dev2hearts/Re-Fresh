@@ -15,8 +15,8 @@ export const GIStyles = styled.div`
   top: 0px;
   background: linear-gradient(
     180deg,
-    rgba(218, 218, 218, 0.65) 0%,
-    rgba(204, 204, 204, 0) 100%
+    rgba(249, 246, 241, 0.65) 0%,
+    rgba(249, 246, 241, 0) 100%
   );
 `;
 
