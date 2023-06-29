@@ -19,12 +19,16 @@ export const ShoppingWrap = styled.div`
     top: 100%;
   }
   .listOpen {
-    display: flex;
-    justify-content: center;
     height: 20px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    button {
+      height: 100%;
+    }
     img {
       height: 100%;
-      margin-top: 10px;
     }
   }
 `;
