@@ -13,7 +13,7 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
   const [value, setValue] = useState(() => dayjs(Date.now()));
   const [selectedValue, setSelectedValue] = useState(() => dayjs(Date.now()));
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [addItems, setAddItems] = useState([<FirstItem key={0}/>]);
   const cellRender = date => {
     const dateString = date.format("YYYY-MM-DD");
 
@@ -37,7 +37,10 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const handlePlusClick = () => {};
+  const handlePlusClick = () => {
+    setAddItems(prevItems => [...prevItems, <FirstItem key={prevItems.length} />]);
+  };
+
   const onSelect = newValue => {
     setValue(newValue);
     setSelectedValue(newValue);
@@ -86,8 +89,8 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
         >
           <FontAwesomeIcon icon={faPlus} />
         </button>
-        <FirstItem />
-        <FirstItem />
+
+        {addItems}
       </Modal>
       <Calendar
         locale={locale}
