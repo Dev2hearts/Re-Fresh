@@ -5,8 +5,13 @@ export const IntroWrap = styled.div`
   justify-content: center;
   align-items: center;
   height: 100%;
-  background: #f9f6f1;
+  background: linear-gradient(
+    180deg,
+    rgba(249, 246, 241, 0.65) 0%,
+    rgba(249, 246, 241, 0) 80%
+  );
   img {
     width: 250px;
   }
 `;
+
