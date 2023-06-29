@@ -17,7 +17,6 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
 
   const cellRender = date => {
     const dateString = date.format("YYYY-MM-DD");
-
     const result = hi.find(item => {
       if (item.date === dateString) {
         return item;
@@ -82,13 +81,20 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
       }
     });
 
-    if (!result) {
-      handleModalOpen();
-      // 손정민 추가 코드(쇼핑리스트 출력)
-      setOpenShopListDate("");
-
-      // 손정민 추가 코드(목록이 펼쳐진 경우 구분)
-      if (openShopList) {
+    // 손정민 추가 코드(목록이 펼쳐진 경우 구분)
+    if (openShopList) {
+      setOpenShopList(false);
+      if (!result) {
+        handleModalOpen();
+        // 손정민 추가 코드(쇼핑리스트 출력)
+        setOpenShopListDate("");
+        setOpenShopList(false);
+      }
+    } else {
+      if (!result) {
+        handleModalOpen();
+        // 손정민 추가 코드(쇼핑리스트 출력)
+        setOpenShopListDate("");
         setOpenShopList(false);
         if (!result) {
           showModal();
@@ -140,7 +146,6 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
           >
             <FontAwesomeIcon icon={faPlus} />
           </button>
-
           {items.map((item, index) => (
             // <div key={index}>{item}</div>
             // <FirstItem onDelete={() => handleDeleteItem(prevItems.length)} key={prevItems.index}/>
@@ -165,5 +170,5 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
       </div>
     );
   };
-};
+  
 export default Schedule;
