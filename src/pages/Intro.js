@@ -8,9 +8,11 @@ const Intro = () => {
     navigate("/profile");
   };
   return (
-    <IntroWrap onClick={handleClick}>
-      <img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="로고" />
-    </IntroWrap>
+    <>
+      <IntroWrap onClick={handleClick}>
+        <img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="로고" />
+      </IntroWrap>
+    </>
   );
 };
 
