@@ -23,7 +23,7 @@ const FirstItem = () => {
     // 편집중
     return (
       <ItemBox>
-        <div>
+        <div className="flex justify-between">
           <Select
             defaultValue="카테고리"
             style={{
@@ -46,6 +46,10 @@ const FirstItem = () => {
               },
             ]}
           />
+
+          <button className="text-base">
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
         </div>
         <div className="flex flex-wrap gap-1">
           <Input placeholder="구매 목록" disabled={false} />
