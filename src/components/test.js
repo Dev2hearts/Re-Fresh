@@ -5,7 +5,7 @@ import locale from "antd/es/calendar/locale/ko_KR";
 import "../style/schedule.css";
 import FirstItem from "./FirstItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 // 손정민 추가 코드(쇼핑리스트 출력 : state 전달)
 const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
@@ -13,61 +13,37 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
   const [value, setValue] = useState(() => dayjs(Date.now()));
   const [selectedValue, setSelectedValue] = useState(() => dayjs(Date.now()));
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [items, setItems] = useState([]);
-
+  const [addItems, setAddItems] = useState([<FirstItem key={0} />]);
   const cellRender = date => {
     const dateString = date.format("YYYY-MM-DD");
+
     const result = hi.find(item => {
       if (item.date === dateString) {
         return item;
       }
     });
     if (result) {
-      return (
-        <div className="text-right text-gray-500">
-          {<FontAwesomeIcon icon={faCartShopping} />}
-        </div>
-      );
+      return <div>{"장보는날"}</div>;
     }
     return null;
   };
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
   const handleOk = () => {
     setIsModalOpen(false);
-    setItems([]);
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
-    setItems([]);
+  };
+  const handlePlusClick = () => {
+    setAddItems(prevItems => [
+      ...prevItems,
+      <FirstItem key={prevItems.length} />,
+    ]);
   };
 
-  const handleAddItem = () => {
-    // setItems(prevItems => [...prevItems, <FirstItem onDelete={() => handleDeleteItem(prevItems.length)} key={prevItems.index}/>]);
-    setItems([...items, {}]);
-  };
-  const [cateList, setCateList] = useState([
-    {
-      value: "냉동식품",
-      label: "냉동식품",
-    },
-    {
-      value: "과일/채소",
-      label: "과일/채소",
-    },
-    {
-      value: "유제품",
-      label: "유제품",
-    },
-  ]);
-  // 추가
-  const onDelete = _id => {
-    const newItemArr = items.filter((item, index) => index !== _id);
-    setItems(newItemArr);
-  };
-  const handleModalOpen = () => {
-    setIsModalOpen(true);
-    setItems([{}]);
-  };
   const onSelect = newValue => {
     setValue(newValue);
     setSelectedValue(newValue);
@@ -81,14 +57,14 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
     if (openShopList) {
       setOpenShopList(false);
       if (!result) {
-        handleModalOpen();
+        showModal();
         // 손정민 추가 코드(쇼핑리스트 출력)
         setOpenShopListDate("");
         setOpenShopList(false);
       }
     } else {
       if (!result) {
-        handleModalOpen();
+        showModal();
         // 손정민 추가 코드(쇼핑리스트 출력)
         setOpenShopListDate("");
         setOpenShopList(false);
@@ -121,25 +97,15 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
         onOk={handleOk}
         onCancel={handleCancel}
         closable={false}
-        okText={"등록"}
-        cancelText={"취소"}
       >
         <button
           className="block float-right mr-10 text-xl"
-          onClick={handleAddItem}
+          onClick={handlePlusClick}
         >
           <FontAwesomeIcon icon={faPlus} />
         </button>
-        {items.map((item, index) => (
-          // <div key={index}>{item}</div>
-          // <FirstItem onDelete={() => handleDeleteItem(prevItems.length)} key={prevItems.index}/>
-          <FirstItem
-            key={index}
-            onDelete={onDelete}
-            index={index}
-            cateList={cateList}
-          />
-        ))}
+
+        {addItems}
       </Modal>
       <Calendar
         locale={locale}
