@@ -17,7 +17,6 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
 
   const cellRender = date => {
     const dateString = date.format("YYYY-MM-DD");
-
     const result = hi.find(item => {
       if (item.date === dateString) {
         return item;
@@ -71,7 +70,6 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
   const handleModalOpen = () => {
     setIsModalOpen(true);
     setItems([{}]);
-
   };
   const onSelect = newValue => {
     setValue(newValue);
@@ -82,25 +80,18 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
         return item;
       }
     });
-
-    if (!result) {
-      handleModalOpen();
-      // 손정민 추가 코드(쇼핑리스트 출력)
-      setOpenShopListDate("");
-
     // 손정민 추가 코드(목록이 펼쳐진 경우 구분)
     if (openShopList) {
-
       setOpenShopList(false);
       if (!result) {
-        showModal();
+        handleModalOpen();
         // 손정민 추가 코드(쇼핑리스트 출력)
         setOpenShopListDate("");
         setOpenShopList(false);
       }
     } else {
       if (!result) {
-        showModal();
+        handleModalOpen();
         // 손정민 추가 코드(쇼핑리스트 출력)
         setOpenShopListDate("");
         setOpenShopList(false);
@@ -110,62 +101,62 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
       }
     }
 
-    setValue(newValue);
-    setSelectedValue(newValue);
-    // 손정민 추가 코드(쇼핑리스트 출력)
-    setOpenShopListDate(newValue.format("YYYY/MM/DD"));
-  };
-  const onPanelChange = newValue => {
-    setValue(newValue);
-  };
-  useEffect(() => {
-    const th = document.querySelectorAll(".ant-picker-content th");
-    const day = ["일", "월", "화", "수", "목", "금", "토"];
-    th.forEach((item, index) => {
-      item.innerHTML = day[index];
-    });
-  }, []);
-  return (
-    <div>
-      <Modal
-        title={`${selectedValue?.format("YYYY-MM-DD")}`}
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        closable={false}
-        okText={"등록"}
-        cancelText={"취소"}
-      >
-        <button
-          className="block float-right mr-10 text-xl"
-          onClick={handleAddItem}
+      setValue(newValue);
+      setSelectedValue(newValue);
+      // 손정민 추가 코드(쇼핑리스트 출력)
+      setOpenShopListDate(newValue.format("YYYY/MM/DD"));
+    }
+    const onPanelChange = newValue => {
+      setValue(newValue);
+    };
+    useEffect(() => {
+      const th = document.querySelectorAll(".ant-picker-content th");
+      const day = ["일", "월", "화", "수", "목", "금", "토"];
+      th.forEach((item, index) => {
+        item.innerHTML = day[index];
+      });
+    }, []);
+    return (
+      <div>
+        <Modal
+          title={`${selectedValue?.format("YYYY-MM-DD")}`}
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          closable={false}
+          okText={"등록"}
+          cancelText={"취소"}
         >
-          <FontAwesomeIcon icon={faPlus} />
-        </button>
-
-        {items.map((item, index) => (
-          // <div key={index}>{item}</div>
-          // <FirstItem onDelete={() => handleDeleteItem(prevItems.length)} key={prevItems.index}/>
-          <FirstItem
-            key={index}
-            onDelete={onDelete}
-            index={index}
-            cateList={cateList}
-          />
-        ))}
-      </Modal>
-      <Calendar
-        locale={locale}
-        value={value}
-        onSelect={onSelect}
-        onPanelChange={onPanelChange}
-        cellRender={cellRender}
-      />
-      <div style={openShopList ? { display: "none" } : { display: "block" }}>
-        {selectedValue?.format("YYYY-MM-DD")}
+          <button
+            className="block float-right mr-10 text-xl"
+            onClick={handleAddItem}
+          >
+            <FontAwesomeIcon icon={faPlus} />
+          </button>
+          {items.map((item, index) => (
+            // <div key={index}>{item}</div>
+            // <FirstItem onDelete={() => handleDeleteItem(prevItems.length)} key={prevItems.index}/>
+            <FirstItem
+              key={index}
+              onDelete={onDelete}
+              index={index}
+              cateList={cateList}
+            />
+          ))}
+        </Modal>
+        <Calendar
+          locale={locale}
+          value={value}
+          onSelect={onSelect}
+          onPanelChange={onPanelChange}
+          cellRender={cellRender}
+        />
+        <div style={openShopList ? { display: "none" } : { display: "block" }}>
+          {selectedValue?.format("YYYY-MM-DD")}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
+
 
 export default Schedule;
