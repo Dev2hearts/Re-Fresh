@@ -70,14 +70,14 @@ const ListItem = () => {
             ]}
           />
         </div>
-        <div className="flex justify-around">
+        {/* <div className="flex justify-around">
           <button className="text-base" onClick={handleSaveClick}>
             <FontAwesomeIcon icon={faCheck} />
           </button>
           <button className="text-base">
             <FontAwesomeIcon icon={faXmark} onClick={handleCancelClick} />
           </button>
-        </div>
+        </div> */}
       </ItemBox>
     );
   } else {

@@ -50,3 +50,28 @@ export const ShoppingDiv = styled.div`
     border-radius: 15px 15px 0 0;
   }
 `;
+
+export const ShoppingListSC = styled.div`
+  position: relative;
+  width: 100%;
+  height: ${props => props.scHeight}px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 20px 0;
+  transition: height 0.5s;
+
+  /* 아래의 모든 코드는 영역::코드로 사용 */
+  &::-webkit-scrollbar {
+    width: 8px; /* 스크롤바의 너비 */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #217af4; /* 스크롤바의 색상 */
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, 0.1); /*스크롤바 뒷 배경 색상*/
+  }
+`;

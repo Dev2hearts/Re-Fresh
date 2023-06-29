@@ -13,7 +13,7 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
   const [value, setValue] = useState(() => dayjs(Date.now()));
   const [selectedValue, setSelectedValue] = useState(() => dayjs(Date.now()));
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [addItems, setAddItems] = useState([<FirstItem key={0}/>]);
+  const [addItems, setAddItems] = useState([<FirstItem key={0} />]);
   const cellRender = date => {
     const dateString = date.format("YYYY-MM-DD");
 
@@ -38,7 +38,10 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
     setIsModalOpen(false);
   };
   const handlePlusClick = () => {
-    setAddItems(prevItems => [...prevItems, <FirstItem key={prevItems.length} />]);
+    setAddItems(prevItems => [
+      ...prevItems,
+      <FirstItem key={prevItems.length} />,
+    ]);
   };
 
   const onSelect = newValue => {
@@ -50,15 +53,27 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
         return item;
       }
     });
-    if (!result) {
-      showModal();
-      // 손정민 추가 코드(쇼핑리스트 출력)
-      setOpenShopListDate("");
+    // 손정민 추가 코드(목록이 펼쳐진 경우 구분)
+    if (openShopList) {
       setOpenShopList(false);
+      if (!result) {
+        showModal();
+        // 손정민 추가 코드(쇼핑리스트 출력)
+        setOpenShopListDate("");
+        setOpenShopList(false);
+      }
     } else {
-      // 손정민 추가 코드(쇼핑리스트 출력)
-      setOpenShopList(true);
+      if (!result) {
+        showModal();
+        // 손정민 추가 코드(쇼핑리스트 출력)
+        setOpenShopListDate("");
+        setOpenShopList(false);
+      } else {
+        // 손정민 추가 코드(쇼핑리스트 출력)
+        setOpenShopList(true);
+      }
     }
+
     setValue(newValue);
     setSelectedValue(newValue);
     // 손정민 추가 코드(쇼핑리스트 출력)
