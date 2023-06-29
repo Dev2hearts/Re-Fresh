@@ -80,6 +80,7 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
         return item;
       }
     });
+
     // 손정민 추가 코드(목록이 펼쳐진 경우 구분)
     if (openShopList) {
       setOpenShopList(false);
@@ -95,11 +96,23 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
         // 손정민 추가 코드(쇼핑리스트 출력)
         setOpenShopListDate("");
         setOpenShopList(false);
+        if (!result) {
+          showModal();
+          // 손정민 추가 코드(쇼핑리스트 출력)
+          setOpenShopListDate("");
+          setOpenShopList(false);
+        }
       } else {
-        // 손정민 추가 코드(쇼핑리스트 출력)
-        setOpenShopList(true);
+        if (!result) {
+          showModal();
+          // 손정민 추가 코드(쇼핑리스트 출력)
+          setOpenShopListDate("");
+          setOpenShopList(false);
+        } else {
+          // 손정민 추가 코드(쇼핑리스트 출력)
+          setOpenShopList(true);
+        }
       }
-    }
 
       setValue(newValue);
       setSelectedValue(newValue);
@@ -157,6 +170,5 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
       </div>
     );
   };
-
-
+  
 export default Schedule;
