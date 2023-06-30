@@ -117,7 +117,11 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
       <div style={openShopList ? { display: "none" } : { display: "block" }}>
         {selectedValue?.format("YYYY-MM-DD")}
       </div>
+<<<<<<< HEAD
     
+=======
+      <div>안녕 ㅎㅎ</div>
+>>>>>>> 5515ff7ff6fe4daa8fc9e44f0454186bc25b5d14
     </div>
   );
 };
