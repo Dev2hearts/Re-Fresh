@@ -9,6 +9,8 @@ import {
   GIContainer,
 } from "../style/GITotalCss";
 import { Link } from "react-router-dom";
+// axios 관련
+import { getUserAll } from "../api/fetch";
 
 const Profile = () => {
   // state 에는 데이터가 저장되는 장소다.
@@ -16,58 +18,19 @@ const Profile = () => {
   // 사용자 정보를 저장하는 state
   /*
    [
-      {사용자닉네임, 사용자생일, 사용자성별, 사용자사진, 사용자그룹},     
+      {사용자닉네임, 사용자생일, 사용자사진, 사용자그룹},     
   ]
    */
   const [profiles, setProfiles] = useState([]);
 
+  // 사용자 정보를 axios 로 가지고 옮
+  const getAllUserParse = async () => {
+    const data = await getUserAll();
+    setProfiles(data);
+  };
   useEffect(() => {
-    // 서버에서 자료 가져오기
-    const sampleUser = [
-      {
-        userPk: 1,
-        nm: "홍길동1",
-        birth: "20230620",
-        pic: "Test.png",
-        group: "01",
-      },
-      {
-        userPk: 2,
-        nm: "홍길동2",
-        birth: "20230620",
-        pic: "Test.png",
-        group: "02",
-      },
-      {
-        userPk: 3,
-        nm: "홍길동3",
-        birth: "20230620",
-        pic: "Test.png",
-        group: "03",
-      },
-      {
-        userPk: 4,
-        nm: "홍길동4",
-        birth: "20230620",
-        pic: "Test.png",
-        group: "04",
-      },
-      {
-        userPk: 5,
-        nm: "홍길동5",
-        birth: "20230620",
-        pic: "Test.png",
-        group: "05",
-      },
-      {
-        userPk: 6,
-        nm: "홍길동6",
-        birth: "20230620",
-        pic: "Test.png",
-        group: "06",
-      },
-    ];
-    setProfiles(sampleUser);
+    // 서버에서 회원 전체 자료 가져오기
+    getAllUserParse();
   }, []);
 
   return (
@@ -79,7 +42,7 @@ const Profile = () => {
             {profiles.map((item, index) => (
               <GILi key={index}>
                 {/* 클릭시에 사용자 아이디를 전달한다. */}
-                <Link to={`/group/${item.userPk}`}>
+                <Link to={`/group/${item.iuser}`}>
                   <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
                 </Link>
               </GILi>
