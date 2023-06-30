@@ -4,29 +4,17 @@ import { ItemBox } from "../style/FirstItemCss";
 import { InputNumber, Input, Select } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { getCate, getUnit } from "../api/fetch";
 
-const FirstItem = ({ onDelete, index }) => {
-  const [cateList, setCateList] = useState([]);
-  const [unitList, setUnitList] = useState([]);
+const FirstItem = ({ onDelete, index, cateList }) => {
   const [isEdit, setIsEdit] = useState(true);
-  const [selecCate, setSelecCate] = useState(null);
-  const [itemName, setItemName] = useState();
-  const [selecUnit, setSelecUnit] = useState(null);
-  const [ea,setEa] = useState();
-
-  const itemData = {
-    "icate":selecCate,
-    "iunit":selecUnit,
-    "nm":itemName,
-    "cnt":ea
-  }
-  console.log(itemData)
   const handleSaveClick = () => {
     setIsEdit(false);
   };
   const handleEditClick = () => {
     setIsEdit(true);
+  };
+  const handleChange = value => {
+    console.log(`Selected: ${value}`);
   };
   const handleCancelClick = () => {
     setIsEdit(false);
@@ -34,6 +22,7 @@ const FirstItem = ({ onDelete, index }) => {
   const handleRemoveClick = () => {
     onDelete(index);
   };
+
   const handleCateChange = (value) => {
     setSelecCate(value)
   }
@@ -64,6 +53,7 @@ const FirstItem = ({ onDelete, index }) => {
     }
   }, [isEdit]);
 
+
   if (isEdit) {
     // 편집중
     return (
@@ -74,7 +64,7 @@ const FirstItem = ({ onDelete, index }) => {
             style={{
               width: 205,
             }}
-            onChange={handleCateChange}
+            onChange={handleChange}
             disabled={false}
             options={cateList}
           />
@@ -84,13 +74,26 @@ const FirstItem = ({ onDelete, index }) => {
         </div>
 
         <div className="flex flex-wrap gap-1">
-          <Input placeholder="구매 목록" disabled={false} onChange={handleItemNameChange}/>
-          <InputNumber className="flex-1" defaultValue={1} disabled={false} onChange={handleEaChange}/>
+          <Input placeholder="구매 목록" disabled={false} />
+          <InputNumber className="flex-1" defaultValue={1} disabled={false} />
           <Select
             className="flex-1"
             defaultValue="단위"
-            onChange={handleUnitChange}
-            options={unitList}
+            onChange={handleChange}
+            options={[
+              {
+                value: "ea",
+                label: "ea",
+              },
+              {
+                value: "kg",
+                label: "kg",
+              },
+              {
+                value: "g",
+                label: "g",
+              },
+            ]}
           />
         </div>
         <div className="flex justify-around">
@@ -113,7 +116,7 @@ const FirstItem = ({ onDelete, index }) => {
             style={{
               width: 205,
             }}
-            onChange={handleCateChange}
+            onChange={handleChange}
             disabled={true}
             // options={cateList}
           />
@@ -122,19 +125,32 @@ const FirstItem = ({ onDelete, index }) => {
           </button>
         </div>
         <div className="flex flex-wrap gap-1">
-          <Input placeholder="구매 목록" disabled={true} onChange={handleItemNameChange}/>
+          <Input placeholder="구매 목록" disabled={true} />
           <InputNumber
             className="flex-1"
             defaultValue={1}
+            style={{ width: 70 }}
             disabled={true}
-            onChange={handleEaChange}
           />
           <Select
             className="flex-1"
             disabled={true}
             defaultValue="단위"
-            onChange={handleUnitChange}
-            options={unitList}
+            onChange={handleChange}
+            options={[
+              {
+                value: "ea",
+                label: "ea",
+              },
+              {
+                value: "kg",
+                label: "kg",
+              },
+              {
+                value: "g",
+                label: "g",
+              },
+            ]}
           />
         </div>
         <div className="flex justify-around"></div>

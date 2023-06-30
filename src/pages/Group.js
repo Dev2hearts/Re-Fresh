@@ -13,8 +13,8 @@ import { Link, useParams } from "react-router-dom";
 const Group = () => {
   // 주소창에 전달된 사용자 PK 를 참조한다.
   const params = useParams();
-  const userPk = params.userpk;
-  // console.log(userPk);
+  const userPK = params.iuser;
+  // console.log(userPK);
   const [groupList, setGroupList] = useState([]);
   useEffect(() => {
     // 서버자료 요청 : 사용자가 소속된 그룹 목록을 사용자 Primary Key로 알아낸다.
