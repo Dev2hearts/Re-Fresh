@@ -7,7 +7,6 @@ import FirstItem from "./FirstItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faPlus } from "@fortawesome/free-solid-svg-icons";
 
-// 손정민 추가 코드(쇼핑리스트 출력 : state 전달)
 const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
   const hi = [{ date: "2023-06-29" }, { date: "2023-07-07" }];
   const [value, setValue] = useState(() => dayjs(Date.now()));
@@ -15,21 +14,16 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [items, setItems] = useState([]);
 
-  const cellRender = date => {
-    const dateString = date.format("YYYY-MM-DD");
-    const result = hi.find(item => {
-      if (item.date === dateString) {
-        return item;
-      }
-    });
-    if (result) {
-      return (
-        <div className="text-right text-gray-500">
-          {<FontAwesomeIcon icon={faCartShopping} />}
-        </div>
-      );
-    }
-    return null;
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+    setItems([
+      {
+        icate: "",
+        iunit: "",
+        nm: "",
+        cnt: 1,
+      },
+    ]); // 모달 열 때 아이템 초기화
   };
   const handleOk = () => {
     setIsModalOpen(false);
@@ -42,77 +36,57 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
   };
 
   const handleAddItem = () => {
-    // setItems(prevItems => [...prevItems, <FirstItem onDelete={() => handleDeleteItem(prevItems.length)} key={prevItems.index}/>]);
-    setItems([...items, {}]);
+    setItems(prevItems => [...prevItems, {}]); // 새로운 아이템 추가
   };
-  const [cateList, setCateList] = useState([
-    {
-      value: "냉동식품",
-      label: "냉동식품",
-    },
-    {
-      value: "과일/채소",
-      label: "과일/채소",
-    },
-    {
-      value: "유제품",
-      label: "유제품",
-    },
-  ]);
-  // 추가
-  const onDelete = _id => {
-    const newItemArr = items.filter((item, index) => index !== _id);
-    setItems(newItemArr);
+
+  const onDelete = index => {
+    setItems(prevItems => prevItems.filter((_, i) => i !== index)); // 아이템 삭제
   };
-  const handleModalOpen = () => {
-    setIsModalOpen(true);
-    setItems([{}]);
-  };
+
   const onSelect = newValue => {
     setValue(newValue);
     setSelectedValue(newValue);
     const dateString = newValue.format("YYYY-MM-DD");
-    const result = hi.find(item => {
-      if (item.date === dateString) {
-        return item;
-      }
-    });
-    // 손정민 추가 코드(목록이 펼쳐진 경우 구분)
-    if (openShopList) {
+    const result = hi.find(item => item.date === dateString);
+
+    if ((openShopList && !result) || !result) {
+      handleModalOpen(); // 모달 열기
+      setOpenShopListDate("");
       setOpenShopList(false);
-      if (!result) {
-        handleModalOpen();
-        // 손정민 추가 코드(쇼핑리스트 출력)
-        setOpenShopListDate("");
-        setOpenShopList(false);
-      }
     } else {
-      if (!result) {
-        handleModalOpen();
-        // 손정민 추가 코드(쇼핑리스트 출력)
-        setOpenShopListDate("");
-        setOpenShopList(false);
-      } else {
-        // 손정민 추가 코드(쇼핑리스트 출력)
-        setOpenShopList(true);
-      }
+      setOpenShopList(true);
     }
 
-    setValue(newValue);
-    setSelectedValue(newValue);
-    // 손정민 추가 코드(쇼핑리스트 출력)
     setOpenShopListDate(newValue.format("YYYY/MM/DD"));
   };
+
   const onPanelChange = newValue => {
     setValue(newValue);
   };
+
   useEffect(() => {
     const th = document.querySelectorAll(".ant-picker-content th");
     const day = ["일", "월", "화", "수", "목", "금", "토"];
     th.forEach((item, index) => {
-      item.innerHTML = day[index];
+      item.innerHTML = day[index]; // 캘린더 요일 텍스트 설정
     });
   }, []);
+
+  const cellRender = date => {
+    const dateString = date.format("YYYY-MM-DD");
+    const result = hi.find(item => item.date === dateString);
+
+    if (result) {
+      return (
+        <div className="text-right text-gray-500">
+          {<FontAwesomeIcon icon={faCartShopping} />}
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <div>
       <Modal
@@ -130,16 +104,18 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
         >
           <FontAwesomeIcon icon={faPlus} />
         </button>
-        {items.map((item, index) => (
-          // <div key={index}>{item}</div>
-          // <FirstItem onDelete={() => handleDeleteItem(prevItems.length)} key={prevItems.index}/>
-          <FirstItem
-            key={index}
-            onDelete={onDelete}
-            index={index}
-            cateList={cateList}
-          />
-        ))}
+        {isModalOpen && (
+          <div>
+            {items.map((item, index) => (
+              <FirstItem
+                key={index}
+                onDelete={onDelete}
+                index={index}
+                item={item}
+              />
+            ))}
+          </div>
+        )}
       </Modal>
       <Calendar
         locale={locale}
@@ -148,9 +124,7 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
         onPanelChange={onPanelChange}
         cellRender={cellRender}
       />
-      <div style={openShopList ? { display: "none" } : { display: "block" }}>
-        {selectedValue?.format("YYYY-MM-DD")}
-      </div>
+      {!openShopList && <div>{selectedValue?.format("YYYY-MM-DD")}</div>}
     </div>
   );
 };
