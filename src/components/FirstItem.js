@@ -5,7 +5,6 @@ import { InputNumber, Input, Select } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { getCate, getUnit } from "../api/fetch";
-import { NavLink } from "react-router-dom";
 
 // 추가 코드 item
 const FirstItem = ({ onDelete, index, item }) => {
