@@ -46,15 +46,17 @@ const FirstItem = ({ onDelete, index }) => {
   const handleUnitChange = (value) => {
     setSelecUnit(value)
   }
+  const fetchCateData = async () => {
+    const result = await getCate();
+    setCateList(result);
+  };
+  const fetchUnitData = async () => {
+    const result = await getUnit();
+    setUnitList(result);
+  };
   useEffect(() => {
-    const fetchCateData = async () => {
-      const result = await getCate();
-      setCateList(result);
-    };
-    const fetchUnitData = async () => {
-      const result = await getUnit();
-      setUnitList(result);
-    };
+    fetchCateData();
+    fetchUnitData();
     if (isEdit) {
       // 모달 창이 열릴 때마다 데이터를 초기화
       fetchCateData();
