@@ -40,4 +40,16 @@ const getUnit = async () => {
   }
 };
 
-export { getCate,getUnit };
+// 사용자 정보 관련 API
+const getUserAll = async () => {
+  try {
+    const res = await axiosInstance.get("/user/all");
+    const result = res.data;
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export { getCate, getUnit, getUserAll };
