@@ -22,6 +22,38 @@ const FirstItem = ({ onDelete, index, cateList }) => {
   const handleRemoveClick = () => {
     onDelete(index);
   };
+
+  const handleCateChange = (value) => {
+    setSelecCate(value)
+  }
+  const handleItemNameChange = (e) => {
+    setItemName(e.target.value)
+  }
+  const handleEaChange = (e) => {
+    setEa(e.target.value)
+  }
+  const handleUnitChange = (value) => {
+    setSelecUnit(value)
+  }
+  const fetchCateData = async () => {
+    const result = await getCate();
+    setCateList(result);
+  };
+  const fetchUnitData = async () => {
+    const result = await getUnit();
+    setUnitList(result);
+  };
+  useEffect(() => {
+    fetchCateData();
+    fetchUnitData();
+    if (isEdit) {
+      // 모달 창이 열릴 때마다 데이터를 초기화
+      fetchCateData();
+      fetchUnitData();
+    }
+  }, [isEdit]);
+
+
   if (isEdit) {
     // 편집중
     return (
