@@ -14,7 +14,6 @@ export const ItemWrap = styled.div`
 export const ItemListCate = styled.span``;
 export const ItemListName = styled.span``;
 export const ItemListUnit = styled.span`
-  color: red;
   em {
     font-style: normal;
     color: #000;

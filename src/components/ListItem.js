@@ -14,18 +14,19 @@ const ListItem = ({ item }) => {
   const onChange = e => {
     console.log(`checked = ${e.target.checked}`);
   };
-  // 목록창 클릭시 모달창
-  const handleClick = () => {
-    console.log("클릭");
-  };
+
   const handleDeleteClick = e => {
     console.log("삭제클릭");
-    // 이벤트 전달 안 하기 
+    // 이벤트 전달 안 하기
     e.stopPropagation();
   };
   return (
-    <ItemWrap onClick={handleClick}>
-      <Checkbox onChange={onChange} value={item.finishYn}></Checkbox>
+    <ItemWrap>
+      <Checkbox
+        onChange={onChange}
+        value={item.finishYn}
+        defaultChecked={item.completed}
+      ></Checkbox>
       <ItemListCate>{item.icate}</ItemListCate>
       <ItemListName>{item.nm}</ItemListName>
       <ItemListUnit>
@@ -37,6 +38,7 @@ const ListItem = ({ item }) => {
       </ItemDelete>
       <ItemUser>{item.wiuser}</ItemUser>
     </ItemWrap>
+    
   );
 };
 
