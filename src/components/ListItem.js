@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ItemDelete,
   ItemListCate,
@@ -11,7 +11,8 @@ import { Checkbox } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 const ListItem = ({ item }) => {
-  const onChange = e => {
+  const onClick = e => {
+    e.stopPropagation();
     console.log(`checked = ${e.target.checked}`);
   };
 
@@ -20,10 +21,11 @@ const ListItem = ({ item }) => {
     // 이벤트 전달 안 하기
     e.stopPropagation();
   };
+
   return (
     <ItemWrap>
       <Checkbox
-        onChange={onChange}
+        onClick={onClick}
         value={item.finishYn}
         defaultChecked={item.completed}
       ></Checkbox>
@@ -38,7 +40,6 @@ const ListItem = ({ item }) => {
       </ItemDelete>
       <ItemUser>{item.wiuser}</ItemUser>
     </ItemWrap>
-    
   );
 };
 

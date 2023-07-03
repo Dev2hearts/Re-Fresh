@@ -1,4 +1,3 @@
-// import ItemList from "./ItemList";
 import {
   DatePicker,
   Button,
@@ -22,6 +21,8 @@ import {
 } from "../style/ShoppingListCss";
 import ListItem from "./ListItem";
 import { getCate } from "../api/fetch";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const ShoppingList = ({ openShopListDate, openShopList }) => {
   // 날짜별 장보기 목록 state
@@ -126,7 +127,6 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  //
   const handleChange = value => {
     console.log(`selected ${value}`);
   };
@@ -166,7 +166,6 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
           ))}
         </ShoppingListSC>
       </ShoppingDiv>
-      <button className="delete-schedule">일정삭제</button>
 
       <Modal
         // title="Basic Modal"
@@ -176,7 +175,7 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
         centered
         footer={[
           <Button key="back" onClick={handleOk}>
-            수정
+            <FontAwesomeIcon icon={faCheck} />
           </Button>,
           <Button
             style={{ backgroundColor: "#1677ff" }}
@@ -184,7 +183,7 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
             type="primary"
             onClick={handleCancel}
           >
-            취소
+            <FontAwesomeIcon icon={faXmark} />
           </Button>,
         ]}
       >
