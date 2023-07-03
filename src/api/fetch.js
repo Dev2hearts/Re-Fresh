@@ -72,7 +72,7 @@ const getGroupAll = async () => {
 // 날짜, 아이템
 const getPlan = async () => {
   try {
-    const res = await axiosInstance.get("/plan");
+    const res = await axiosInstance.get("/plan?igroup=1");
     const result = res.data;
     return result;
   } catch (err) {
