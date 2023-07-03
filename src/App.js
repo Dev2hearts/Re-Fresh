@@ -15,7 +15,7 @@ function App() {
         <Route path="/" element={<Navigate to="/intro" />}></Route>
         <Route path="/intro" element={<Intro />}></Route>
         <Route path="/group/:iuser" element={<Group />}></Route>
-        <Route path="/main" element={<Main />}></Route>
+        <Route path="/main/:iuser/:igroup" element={<Main />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="*" element={<NotFound />}></Route>

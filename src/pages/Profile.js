@@ -33,7 +33,6 @@ const Profile = () => {
     getAllUserParse();
     console.log(getAllUserParse)
   }, []);
-
   return (
     <GIContainer>
       <GIStyles>

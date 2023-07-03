@@ -45,11 +45,18 @@ const getUserAll = async () => {
   try {
     const res = await axiosInstance.get("/user/all");
     const result = res.data;
-    console.log(result);
     return result;
   } catch (err) {
     console.log(err);
   }
 };
-
-export { getCate, getUnit, getUserAll };
+const getGroupAll = async () => {
+  try {
+    const res = await axiosInstance.get("/group/all");
+    const result = res.data;
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
+export { getCate, getUnit, getUserAll, getGroupAll };
