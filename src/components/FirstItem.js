@@ -7,18 +7,21 @@ import { faTrash, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { getCate, getUnit } from "../api/fetch";
 
 // 추가 코드 item
-const FirstItem = ({ onDelete, index, item }) => {
+const FirstItem = ({ onDelete, itemChange, handleAddItem, item }) => {
   const [cateList, setCateList] = useState([]);
   const [unitList, setUnitList] = useState([]);
   const [isEdit, setIsEdit] = useState(true);
   const [selecCate, setSelecCate] = useState(null);
-
-  // 추가 코드 : Select 의 value 값
-  const [selectValue, setSelectValue] = useState(null);
-
-  const [itemName, setItemName] = useState();
+  const [itemName, setItemName] = useState("");
   const [selecUnit, setSelecUnit] = useState(null);
   const [ea, setEa] = useState();
+
+  // const [item, setItem] = useState(null);
+  const [items, setItems] = useState({});
+
+  // console.log(index);
+  // console.log(items);
+
   const handleSaveClick = () => {
     setIsEdit(false);
   };
@@ -29,30 +32,41 @@ const FirstItem = ({ onDelete, index, item }) => {
     setIsEdit(false);
   };
   const handleRemoveClick = () => {
-    onDelete(index);
+    onDelete(items.index);
   };
+  // 내용이 변하는 경우에 실행할 기능
   const handleCateChange = value => {
     setSelecCate(value);
-    // 추가코드 사용자가 Selec 에서 값을 선택한 경우
-    setSelectValue(cateList[value].label);
+    const nowItems = { ...items, icate: value };
+    setItems(nowItems);
+    itemChange(nowItems);
   };
   const handleItemNameChange = e => {
     setItemName(e.target.value);
+    const nowItems = { ...items, nm: e.target.value };
+    setItems(nowItems);
+    itemChange(nowItems);
   };
-  const handleEaChange = e => {
-    setEa(e.target.value);
+  const handleEaChange = value => {
+    setEa(value);
+    const nowItems = { ...items, cnt: value };
+    setItems(nowItems);
+    itemChange(nowItems);
   };
   const handleUnitChange = value => {
     setSelecUnit(value);
+    const nowItems = { ...items, iunit: value };
+    setItems(nowItems);
+    itemChange(nowItems);
   };
 
-  // 추가한 코드 item 이 넘어온다.
   useEffect(() => {
-    // console.log("아이템 넘어옴");
-    if (!item.icate) {
-      setSelectValue("카테고리");
-      setIsEdit(true);
-    }
+    console.log("갱신된 정보 : ", item);
+    setSelecCate(item.icate);
+    setItemName(item.nm);
+    setSelecUnit(item.iunit);
+    setEa(item.cnt);
+    setItems(item);
   }, [item]);
 
   useEffect(() => {
@@ -64,11 +78,8 @@ const FirstItem = ({ onDelete, index, item }) => {
       const result = await getUnit();
       setUnitList(result);
     };
-    if (isEdit) {
-      // 모달 창이 열릴 때마다 데이터를 초기화
-      fetchCateData();
-      fetchUnitData();
-    }
+    fetchCateData();
+    fetchUnitData();
   }, [isEdit]);
 
   if (isEdit) {
@@ -77,13 +88,12 @@ const FirstItem = ({ onDelete, index, item }) => {
       <ItemBox>
         <div className="flex justify-between">
           <Select
-            value={selectValue}
-            defaultValue="카테고리"
             style={{
               width: 205,
             }}
             onChange={handleCateChange}
             disabled={false}
+            value={selecCate}
             options={cateList}
           />
           <button className="text-base">
@@ -94,18 +104,19 @@ const FirstItem = ({ onDelete, index, item }) => {
         <div className="flex flex-wrap gap-1">
           <Input
             placeholder="구매 목록"
+            value={itemName}
             disabled={false}
             onChange={handleItemNameChange}
           />
           <InputNumber
             className="flex-1"
-            defaultValue={1}
+            value={ea}
             disabled={false}
             onChange={handleEaChange}
           />
           <Select
             className="flex-1"
-            defaultValue="단위"
+            value={selecUnit}
             onChange={handleUnitChange}
             options={unitList}
           />
@@ -127,7 +138,7 @@ const FirstItem = ({ onDelete, index, item }) => {
         <div className="flex justify-between">
           <Select
             labelInValue
-            defaultValue={item.icate ? "gogo" : "카테고리"}
+            value={selecCate}
             style={{
               width: 205,
             }}
@@ -142,19 +153,21 @@ const FirstItem = ({ onDelete, index, item }) => {
         <div className="flex flex-wrap gap-1">
           <Input
             placeholder="구매 목록"
+
+            value={itemName}
             disabled={true}
             onChange={handleItemNameChange}
           />
           <InputNumber
             className="flex-1"
-            defaultValue={1}
+            value={ea}
             disabled={true}
             onChange={handleEaChange}
           />
           <Select
             className="flex-1"
             disabled={true}
-            defaultValue="단위"
+            value={selecUnit}
             onChange={handleUnitChange}
             options={unitList}
           />
