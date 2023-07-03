@@ -17,7 +17,6 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
 
   const [plan, setPlan] = useState([]);
 
-
   const itemChange = _obj => {
     console.log("itemChange", _obj);
     // itemList 의 state에서 index 에 해당하는 키:값 변경
@@ -98,10 +97,11 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
       setPlan(data);
     };
     fetchData();
+    console.log(plan)
   }, []);
   const cellRender = date => {
     const dateString = date.format("YYYY-MM-DD");
-    const result = plan.find(item => item.createdAt === dateString);
+    const result = hi.find(item => item.createdAt === dateString);
 
     if (result) {
       return (
