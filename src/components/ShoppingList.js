@@ -22,7 +22,11 @@ import {
 import ListItem from "./ListItem";
 import { getCate } from "../api/fetch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faTrashCan,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 
 const ShoppingList = ({ openShopListDate, openShopList }) => {
   // 날짜별 장보기 목록 state
@@ -117,6 +121,7 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
   }, [openShopListDate]);
   // 모달창
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -133,6 +138,16 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
   // 수량
   const onChangeCnt = value => {
     console.log("changed", value);
+  };
+  // 전체선택 삭제
+  const showDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
+  const handleDeleteOk = () => {
+    setIsDeleteModalOpen(false);
+  };
+  const handleDeleteCancel = () => {
+    setIsDeleteModalOpen(false);
   };
 
   return (
@@ -219,6 +234,34 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
             </ModalUnit>
           </Space>
         </ModalWrap>
+      </Modal>
+      <button className="delete-schedule" onClick={showDeleteModal}>
+        <FontAwesomeIcon
+          icon={faTrashCan}
+          style={{ fontSize: "15px", alignContent: "center" }}
+        />
+      </button>
+      <Modal
+        // title="Basic Modal"
+        open={isDeleteModalOpen}
+        onOk={handleDeleteOk}
+        onCancel={handleDeleteCancel}
+        centered
+        footer={[
+          <Button key="back" onClick={handleDeleteOk}>
+            <FontAwesomeIcon icon={faCheck} />
+          </Button>,
+          <Button
+            style={{ backgroundColor: "#1677ff" }}
+            key="submit"
+            type="primary"
+            onClick={handleDeleteCancel}
+          >
+            <FontAwesomeIcon icon={faXmark} />
+          </Button>,
+        ]}
+      >
+        <p>일정을 삭제하시겠습니까?</p>
       </Modal>
     </ShoppingWrap>
   );
