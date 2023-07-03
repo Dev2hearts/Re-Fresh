@@ -59,4 +59,23 @@ const getGroupAll = async () => {
     console.log(err);
   }
 };
-export { getCate, getUnit, getUserAll, getGroupAll };
+// 날짜, 아이템
+const getPlan = async () => {
+  try {
+    const res = await axiosInstance.get("/plan");
+    const result = res.data;
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getItemList = async () => {
+  try {
+    const res = await axiosInstance.get(`/pdt?igroup=1&iplan=6`);
+    const result = res.data;
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
+export { getCate, getUnit, getUserAll, getGroupAll, getPlan, getItemList };

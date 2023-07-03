@@ -6,13 +6,17 @@ import "../style/schedule.css";
 import FirstItem from "./FirstItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { getPlan } from "../api/fetch";
 
 const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
-  const hi = [{ date: "2023-06-29" }, { date: "2023-07-07" }];
+  const hi = [{ date: "2023-07-07" }, { date: "2023-07-09" }];
   const [value, setValue] = useState(() => dayjs(Date.now()));
   const [selectedValue, setSelectedValue] = useState(() => dayjs(Date.now()));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemList, setItemList] = useState([]);
+
+  const [plan, setPlan] = useState([]);
+
 
   const itemChange = _obj => {
     console.log("itemChange", _obj);
@@ -66,7 +70,7 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
     setValue(newValue);
     setSelectedValue(newValue);
     const dateString = newValue.format("YYYY-MM-DD");
-    const result = hi.find(item => item.date === dateString);
+    const result = plan.find(item => item.createdAt === dateString);
 
     if ((openShopList && !result) || !result) {
       handleModalOpen(); // 모달 열기
@@ -89,15 +93,15 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
     th.forEach((item, index) => {
       item.innerHTML = day[index]; // 캘린더 요일 텍스트 설정
     });
+    const fetchData = async () => {
+      const data = await getPlan();
+      setPlan(data);
+    };
+    fetchData();
   }, []);
-
-  useEffect(() => {
-    console.log(itemList);
-  }, [itemList]);
-
   const cellRender = date => {
     const dateString = date.format("YYYY-MM-DD");
-    const result = hi.find(item => item.date === dateString);
+    const result = plan.find(item => item.createdAt === dateString);
 
     if (result) {
       return (
