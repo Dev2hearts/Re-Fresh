@@ -41,9 +41,18 @@ const getUnit = async () => {
 };
 
 // 사용자 정보 관련 API
-const getUserAll = async () => {
+const getUserLogin = async () => {
   try {
     const res = await axiosInstance.get("/user/all");
+    const result = res.data;
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const getUserAll = async () => {
+  try {
+    const res = await axiosInstance.get("/user/all/{igroup}");
     const result = res.data;
     return result;
   } catch (err) {
@@ -59,4 +68,4 @@ const getGroupAll = async () => {
     console.log(err);
   }
 };
-export { getCate, getUnit, getUserAll, getGroupAll };
+export { getCate, getUnit, getUserLogin, getGroupAll, getUserAll };
