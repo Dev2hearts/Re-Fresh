@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://192.168.0.144:5007/refresh",
+  baseURL: "http://192.168.0.144:5007/api/refresh",
   timeout: 1000,
   headers: {
     "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
@@ -45,11 +45,18 @@ const getUserAll = async () => {
   try {
     const res = await axiosInstance.get("/user/all");
     const result = res.data;
-    console.log(result);
     return result;
   } catch (err) {
     console.log(err);
   }
 };
-
-export { getCate, getUnit, getUserAll };
+const getGroupAll = async () => {
+  try {
+    const res = await axiosInstance.get("/group/all");
+    const result = res.data;
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
+export { getCate, getUnit, getUserAll, getGroupAll };
