@@ -97,11 +97,10 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
       setPlan(data);
     };
     fetchData();
-    console.log(plan)
   }, []);
   const cellRender = date => {
     const dateString = date.format("YYYY-MM-DD");
-    const result = hi.find(item => item.createdAt === dateString);
+    const result = plan.find(item => item.createdAt === dateString);
 
     if (result) {
       return (
