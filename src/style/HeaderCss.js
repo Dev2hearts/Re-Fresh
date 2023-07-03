@@ -7,10 +7,10 @@ export const Wrap = styled.header`
   height: 40px;
   align-items: center;
   background: #f9f6f1;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 0 0 3px 3px;
   a {
     color: #006127;
-    font-weight: 500;
+    font-weight: 400;
   }
 `;

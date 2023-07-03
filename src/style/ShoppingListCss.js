@@ -9,7 +9,6 @@ export const ShoppingWrap = styled.div`
   transition: top 0.5s;
   background: #f9f6f1;
   height: 700px;
-
   width: 100%;
   .delete-schedule {
     position: absolute;

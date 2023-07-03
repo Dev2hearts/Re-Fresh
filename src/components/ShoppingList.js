@@ -20,9 +20,13 @@ import {
   ModalCnt,
 } from "../style/ShoppingListCss";
 import ListItem from "./ListItem";
-import { getCate } from "../api/fetch";
+import { getCate, getItemList } from "../api/fetch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faTrashCan,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 
 const ShoppingList = ({ openShopListDate, openShopList }) => {
   // 날짜별 장보기 목록 state
@@ -31,63 +35,10 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
   const [unitList, setUnitList] = useState();
   useEffect(() => {
     // axios 연동
-    const tempList = [
-      {
-        icate: "야채2",
-        iproduct: "당근2",
-        iunit: "g",
-        nm: "맛있는 당근4",
-        cnt: 100,
-        finishYn: true,
-        wiuser: "홍길동",
-      },
-      {
-        icate: "야채5",
-        iproduct: "당근34",
-        iunit: "kg3456",
-        nm: "맛있는 346346당근",
-        cnt: 100,
-        finishYn: true,
-        wiuser: "홍길동",
-      },
-      {
-        icate: "야채547",
-        iproduct: "당457근",
-        iunit: "k457g",
-        nm: "맛있457 당근",
-        cnt: 100,
-        finishYn: true,
-        wiuser: "홍길457동",
-      },
-      {
-        icate: "야457채",
-        iproduct: "당근",
-        iunit: "kg",
-        nm: "맛있457는 당근",
-        cnt: 100,
-        finishYn: true,
-        wiuser: "홍457길동",
-      },
-      {
-        icate: "야889채",
-        iproduct: "당0-근",
-        iunit: "kg",
-        nm: "맛있는 70당근",
-        cnt: 100,
-        finishYn: true,
-        wiuser: "홍길동",
-      },
-      {
-        icate: "야채1678",
-        iproduct: "당890근",
-        iunit: "kg",
-        nm: "맛있는 당6789근",
-        cnt: 100,
-        finishYn: true,
-        wiuser: "홍길동",
-      },
-    ];
-    setShopList(tempList);
+    const fetchData = async () => {
+      const data = await getItemList();
+      setShopList(data);}
+      fetchData();
   }, []);
   // 스크롤 영역 너비 state
   const [scHeight, setScHeight] = useState(400);
@@ -117,6 +68,7 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
   }, [openShopListDate]);
   // 모달창
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -133,6 +85,16 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
   // 수량
   const onChangeCnt = value => {
     console.log("changed", value);
+  };
+  // 전체선택 삭제
+  const showDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
+  const handleDeleteOk = () => {
+    setIsDeleteModalOpen(false);
+  };
+  const handleDeleteCancel = () => {
+    setIsDeleteModalOpen(false);
   };
 
   return (
@@ -219,6 +181,34 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
             </ModalUnit>
           </Space>
         </ModalWrap>
+      </Modal>
+      <button className="delete-schedule" onClick={showDeleteModal}>
+        <FontAwesomeIcon
+          icon={faTrashCan}
+          style={{ fontSize: "15px", alignContent: "center" }}
+        />
+      </button>
+      <Modal
+        // title="Basic Modal"
+        open={isDeleteModalOpen}
+        onOk={handleDeleteOk}
+        onCancel={handleDeleteCancel}
+        centered
+        footer={[
+          <Button key="back" onClick={handleDeleteOk}>
+            <FontAwesomeIcon icon={faCheck} />
+          </Button>,
+          <Button
+            style={{ backgroundColor: "#1677ff" }}
+            key="submit"
+            type="primary"
+            onClick={handleDeleteCancel}
+          >
+            <FontAwesomeIcon icon={faXmark} />
+          </Button>,
+        ]}
+      >
+        <p>일정을 삭제하시겠습니까?</p>
       </Modal>
     </ShoppingWrap>
   );
