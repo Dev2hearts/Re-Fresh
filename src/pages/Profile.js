@@ -31,6 +31,7 @@ const Profile = () => {
   useEffect(() => {
     // 서버에서 회원 전체 자료 가져오기
     getAllUserParse();
+    console.log(getAllUserParse)
   }, []);
 
   return (

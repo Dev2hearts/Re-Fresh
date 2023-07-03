@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://192.168.0.144:5007/refresh",
+  baseURL: "http://192.168.0.144:5007/api/refresh",
   timeout: 1000,
   headers: {
     "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",

@@ -12,35 +12,54 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
   const [value, setValue] = useState(() => dayjs(Date.now()));
   const [selectedValue, setSelectedValue] = useState(() => dayjs(Date.now()));
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [items, setItems] = useState([]);
+  const [itemList, setItemList] = useState([]);
+
+  const itemChange = _obj => {
+    console.log("itemChange", _obj);
+    // itemList 의 state에서 index 에 해당하는 키:값 변경
+    const newList = itemList.map(item => {
+      if (item.index === _obj.index) {
+        console.log(item.index, _obj.index);
+
+        item = { ..._obj };
+      }
+      console.log(item);
+      return item;
+    });
+    setItemList(newList);
+  };
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
-    setItems([
-      {
-        icate: "",
-        iunit: "",
-        nm: "",
-        cnt: 1,
-      },
-    ]); // 모달 열 때 아이템 초기화
+    handleAddItem();
   };
+
   const handleOk = () => {
+    setItemList([]);
     setIsModalOpen(false);
-    setItems([]);
   };
 
   const handleCancel = () => {
+    setItemList([]);
     setIsModalOpen(false);
-    setItems([]);
   };
 
   const handleAddItem = () => {
-    setItems(prevItems => [...prevItems, {}]); // 새로운 아이템 추가
+    setItemList(prevItems => [
+      ...prevItems,
+      {
+        index: Date.now(),
+        icate: "카테고리",
+        iunit: "단위",
+        nm: "",
+        cnt: 1,
+      },
+    ]); // 새로운 아이템 추가
   };
 
   const onDelete = index => {
-    setItems(prevItems => prevItems.filter((_, i) => i !== index)); // 아이템 삭제
+    const newItemList = itemList.filter(item => item.index !== index);
+    setItemList(newItemList);
   };
 
   const onSelect = newValue => {
@@ -72,6 +91,10 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
     });
   }, []);
 
+  useEffect(() => {
+    console.log(itemList);
+  }, [itemList]);
+
   const cellRender = date => {
     const dateString = date.format("YYYY-MM-DD");
     const result = hi.find(item => item.date === dateString);
@@ -97,6 +120,7 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
         closable={false}
         okText={"등록"}
         cancelText={"취소"}
+        destroyOnClose={true}
       >
         <button
           className="block float-right mr-10 text-xl"
@@ -106,12 +130,13 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
         </button>
         {isModalOpen && (
           <div>
-            {items.map((item, index) => (
+            {itemList.map((item, index) => (
               <FirstItem
                 key={index}
                 onDelete={onDelete}
-                index={index}
                 item={item}
+                itemChange={itemChange}
+                handleAddItem={handleAddItem}
               />
             ))}
           </div>
