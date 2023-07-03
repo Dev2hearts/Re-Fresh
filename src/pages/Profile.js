@@ -10,7 +10,7 @@ import {
 } from "../style/GITotalCss";
 import { Link } from "react-router-dom";
 // axios 관련
-import { getUserAll } from "../api/fetch";
+import { getUserLogin } from "../api/fetch";
 
 const Profile = () => {
   // state 에는 데이터가 저장되는 장소다.
@@ -24,14 +24,13 @@ const Profile = () => {
   const [profiles, setProfiles] = useState([]);
 
   // 사용자 정보를 axios 로 가지고 옮
-  const getAllUserParse = async () => {
-    const data = await getUserAll();
+  const getAllUserLoginParse = async () => {
+    const data = await getUserLogin();
     setProfiles(data);
   };
   useEffect(() => {
     // 서버에서 회원 전체 자료 가져오기
-    getAllUserParse();
-    console.log(getAllUserParse)
+    getAllUserLoginParse();
   }, []);
   return (
     <GIContainer>
