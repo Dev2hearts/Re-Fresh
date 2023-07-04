@@ -6,16 +6,17 @@ import "../style/schedule.css";
 import FirstItem from "./FirstItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { getPlan } from "../api/fetch";
 
-const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
-  const hi = [{ date: "2023-07-07" }, { date: "2023-07-09" }];
+const Schedule = ({
+  setOpenShopList,
+  setOpenShopListDate,
+  openShopList,
+  plan,
+}) => {
   const [value, setValue] = useState(() => dayjs(Date.now()));
   const [selectedValue, setSelectedValue] = useState(() => dayjs(Date.now()));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemList, setItemList] = useState([]);
-
-  const [plan, setPlan] = useState([]);
 
   const itemChange = _obj => {
     console.log("itemChange", _obj);
@@ -92,11 +93,6 @@ const Schedule = ({ setOpenShopList, setOpenShopListDate, openShopList }) => {
     th.forEach((item, index) => {
       item.innerHTML = day[index]; // 캘린더 요일 텍스트 설정
     });
-    const fetchData = async () => {
-      const data = await getPlan();
-      setPlan(data);
-    };
-    fetchData();
   }, []);
   const cellRender = date => {
     const dateString = date.format("YYYY-MM-DD");

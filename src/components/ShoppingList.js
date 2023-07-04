@@ -28,7 +28,7 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-const ShoppingList = ({ openShopListDate, openShopList }) => {
+const ShoppingList = ({ openShopListDate, openShopList,userGroupPK,plan }) => {
   // 날짜별 장보기 목록 state
   const [shopList, setShopList] = useState([]);
   const [cateList, setCateList] = useState();
@@ -36,9 +36,14 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
   useEffect(() => {
     // axios 연동
     const fetchData = async () => {
-      const data = await getItemList();
+
+      const data = await getItemList(userGroupPK,5);
       setShopList(data);}
       fetchData();
+      const data = await getItemList();
+      setShopList(data);
+    };
+    fetchData();
   }, []);
   // 스크롤 영역 너비 state
   const [scHeight, setScHeight] = useState(400);
@@ -96,6 +101,7 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
   const handleDeleteCancel = () => {
     setIsDeleteModalOpen(false);
   };
+  // 전체 선택 눌렀을 때 창 내려가기
 
   return (
     <ShoppingWrap

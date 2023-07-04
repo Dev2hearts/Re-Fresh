@@ -71,18 +71,18 @@ const getGroupAll = async () => {
 
 export { getCate, getUnit, getUserLogin, getGroupAll, getUserAll };
 // 날짜, 아이템
-const getPlan = async () => {
+const getPlan = async (_group) => {
   try {
-    const res = await axiosInstance.get("/plan?igroup=1");
+    const res = await axiosInstance.get(`/plan?igroup=${_group}`);
     const result = res.data;
     return result;
   } catch (err) {
     console.log(err);
   }
 };
-const getItemList = async () => {
+const getItemList = async (_group,_date) => {
   try {
-    const res = await axiosInstance.get(`/pdt?igroup=1&iplan=6`);
+    const res = await axiosInstance.get(`/pdt?igroup=${_group}&iplan=${_date}`);
     const result = res.data;
     return result;
   } catch (err) {
