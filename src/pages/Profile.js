@@ -3,6 +3,7 @@ import {
   GIStyles,
   GITitle,
   GIUl,
+  GIDiv,
   GILi,
   GILogo,
   GILogoDiv,
@@ -43,10 +44,13 @@ const Profile = ({ setAppUsers }) => {
           <GIUl>
             {profiles.map((item, index) => (
               <GILi key={index}>
-                {/* 클릭시에 사용자 아이디를 전달한다. */}
-                <Link to={`/group/${item.iuser}`}>
-                  <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
-                </Link>
+                <GIDiv>
+                  {/* 클릭시에 사용자 아이디를 전달한다. */}
+                  <Link to={`/group/${item.iuser}`}>
+                    <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
+                  </Link>
+                </GIDiv>
+                <span>{item.nm}</span>
               </GILi>
             ))}
           </GIUl>

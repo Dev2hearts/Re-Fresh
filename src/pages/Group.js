@@ -3,6 +3,7 @@ import {
   GIStyles,
   GITitle,
   GIUl,
+  GIDiv,
   GILi,
   GILogo,
   GILogoDiv,
@@ -40,9 +41,14 @@ const Group = () => {
               if (item.iuser === userPK) {
                 return (
                   <GILi key={index}>
-                    <Link to={`/main/${item.iuser}/${item.igroup}`}>
-                      <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
-                    </Link>
+                    <GIDiv>
+                      <Link to={`/main/${item.iuser}/${item.igroup}`}>
+                        <img
+                          src={`${process.env.PUBLIC_URL}/images/Test.png`}
+                        />
+                      </Link>
+                    </GIDiv>
+                    <span>{item.gnm}</span>
                   </GILi>
                 );
               } else {

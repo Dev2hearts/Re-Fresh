@@ -11,8 +11,8 @@ export const GIStyles = styled.div`
   position: absolute;
   width: 100%;
   height: 80%;
-  left: 0px;
-  top: 0px;
+  left: 0;
+  top: 0;
   background: linear-gradient(
     180deg,
     rgba(249, 246, 241, 0.65) 0%,
@@ -57,28 +57,33 @@ export const GIUl = styled.ul`
   align-items: center;
   gap: 15px;
   padding: 0 20%;
+
   @media (max-width: 191px) {
     padding: 0 5%;
   }
   @media (max-width: 174px) {
     padding: 0;
   }
-  @media (max-height: 500px) {
+  @media (max-height: 500px), (max-width: 115px) {
     gap: 5px;
   }
-  @media (max-width: 115px) {
-    gap: 5px;
-  }
-  @media (max-height: 470px) {
-    gap: 0px;
-  }
-  @media (max-width: 104px) {
-    gap: 0px;
+  @media (max-height: 470px), (max-width: 104px) {
+    gap: 0;
   }
 `;
 
 export const GILi = styled.li`
   width: calc((100% - 30px) / 3);
+  text-align: center;
+
+  span {
+    color: #305569;
+    font-size: 16px;
+    font-weight: 500;
+  }
+`;
+
+export const GIDiv = styled.div`
   min-height: 50px;
   min-width: 50px;
   border: 1px solid rgb(0, 97, 39);
@@ -114,6 +119,7 @@ export const GILogo = styled.img`
   width: 30%;
   height: auto;
   margin: 0 auto;
+
   @media (max-width: 300px) {
     width: 70px;
   }

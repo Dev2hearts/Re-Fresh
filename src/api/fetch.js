@@ -52,7 +52,7 @@ const getUserLogin = async () => {
 };
 const getUserAll = async () => {
   try {
-    const res = await axiosInstance.get("/user/all/{igroup}");
+    const res = await axiosInstance.get("/user/all/igroup");
     const result = res.data;
     return result;
   } catch (err) {
