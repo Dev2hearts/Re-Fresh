@@ -80,6 +80,7 @@ const getPlan = async _group => {
   }
 };
 
+// 아이템 관련
 const getItemList = async (_group, _plan) => {
   try {
     const res = await axiosInstance.get(`/pdt?igroup=${_group}&iplan=${_plan}`);
@@ -95,6 +96,19 @@ const postPlan = async _planData => {
     const res = await axiosInstance.post("/plan", _planData);
     // console.log(res.data);
     return res.data;
+const patchItemList = async (_iproduct, _icate, _nm, _cnt, _iunit) => {
+  try {
+    let data = {
+      iproduct: _iproduct,
+      icate: _icate,
+      nm: _nm,
+      cnt: _cnt,
+      iunit: _iunit,
+    };
+
+    const res = await axiosInstance.patch(`/pdt`, data);
+    const result = res.data;
+    return result;
   } catch (err) {
     console.log(err);
   }
@@ -107,6 +121,14 @@ const postItem = async _itemData => {
   } catch (err) {
     console.log(err);
     // console.log(_itemData);
+const deleteItemList = async _iproduct => {
+  try {
+    const res = await axiosInstance.delete(`/pdt?iproduct=${_iproduct}`);
+    const result = res.data;
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
   }
 };
 export {
@@ -119,4 +141,6 @@ export {
   getItemList,
   postPlan,
   postItem,
+  patchItemList,
+  deleteItemList,
 };

@@ -33,6 +33,7 @@ const Main = ({ appUsers }) => {
   };
   const fetchPlanData = async () => {
     const data = await getPlan(userGroupPK);
+    console.log("Plan Data : ", data);
     setPlan(data);
   };
 

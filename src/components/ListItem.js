@@ -27,11 +27,27 @@ import {
   ModalWrap,
 } from "../style/ShoppingListCss";
 
-const ListItem = ({ item }) => {
+const ListItem = ({ item, itemUpdate, itemDelete }) => {
   const [cateList, setCateList] = useState();
   const [unitList, setUnitList] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
+  const [itemNm, setItemNm] = useState("");
+  const [itemCateNm, setItemCateNm] = useState("");
+  const [itemCate, setItemCate] = useState(0);
+  const [itemIUnit, setItemIUnit] = useState("");
+  const [itemUnitNm, setItemUnitNm] = useState("");
+  const [itemCnt, setItemCnt] = useState(0);
+
+  useEffect(() => {
+    setItemNm(item.nm);
+    setItemCate(item.icate);
+    setItemCateNm(item.cateNm);
+    setItemIUnit(item.uinit);
+    setItemUnitNm(item.unitNm);
+    setItemCnt(item.cnt);
+  }, []);
+
   const fetchCateData = async () => {
     const data = await getCate();
     setCateList(data);
@@ -51,21 +67,49 @@ const ListItem = ({ item }) => {
 
   const handleOk = () => {
     setIsModalOpen(false);
+    // 데이터를 수정하는 것을 모은다.
+    const newObj = {
+      ...item,
+      cateNm: itemCateNm,
+      nm: itemNm,
+      cnt: itemCnt,
+      unitNm: itemUnitNm,
+    };
+
+    itemUpdate(newObj);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const handleChange = value => {
-    console.log(`selected ${value}`);
-  };
+
   const handleDeleteClick = e => {
     console.log("삭제클릭");
+    itemDelete(item.iproduct);
     // 이벤트 전달 안 하기
     e.stopPropagation();
   };
+  const onChangeCateNm = value => {
+    // console.log("changed", value);
+    // console.log(`selected ${value}`);
+    const cat = cateList.find(item => item.value === parseInt(value));
+    setItemCate(parseInt(value));
+    setItemCateNm(cat.label);
+  };
+  const onChangeNm = e => {
+    // console.log("changed value ", e.target.value);
+    setItemNm(e.target.value);
+  };
+  const onChangeUnitNm = value => {
+    // console.log("changed", value);
+    const cat = unitList.find(item => item.value === parseInt(value));
+
+    setItemIUnit(parseInt(value));
+    setItemUnitNm(cat.label);
+  };
   // 수량
   const onChangeCnt = value => {
-    console.log("changed", value);
+    // console.log("changed", value);
+    setItemCnt(parseInt(value));
   };
   const handleModalClick = () => {
     showModal();
@@ -73,6 +117,17 @@ const ListItem = ({ item }) => {
   const showModal = () => {
     setIsModalOpen(true);
   };
+  // 수정사항 반영
+  // const handleCateChange = () => {
+  //   setCateList();
+  // };
+  // const handleNameChange = () => {
+  //   setName();
+  // };
+  // const handleUnitChange = () => {
+  //   setUnitList();
+  // };
+
   return (
     <>
       <Modal
@@ -101,32 +156,36 @@ const ListItem = ({ item }) => {
             <ModalCate>
               <Select
                 // value={cateList}
-                defaultValue={item.cateNm}
+                defaultValue={itemCateNm}
                 style={{
                   width: 120,
                 }}
-                onChange={handleChange}
                 options={cateList}
+                onChange={onChangeCateNm}
+                // handleCateChange={setCateList}
               />
             </ModalCate>
             <ModalName>
               {" "}
-              <Input defaultValue={item.nm} />
+              <Input defaultValue={itemNm} onChange={onChangeNm} />
             </ModalName>
             <ModalCnt>
-              <InputNumber defaultValue={item.cnt} onChange={onChangeCnt} />
+              <InputNumber defaultValue={itemCnt} onChange={onChangeCnt} />
             </ModalCnt>
             <ModalUnit>
               <Select
                 // value={unitList}
-                defaultValue={item.unitNm}
+                defaultValue={itemUnitNm}
                 options={unitList}
+                onChange={onChangeUnitNm}
+                // handleUnitChange={setUnitList}
               />
             </ModalUnit>
           </Space>
         </ModalWrap>
       </Modal>
-      <ItemWrap  onClick={handleModalClick}>
+      {/* 목록 관련 ============ */}
+      <ItemWrap onClick={handleModalClick}>
         <Checkbox
           onClick={onClick}
           value={item.finishYn}
