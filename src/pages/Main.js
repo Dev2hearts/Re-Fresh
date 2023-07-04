@@ -10,10 +10,12 @@ const Main = ({ appUsers }) => {
   const userPK = parseInt(params.iuser);
   const userGroupPK = parseInt(params.igroup);
   const [userList, setUserList] = useState([]);
-
-
+  const [plan, setPlan] = useState([]);
+  const [planPK, setPlanPK] = useState(null);
   // 사용자의 상세한 정보를 userPK 를 통해서 파악한다.
   const [nowUser, setNowUser] = useState({});
+  const [openShopList, setOpenShopList] = useState(false);
+  const [openShopListDate, setOpenShopListDate] = useState("");
 
   const parseUserInfo = () => {
     const nowUserFind = appUsers.find(item => item.iuser === userPK);
@@ -24,18 +26,16 @@ const Main = ({ appUsers }) => {
     setNowUser(nowUserFind);
   }, [nowUser]);
 
-  const [plan, setPlan] = useState([123]);
-
   // 사용자 정보를 axios 로 가지고 옮
   const getAllParse = async () => {
     const data = await getUserAll();
     setUserList(data);
-    
   };
   const fetchPlanData = async () => {
     const data = await getPlan(userGroupPK);
     setPlan(data);
   };
+
   useEffect(() => {
     // 서버에서 회원 전체 자료 가져오기
     getAllParse();
@@ -48,9 +48,6 @@ const Main = ({ appUsers }) => {
   // }, []);
   // 목록 열기 내리기
 
-  
-  const [openShopList, setOpenShopList] = useState(false);
-  const [openShopListDate, setOpenShopListDate] = useState("");
   return (
     <div style={{ position: "relative", height: "100vh" }}>
       <Header nowUser={nowUser} />
@@ -60,12 +57,13 @@ const Main = ({ appUsers }) => {
           setOpenShopListDate={setOpenShopListDate}
           openShopList={openShopList}
           plan={plan}
+          setPlanPK={setPlanPK}
           userGroupPK={userGroupPK}
         />
         <ShoppingList
           openShopListDate={openShopListDate}
           openShopList={openShopList}
-          plan={plan}
+          planPK={planPK}
           userGroupPK={userGroupPK}
         />
       </div>

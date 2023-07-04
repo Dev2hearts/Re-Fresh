@@ -12,6 +12,7 @@ const Schedule = ({
   setOpenShopListDate,
   openShopList,
   plan,
+  setPlanPK,
 }) => {
   const [value, setValue] = useState(() => dayjs(Date.now()));
   const [selectedValue, setSelectedValue] = useState(() => dayjs(Date.now()));
@@ -76,8 +77,10 @@ const Schedule = ({
       handleModalOpen(); // 모달 열기
       setOpenShopListDate("");
       setOpenShopList(false);
+      setPlanPK(null);
     } else {
       setOpenShopList(true);
+      setPlanPK(result.iplan);
     }
 
     setOpenShopListDate(newValue.format("YYYY/MM/DD"));
