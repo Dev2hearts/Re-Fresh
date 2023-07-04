@@ -20,7 +20,13 @@ import {
   ModalCnt,
 } from "../style/ShoppingListCss";
 import ListItem from "./ListItem";
-import { getCate, getItemList, getUnit } from "../api/fetch";
+import {
+  deleteItemList,
+  getCate,
+  getItemList,
+  getUnit,
+  patchItemList,
+} from "../api/fetch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
@@ -37,7 +43,7 @@ const ShoppingList = ({
 }) => {
   // 날짜별 장보기 목록 state
   const [shopList, setShopList] = useState([]);
- 
+
   // 스크롤 영역 너비 state
   const [scHeight, setScHeight] = useState(400);
   const [isClicked, setIsClicked] = useState(false);
@@ -63,7 +69,6 @@ const ShoppingList = ({
     console.log(dateString);
   };
 
-
   // 전체선택 삭제
   const showDeleteModal = () => {
     setIsDeleteModalOpen(true);
@@ -80,15 +85,39 @@ const ShoppingList = ({
     // 렌더링 시 초기값 설정
     setSelectedDate(dayjs(openShopListDate, "YYYY/MM/DD"));
   }, [openShopListDate]);
+
   useEffect(() => {
     const fetchItemList = async () => {
       const data = await getItemList(userGroupPK, planPK);
+      // axios 아이템 리스트
+      console.log(data);
       setShopList(data);
     };
     if (planPK) {
       fetchItemList();
     }
   }, [planPK]);
+
+  const itemUpdate = _obj => {
+    console.log("뭐지", _obj);
+    // 아이템 수정 fetch
+    patchItemList(_obj.iproduct, _obj.icate, _obj.nm, _obj.cnt, _obj.iunit);
+    const newArr = shopList.map(item => {
+      if (item.iproduct === _obj.iproduct) {
+        item = { ..._obj };
+      }
+      return item;
+    });
+
+    setShopList(newArr);
+  };
+  const itemDelete = _iproduct => {
+    deleteItemList(_iproduct);
+    // filter 를 이용해서 state 갱신하기
+    const newArr = shopList.filter(item => item.iproduct !== _iproduct);
+    setShopList(newArr);
+  };
+
   return (
     <ShoppingWrap
       className={openShopList ? "shopping-list-open" : "shopping-list-close"}
@@ -114,9 +143,15 @@ const ShoppingList = ({
             />
           </button>
         </div>
+
         <ShoppingListSC scHeight={scHeight}>
           {shopList.map((item, index) => (
-            <ListItem key={index} item={item} />
+            <ListItem
+              key={index}
+              item={item}
+              itemUpdate={itemUpdate}
+              itemDelete={itemDelete}
+            />
           ))}
         </ShoppingListSC>
       </ShoppingDiv>

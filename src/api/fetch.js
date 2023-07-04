@@ -4,7 +4,7 @@ const axiosInstance = axios.create({
   baseURL: "http://192.168.0.144:5007/api/refresh",
   timeout: 1000,
   headers: {
-    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "Content-type": "application/json;",
     Accept: "*/*",
   },
 });
@@ -80,10 +80,39 @@ const getPlan = async _group => {
   }
 };
 
+// 아이템 관련
 const getItemList = async (_group, _plan) => {
   try {
     const res = await axiosInstance.get(`/pdt?igroup=${_group}&iplan=${_plan}`);
     const result = res.data;
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const patchItemList = async (_iproduct, _icate, _nm, _cnt, _iunit) => {
+  try {
+    let data = {
+      iproduct: _iproduct,
+      icate: _icate,
+      nm: _nm,
+      cnt: _cnt,
+      iunit: _iunit,
+    };
+
+    const res = await axiosInstance.patch(`/pdt`, data);
+    const result = res.data;
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const deleteItemList = async _iproduct => {
+  try {
+    const res = await axiosInstance.delete(`/pdt?iproduct=${_iproduct}`);
+    const result = res.data;
+    console.log(result);
     return result;
   } catch (err) {
     console.log(err);
@@ -97,4 +126,6 @@ export {
   getUserAll,
   getPlan,
   getItemList,
+  patchItemList,
+  deleteItemList,
 };

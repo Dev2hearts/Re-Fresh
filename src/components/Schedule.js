@@ -80,6 +80,7 @@ const Schedule = ({
       setPlanPK(null);
     } else {
       setOpenShopList(true);
+      console.log(result.iplan);
       setPlanPK(result.iplan);
     }
 
