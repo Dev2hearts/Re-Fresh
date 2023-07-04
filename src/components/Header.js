@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Wrap } from "../style/HeaderCss";
 
-const Header = () => {
+const Header = ({ nowUser }) => {
+  const [userName, setUserName] = useState("");
+  const [userPic, setUserPic] = useState("");
+  useEffect(() => {
+    console.log(nowUser);
+    setUserName(nowUser.nm);
+    setUserPic(nowUser.pic);
+  }, [nowUser]);
+
   return (
     <Wrap>
       <div>
         <Link to="/about">
-          <img src="" alt="" />
-          UserName
+          {userPic && <img src={userPic} alt={userName} />}
+          {userName}
         </Link>
       </div>
       <div>
