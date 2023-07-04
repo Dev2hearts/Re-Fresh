@@ -28,7 +28,12 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-const ShoppingList = ({ openShopListDate, openShopList,userGroupPK,plan }) => {
+const ShoppingList = ({
+  openShopListDate,
+  openShopList,
+  userGroupPK,
+  plan,
+}) => {
   // 날짜별 장보기 목록 state
   const [shopList, setShopList] = useState([]);
   const [cateList, setCateList] = useState();
@@ -36,13 +41,11 @@ const ShoppingList = ({ openShopListDate, openShopList,userGroupPK,plan }) => {
   useEffect(() => {
     // axios 연동
     const fetchData = async () => {
-
-      const data = await getItemList(userGroupPK,5);
-      setShopList(data);}
-      fetchData();
-      const data = await getItemList();
+      const data = await getItemList(userGroupPK, 5);
       setShopList(data);
     };
+    fetchData();
+
     fetchData();
   }, []);
   // 스크롤 영역 너비 state
