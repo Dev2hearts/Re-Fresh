@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Wrap } from "../style/HeaderCss";
+import { Wrap, Imgdiv, UIDdiv } from "../style/HeaderCss";
 
 const Header = ({ nowUser }) => {
   const [userName, setUserName] = useState("");
   const [userPic, setUserPic] = useState("");
   useEffect(() => {
-    console.log(nowUser);
     setUserName(nowUser.nm);
     setUserPic(nowUser.pic);
   }, [nowUser]);
@@ -15,8 +14,10 @@ const Header = ({ nowUser }) => {
     <Wrap>
       <div>
         <Link to="/about">
-          {userPic && <img src={userPic} alt={userName} />}
-          {userName}
+          <UIDdiv>
+            <Imgdiv>{userPic && <img src={userPic} alt={userName} />}</Imgdiv>
+            <span>{userName}</span>
+          </UIDdiv>
         </Link>
       </div>
       <div>
