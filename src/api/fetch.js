@@ -4,7 +4,7 @@ const axiosInstance = axios.create({
   baseURL: "http://192.168.0.144:5007/api/refresh",
   timeout: 1000,
   headers: {
-    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "Content-type": "application/json",
     Accept: "*/*",
   },
 });
@@ -89,6 +89,26 @@ const getItemList = async (_group, _plan) => {
     console.log(err);
   }
 };
+// Post
+const postPlan = async _planData => {
+  try {
+    const res = await axiosInstance.post("/plan", _planData);
+    // console.log(res.data);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+const postItem = async _itemData => {
+  try {
+    const res = await axiosInstance.post("/pdt", _itemData);
+    console.log(_itemData);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    // console.log(_itemData);
+  }
+};
 export {
   getCate,
   getUnit,
@@ -97,4 +117,6 @@ export {
   getUserAll,
   getPlan,
   getItemList,
+  postPlan,
+  postItem,
 };
