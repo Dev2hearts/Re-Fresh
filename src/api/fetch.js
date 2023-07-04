@@ -4,7 +4,7 @@ const axiosInstance = axios.create({
   baseURL: "http://192.168.0.144:5007/api/refresh",
   timeout: 1000,
   headers: {
-    "Content-type": "application/json;",
+    "Content-type": "application/json",
     Accept: "*/*",
   },
 });
@@ -90,6 +90,12 @@ const getItemList = async (_group, _plan) => {
     console.log(err);
   }
 };
+// Post
+const postPlan = async _planData => {
+  try {
+    const res = await axiosInstance.post("/plan", _planData);
+    // console.log(res.data);
+    return res.data;
 const patchItemList = async (_iproduct, _icate, _nm, _cnt, _iunit) => {
   try {
     let data = {
@@ -107,7 +113,14 @@ const patchItemList = async (_iproduct, _icate, _nm, _cnt, _iunit) => {
     console.log(err);
   }
 };
-
+const postItem = async _itemData => {
+  try {
+    const res = await axiosInstance.post("/pdt", _itemData);
+    console.log(_itemData);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    // console.log(_itemData);
 const deleteItemList = async _iproduct => {
   try {
     const res = await axiosInstance.delete(`/pdt?iproduct=${_iproduct}`);
@@ -126,6 +139,8 @@ export {
   getUserAll,
   getPlan,
   getItemList,
+  postPlan,
+  postItem,
   patchItemList,
   deleteItemList,
 };

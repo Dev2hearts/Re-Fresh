@@ -33,7 +33,6 @@ import {
   faTrashCan,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { ItemWrap } from "../style/ListItemCss";
 
 const ShoppingList = ({
   openShopListDate,

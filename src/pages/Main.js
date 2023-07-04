@@ -57,9 +57,11 @@ const Main = ({ appUsers }) => {
           setOpenShopList={setOpenShopList}
           setOpenShopListDate={setOpenShopListDate}
           openShopList={openShopList}
+          setPlan={setPlan}
           plan={plan}
           setPlanPK={setPlanPK}
           userGroupPK={userGroupPK}
+          userPK={userPK}
         />
         <ShoppingList
           openShopListDate={openShopListDate}

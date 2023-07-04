@@ -6,13 +6,17 @@ import "../style/schedule.css";
 import FirstItem from "./FirstItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { postPlan, getPlan, postItem } from "../api/fetch";
 
 const Schedule = ({
   setOpenShopList,
   setOpenShopListDate,
   openShopList,
   plan,
+  setPlan,
   setPlanPK,
+  userGroupPK,
+  userPK,
 }) => {
   const [value, setValue] = useState(() => dayjs(Date.now()));
   const [selectedValue, setSelectedValue] = useState(() => dayjs(Date.now()));
@@ -39,10 +43,57 @@ const Schedule = ({
     handleAddItem();
   };
 
-  const handleOk = () => {
+  // const handleOk = async () => {
+  //   setItemList([]);
+  //   setIsModalOpen(false);
+  //   const planData = {
+  //     igroup: userGroupPK,
+  //     iuser: userPK,
+  //     createdAt: selectedValue.format("YYYY-MM-DD"),
+  //   };
+  //   const itemData = {
+  //     iplan: 0,
+  //     icate: 0,
+  //     nm: "string",
+  //     cnt: 0,
+  //     iunit: 0,
+  //     wiuser: 0,
+  //   };
+  //   const postPlanData = await postPlan(planData);
+  //   const postItemData = await postItem(itemData);
+  //   const getData = await getPlan(userGroupPK);
+  //   setPlan(getData);
+  // };
+  const handleOk = async () => {
     setItemList([]);
     setIsModalOpen(false);
+    const planData = {
+      igroup: userGroupPK,
+      iuser: userPK,
+      createdAt: selectedValue.format("YYYY-MM-DD"),
+    };
+    const postData = await postPlan(planData);
+    const getData = await getPlan(userGroupPK);
+    setPlan(getData);
+
+    // itemList의 각 객체를 순회하며 postItem 요청 보내기
+    itemList.forEach(async item => {
+      const itemData = {
+        iplan: postData, // 이전에 생성된 plan의 iplan 값을 사용
+        icate: item.icate,
+        nm: item.nm,
+        cnt: item.cnt,
+        iunit: item.iunit,
+        wiuser: userPK,
+      };
+      console.log(itemData);
+      await postItem(itemData);
+    });
   };
+
+  // useEffect(() => {
+  //   console.log(itemList);
+  // }, [itemList]);
 
   const handleCancel = () => {
     setItemList([]);
@@ -97,6 +148,7 @@ const Schedule = ({
     th.forEach((item, index) => {
       item.innerHTML = day[index]; // 캘린더 요일 텍스트 설정
     });
+    console.log(plan);
   }, []);
   const cellRender = date => {
     const dateString = date.format("YYYY-MM-DD");
