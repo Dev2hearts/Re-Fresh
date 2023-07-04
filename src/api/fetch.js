@@ -96,6 +96,10 @@ const postPlan = async _planData => {
     const res = await axiosInstance.post("/plan", _planData);
     // console.log(res.data);
     return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 const patchItemList = async (_iproduct, _icate, _nm, _cnt, _iunit) => {
   try {
     let data = {
@@ -121,6 +125,8 @@ const postItem = async _itemData => {
   } catch (err) {
     console.log(err);
     // console.log(_itemData);
+  }
+};
 const deleteItemList = async _iproduct => {
   try {
     const res = await axiosInstance.delete(`/pdt?iproduct=${_iproduct}`);
