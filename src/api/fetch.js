@@ -69,6 +69,7 @@ const getGroupAll = async () => {
   }
 };
 
+export { getCate, getUnit, getUserLogin, getGroupAll, getUserAll };
 // 날짜, 아이템
 const getPlan = async (_group) => {
   try {
@@ -88,12 +89,5 @@ const getItemList = async (_group,_date) => {
     console.log(err);
   }
 };
-export {
-  getCate,
-  getUnit,
-  getUserAll,
-  getGroupAll,
-  getPlan,
-  getItemList,
-  getUserLogin,
-};
+export { getPlan, getItemList };
+
