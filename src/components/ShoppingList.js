@@ -37,8 +37,9 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
     // axios 연동
     const fetchData = async () => {
       const data = await getItemList();
-      setShopList(data);}
-      fetchData();
+      setShopList(data);
+    };
+    fetchData();
   }, []);
   // 스크롤 영역 너비 state
   const [scHeight, setScHeight] = useState(400);
@@ -96,6 +97,7 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
   const handleDeleteCancel = () => {
     setIsDeleteModalOpen(false);
   };
+  // 전체 선택 눌렀을 때 창 내려가기
 
   return (
     <ShoppingWrap
