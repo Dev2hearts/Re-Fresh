@@ -28,7 +28,7 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-const ShoppingList = ({ openShopListDate, openShopList }) => {
+const ShoppingList = ({ openShopListDate, openShopList,userGroupPK,plan }) => {
   // 날짜별 장보기 목록 state
   const [shopList, setShopList] = useState([]);
   const [cateList, setCateList] = useState();
@@ -36,7 +36,7 @@ const ShoppingList = ({ openShopListDate, openShopList }) => {
   useEffect(() => {
     // axios 연동
     const fetchData = async () => {
-      const data = await getItemList();
+      const data = await getItemList(userGroupPK,5);
       setShopList(data);}
       fetchData();
   }, []);
