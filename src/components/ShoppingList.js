@@ -1,4 +1,4 @@
-import { DatePicker, Button, Modal } from "antd";
+import { DatePicker, Button, Modal, Select, Input, InputNumber } from "antd";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import {
@@ -13,6 +13,8 @@ import {
   patchItemList,
   postItem,
   patchPlan,
+  getCate,
+  getUnit,
 } from "../api/fetch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -40,6 +42,7 @@ const ShoppingList = ({
   const [isClicked, setIsClicked] = useState(false);
   // 모달창
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [selectedDate, setSelectedDate] = useState(
     dayjs(openShopListDate, "YYYY/MM/DD"),
