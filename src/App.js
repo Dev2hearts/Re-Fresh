@@ -12,19 +12,20 @@ import { useState } from "react";
 function App() {
   // 사용자 모든 정보 저장(박호진)
   const [appUsers, setAppUsers] = useState([]);
+  const [appGroups, setAppGroups] = useState([]);
   return (
     <>
       <Routes>
         <Route path="/" element={<Navigate to="/intro" />}></Route>
         <Route path="/intro" element={<Intro />}></Route>
-        <Route path="/group/:iuser" element={<Group />}></Route>
+        <Route path="/group/:iuser" element={<Group setAppGroups={setAppGroups} />}></Route>
         <Route
           path="/main/:iuser/:igroup"
           element={<Main appUsers={appUsers} />}
         ></Route>
         <Route
           path="/about/:iuser/:igroup"
-          element={<About appUsers={appUsers} />}
+          element={<About appUsers={appUsers} appGroups={appGroups} />}
         ></Route>
         <Route
           path="/profile"
