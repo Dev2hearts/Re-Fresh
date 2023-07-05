@@ -5,15 +5,19 @@ import { Wrap, Imgdiv, UIDdiv } from "../style/HeaderCss";
 const Header = ({ nowUser }) => {
   const [userName, setUserName] = useState("");
   const [userPic, setUserPic] = useState("");
+  const [userPK, setUserPK] = useState("");
+  const [groupPK, setGroupPK] = useState("");
   useEffect(() => {
     setUserName(nowUser.nm);
     setUserPic(nowUser.pic);
+    setUserPK(nowUser.iuser);
+    setGroupPK(nowUser.igroup);
   }, [nowUser]);
 
   return (
     <Wrap>
       <div>
-        <Link to="/about">
+        <Link to={`/about/${userPK}/${groupPK}`}>
           <UIDdiv>
             <Imgdiv>{userPic && <img src={userPic} alt={userName} />}</Imgdiv>
             <span>{userName}</span>
