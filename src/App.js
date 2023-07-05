@@ -22,7 +22,10 @@ function App() {
           path="/main/:iuser/:igroup"
           element={<Main appUsers={appUsers} />}
         ></Route>
-        <Route path="/about" element={<About />}></Route>
+        <Route
+          path="/about/:iuser/:igroup"
+          element={<About appUsers={appUsers} />}
+        ></Route>
         <Route
           path="/profile"
           element={<Profile setAppUsers={setAppUsers} />}

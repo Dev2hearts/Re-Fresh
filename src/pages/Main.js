@@ -18,11 +18,11 @@ const Main = ({ appUsers }) => {
   const [openShopListDate, setOpenShopListDate] = useState("");
 
   const parseUserInfo = () => {
-    const nowUserFind = appUsers.find(item => item.iuser === userPK);
+    const nowUserFind = appUsers.find(item => item.iuser === userPK && item.igroup === userGroupPK);
     setNowUser(nowUserFind);
   };
   useEffect(() => {
-    const nowUserFind = appUsers.find(item => item.iuser === userPK);
+    const nowUserFind = appUsers.find(item => item.iuser === userPK && item.igroup === userGroupPK);
     setNowUser(nowUserFind);
   }, [nowUser]);
 
