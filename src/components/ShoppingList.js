@@ -137,7 +137,7 @@ const ShoppingList = ({
     if (planPK) {
       fetchItemList();
     }
-  }, [planPK]);
+  }, [planPK,shopList]);
   useEffect(() => {
     const fetchCateData = async () => {
       const result = await getCate();
