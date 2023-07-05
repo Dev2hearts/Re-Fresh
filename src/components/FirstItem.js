@@ -80,7 +80,7 @@ const FirstItem = ({ onDelete, itemChange, handleAddItem, item }) => {
     };
     fetchCateData();
     fetchUnitData();
-  }, [isEdit]);
+  }, []);
 
   if (isEdit) {
     // 편집중
@@ -153,7 +153,6 @@ const FirstItem = ({ onDelete, itemChange, handleAddItem, item }) => {
         <div className="flex flex-wrap gap-1">
           <Input
             placeholder="구매 목록"
-
             value={itemName}
             disabled={true}
             onChange={handleItemNameChange}

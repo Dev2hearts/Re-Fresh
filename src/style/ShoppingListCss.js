@@ -17,6 +17,12 @@ export const ShoppingWrap = styled.div`
     z-index: 9999;
     height: 32px;
   }
+  .add-schedule {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    height: 32px;
+  }
   &.shopping-list-open {
     top: 475px;
     border-radius: 15px 15px 0 0;

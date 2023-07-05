@@ -26,19 +26,23 @@ import {
   getItemList,
   getUnit,
   patchItemList,
+  postItem,
 } from "../api/fetch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
+  faPlus,
   faTrashCan,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import { ItemBox } from "../style/FirstItemCss";
 
 const ShoppingList = ({
   openShopListDate,
   openShopList,
   userGroupPK,
   planPK,
+  userPK,
 }) => {
   // 날짜별 장보기 목록 state
   const [shopList, setShopList] = useState([]);
@@ -53,6 +57,13 @@ const ShoppingList = ({
   const [selectedDate, setSelectedDate] = useState(
     dayjs(openShopListDate, "YYYY/MM/DD"),
   );
+  const [cateList, setCateList] = useState([]);
+  const [unitList, setUnitList] = useState([]);
+  const [selecCate, setSelecCate] = useState("카테고리");
+  const [itemName, setItemName] = useState("");
+  const [selecUnit, setSelecUnit] = useState("단위");
+  const [ea, setEa] = useState();
+
   const handleClick = () => {
     setIsClicked(!isClicked);
     if (isClicked) {
@@ -61,7 +72,6 @@ const ShoppingList = ({
       setScHeight(800);
     }
   };
-
   // 날짜 바뀌는 거
   const onChange = (date, dateString) => {
     setSelectedDate(date);
@@ -79,6 +89,44 @@ const ShoppingList = ({
     setIsDeleteModalOpen(false);
   };
 
+  const handleAddItemList = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+    setSelecCate("카테고리");
+    setSelecUnit("단위");
+    setEa(1);
+    setItemName(null);
+    const item = {
+      iplan: planPK,
+      icate: selecCate,
+      nm: itemName,
+      cnt: ea,
+      iunit: selecUnit,
+      wiuser: userPK,
+    };
+    postItem(item);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    setSelecCate("카테고리");
+    setSelecUnit("단위");
+    setEa(1);
+    setItemName(null);
+  };
+  const handleCateChange = value => {
+    setSelecCate(value);
+  };
+  const handleItemNameChange = e => {
+    setItemName(e.target.value);
+  };
+  const handleEaChange = value => {
+    setEa(value);
+  };
+  const handleUnitChange = value => {
+    setSelecUnit(value);
+  };
   // 전체 선택 눌렀을 때 창 내려가기
   useEffect(() => {
     // 렌더링 시 초기값 설정
@@ -96,7 +144,18 @@ const ShoppingList = ({
       fetchItemList();
     }
   }, [planPK]);
-
+  useEffect(() => {
+    const fetchCateData = async () => {
+      const result = await getCate();
+      setCateList(result);
+    };
+    const fetchUnitData = async () => {
+      const result = await getUnit();
+      setUnitList(result);
+    };
+    fetchCateData();
+    fetchUnitData();
+  }, []);
   const itemUpdate = _obj => {
     console.log("뭐지", _obj);
     // 아이템 수정 fetch
@@ -153,13 +212,17 @@ const ShoppingList = ({
             />
           ))}
         </ShoppingListSC>
+        <button className="delete-schedule" onClick={showDeleteModal}>
+          <FontAwesomeIcon
+            icon={faTrashCan}
+            style={{ fontSize: "15px", alignContent: "center" }}
+          />
+        </button>
+        <button className="add-schedule" onClick={handleAddItemList}>
+          <FontAwesomeIcon icon={faPlus} style={{ fontSize: "15px" }} />
+        </button>
       </ShoppingDiv>
-      <button className="delete-schedule" onClick={showDeleteModal}>
-        <FontAwesomeIcon
-          icon={faTrashCan}
-          style={{ fontSize: "15px", alignContent: "center" }}
-        />
-      </button>
+
       <Modal
         // title="Basic Modal"
         open={isDeleteModalOpen}
@@ -181,6 +244,66 @@ const ShoppingList = ({
         ]}
       >
         <p>일정을 삭제하시겠습니까?</p>
+      </Modal>
+      <Modal
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        closable={false}
+        okText={"등록"}
+        cancelText={"취소"}
+        centered
+        footer={[
+          <Button key="back" onClick={handleOk}>
+            <FontAwesomeIcon icon={faCheck} />
+          </Button>,
+          <Button
+            style={{ backgroundColor: "#1677ff" }}
+            key="submit"
+            type="primary"
+            onClick={handleCancel}
+          >
+            <FontAwesomeIcon icon={faXmark} />
+          </Button>,
+        ]}
+      >
+        <ItemBox>
+          <div className="flex justify-between">
+            <Select
+              style={{
+                width: 205,
+              }}
+              onChange={handleCateChange}
+              disabled={false}
+              value={selecCate}
+              options={cateList}
+              defaultValue={"카테고리"}
+            />
+          </div>
+
+          <div className="flex flex-wrap gap-1">
+            <Input
+              placeholder="구매 목록"
+              value={itemName}
+              disabled={false}
+              onChange={handleItemNameChange}
+            />
+            <InputNumber
+              className="flex-1"
+              value={ea}
+              disabled={false}
+              onChange={handleEaChange}
+              defaultValue={1}
+            />
+            <Select
+              className="flex-1"
+              defaultValue={"단위"}
+              value={selecUnit}
+              onChange={handleUnitChange}
+              options={unitList}
+            />
+          </div>
+        </ItemBox>
       </Modal>
     </ShoppingWrap>
   );

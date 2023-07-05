@@ -68,6 +68,7 @@ const Main = ({ appUsers }) => {
           openShopList={openShopList}
           planPK={planPK}
           userGroupPK={userGroupPK}
+          userPK={userPK}
         />
       </div>
     </div>
