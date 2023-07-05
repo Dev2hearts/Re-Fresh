@@ -129,12 +129,16 @@ const Schedule = ({
       setOpenShopListDate("");
       setOpenShopList(false);
       setPlanPK(null);
-    } else {
+    }
+    else if (openShopList){
+      setOpenShopList(false);
+    }
+    else {
       setOpenShopList(true);
       console.log(result.iplan);
       setPlanPK(result.iplan);
     }
-
+    
     setOpenShopListDate(newValue.format("YYYY/MM/DD"));
   };
 
