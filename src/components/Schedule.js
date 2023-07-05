@@ -42,28 +42,6 @@ const Schedule = ({
     setIsModalOpen(true);
     handleAddItem();
   };
-
-  // const handleOk = async () => {
-  //   setItemList([]);
-  //   setIsModalOpen(false);
-  //   const planData = {
-  //     igroup: userGroupPK,
-  //     iuser: userPK,
-  //     createdAt: selectedValue.format("YYYY-MM-DD"),
-  //   };
-  //   const itemData = {
-  //     iplan: 0,
-  //     icate: 0,
-  //     nm: "string",
-  //     cnt: 0,
-  //     iunit: 0,
-  //     wiuser: 0,
-  //   };
-  //   const postPlanData = await postPlan(planData);
-  //   const postItemData = await postItem(itemData);
-  //   const getData = await getPlan(userGroupPK);
-  //   setPlan(getData);
-  // };
   const handleOk = async () => {
     setItemList([]);
     setIsModalOpen(false);
@@ -89,6 +67,7 @@ const Schedule = ({
       console.log(itemData);
       await postItem(itemData);
     });
+    setOpenShopList(true);
   };
 
   // useEffect(() => {

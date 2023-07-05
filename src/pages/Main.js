@@ -57,7 +57,9 @@ const Main = ({ appUsers }) => {
   //   console.log("사용자 번호: ", userId);
   // }, []);
   // 목록 열기 내리기
-
+  useEffect(() => {
+    fetchPlanData()
+  },[plan])
   return (
     <div style={{ position: "relative", height: "100vh" }}>
       <Header nowUser={nowUser} />
