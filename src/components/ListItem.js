@@ -80,6 +80,12 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+    setItemNm(item.nm);
+    setItemCate(item.icate);
+    setItemCateNm(item.cateNm);
+    setItemIUnit(item.uinit);
+    setItemUnitNm(item.unitNm);
+    setItemCnt(item.cnt);
   };
 
   const handleDeleteClick = e => {
