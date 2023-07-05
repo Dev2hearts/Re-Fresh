@@ -1,4 +1,4 @@
-import { Calendar, Modal } from "antd";
+import { Calendar, Modal, Button } from "antd";
 import dayjs from "dayjs";
 import { useState, useEffect } from "react";
 import locale from "antd/es/calendar/locale/ko_KR";
@@ -173,9 +173,18 @@ const Schedule = ({
         onOk={handleOk}
         onCancel={handleCancel}
         closable={false}
-        okText={"등록"}
-        cancelText={"취소"}
         destroyOnClose={true}
+        footer={[
+          <Button key="back" onClick={handleCancel}>
+            취소
+          </Button>,
+          <Button
+            onClick={handleOk}
+            style={{ backgroundColor: "#1677ff" }}
+            key="submit"
+            type="primary"
+          >등록</Button>,
+        ]}
       >
         <button
           className="block float-right mr-10 text-xl"

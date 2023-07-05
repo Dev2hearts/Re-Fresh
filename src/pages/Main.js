@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import Header from "../components/Header";
 import Schedule from "../components/Schedule";
 import ShoppingList from "../components/ShoppingList";
-import { getUserAll, getPlan } from "../api/fetch";
+import { getUserAll, getPlan, deletePlan } from "../api/fetch";
 
 const Main = ({ appUsers }) => {
   const params = useParams();
@@ -16,7 +16,12 @@ const Main = ({ appUsers }) => {
   const [nowUser, setNowUser] = useState({});
   const [openShopList, setOpenShopList] = useState(false);
   const [openShopListDate, setOpenShopListDate] = useState("");
-
+  const planDelete = _iplan => {
+    deletePlan(_iplan);
+    const newPlan = plan.filter(item => item.iplan !== _iplan);
+    console.log("삭제후:", newPlan)
+    setPlan(newPlan);
+  };
   const parseUserInfo = () => {
     const nowUserFind = appUsers.find(item => item.iuser === userPK);
     setNowUser(nowUserFind);
@@ -68,6 +73,8 @@ const Main = ({ appUsers }) => {
           openShopList={openShopList}
           planPK={planPK}
           userGroupPK={userGroupPK}
+          planDelete={planDelete}
+          setOpenShopList={setOpenShopList}
         />
       </div>
     </div>
