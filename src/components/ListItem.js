@@ -47,13 +47,14 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
     setItemIUnit(item.uinit);
     setItemUnitNm(item.unitNm);
     setItemCnt(item.cnt);
-    fetchCateData();
-    fetchUnitData();
     if (item.finishYn === 1) {
       setIsChecked(true);
     }
-  }, [isChecked],isModalOpen);
-
+  }, [isChecked, isModalOpen]);
+  useEffect(() => {
+    fetchCateData();
+    fetchUnitData();
+  }, []);
   const fetchCateData = async () => {
     const data = await getCate();
     setCateList(data);
