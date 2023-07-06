@@ -27,7 +27,7 @@ const Header = ({ nowUser }) => {
       <div>
         <Link to={`/about/${userPK}/${groupPK}`}>
           <UIDdiv>
-            <Imgdiv>{userPic && <img src={userPic} alt={userName} />}</Imgdiv>
+            <Imgdiv>{userPic && <img src={`/img/${userPic}`} alt={userName} />}</Imgdiv>
             <span>{userName}</span>
           </UIDdiv>
         </Link>

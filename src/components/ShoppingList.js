@@ -57,7 +57,6 @@ const ShoppingList = ({
   const fetchItemList = async () => {
     const data = await getItemList(userGroupPK, planPK);
     // axios 아이템 리스트
-    console.log(data);
     setShopList(data);
   };
   const fetchCateData = async () => {
@@ -79,8 +78,6 @@ const ShoppingList = ({
   // 날짜 바뀌는 거
   const onChange = async (date, dateString, planPK) => {
     setSelectedDate(date);
-    console.log(dateString);
-    console.log(planPK);
     await patchPlan(planPK, dateString);
     fetchPlanData();
   };
@@ -153,7 +150,6 @@ const ShoppingList = ({
     fetchUnitData();
   }, []);
   const itemUpdate = _obj => {
-    console.log("뭐지", _obj);
     // 아이템 수정 fetch
     patchItemList(_obj.iproduct, _obj.icate, _obj.nm, _obj.cnt, _obj.iunit);
     const newArr = shopList.map(item => {

@@ -51,7 +51,7 @@ const Profile = ({ setAppUsers }) => {
                 <GIDiv>
                   {/* 클릭시에 사용자 아이디를 전달한다. */}
                   <Link to={`/group/${item.iuser}`}>
-                    <img src={`${process.env.PUBLIC_URL}/images/Test.png`} />
+                    <img src={`/img/${item.pic}`} />
                   </Link>
                 </GIDiv>
                 <span>{item.nm}</span>

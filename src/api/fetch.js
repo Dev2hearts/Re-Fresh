@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://192.168.0.144:5007/api/refresh",
+  baseURL: "/api/refresh",
   timeout: 1000,
   headers: {
     "Content-type": "application/json",
@@ -50,6 +50,20 @@ const getUserLogin = async () => {
     console.log(err);
   }
 };
+const getUserPatch = async (_nm, _birth) => {
+  try {
+    let data = {
+      nm: _nm,
+      birth: _birth,
+    };
+
+    const res = await axiosInstance.patch(`/user/user update`, data);
+    const result = res.data;
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
 const getUserAll = async () => {
   try {
     const res = await axiosInstance.get("/user/all/igroup");
@@ -59,6 +73,7 @@ const getUserAll = async () => {
     console.log(err);
   }
 };
+// 그룹 관련 정보
 const getGroupAll = async () => {
   try {
     const res = await axiosInstance.get("/group/all");
@@ -171,6 +186,7 @@ export {
   getCate,
   getUnit,
   getUserLogin,
+  getUserPatch,
   getGroupAll,
   getUserAll,
   getPlan,
