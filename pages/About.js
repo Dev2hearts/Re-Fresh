@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   Header,
-  HeaderUSer,
   UIDdiv,
   Imgdiv,
-  BackImg,
   Title,
   Information,
   SubTitle,
-  Userlist,
 } from "../style/AboutCss";
 import { getUserAll } from "../api/fetch";
 
@@ -74,18 +71,11 @@ const About = ({ appUsers, appGroups }) => {
   return (
     <>
       <Header>
-        <div>
-          <Link to={`/main/${params.iuser}/${params.igroup}`}>
-            <BackImg src={`${process.env.PUBLIC_URL}/images/backarrow.png`} />
-          </Link>
-        </div>
-        <HeaderUSer>
-          <UIDdiv>
-            <Imgdiv>{userPic && <img src={userPic} alt={userName} />}</Imgdiv>
-            <Title>{userName}</Title>
-            <SubTitle>{groupGnm}</SubTitle>
-          </UIDdiv>
-        </HeaderUSer>
+        <UIDdiv>
+          <Imgdiv>{userPic && <img src={userPic} alt={userName} />}</Imgdiv>
+          <Title>{userName}</Title>
+          <SubTitle>{groupGnm}</SubTitle>
+        </UIDdiv>
       </Header>
       <Information>
         <div>
@@ -100,14 +90,12 @@ const About = ({ appUsers, appGroups }) => {
             <div key={index}>{item}</div>
           ))}
           <SubTitle>Group Members</SubTitle>
-          <Userlist>
-            {groupList.map((item, index) => (
-              <li key={index}>
-                {item.pic && <img src={item.pic} alt={item.nm} />}
-                {item.nm}
-              </li>
-            ))}
-          </Userlist>
+          {groupList.map((item, index) => (
+            <div key={index}>
+              {item.pic && <img src={item.pic} alt={item.nm} />}
+              {item.nm}
+            </div>
+          ))}
         </div>
       </Information>
     </>
