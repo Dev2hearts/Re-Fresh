@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Header, UIDdiv, Imgdiv, Title, Information, SubTitle } from "../style/AboutCss";
+import {
+  Header,
+  UIDdiv,
+  Imgdiv,
+  Title,
+  Information,
+  SubTitle,
+} from "../style/AboutCss";
 import { getUserAll } from "../api/fetch";
 
 const About = ({ appUsers, appGroups }) => {

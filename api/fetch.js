@@ -100,34 +100,6 @@ const postPlan = async _planData => {
     console.log(err);
   }
 };
-const postItem = async _itemData => {
-  try {
-    const res = await axiosInstance.post("/pdt", _itemData);
-    console.log(_itemData);
-    return res.data;
-  } catch (err) {
-    console.log(err);
-    // console.log(_itemData);
-  }
-};
-const deleteItemList = async _iproduct => {
-  try {
-    const res = await axiosInstance.delete(`/pdt?iproduct=${_iproduct}`);
-    const result = res.data;
-    return result;
-  } catch (err) {
-    console.log(err);
-  }
-};
-const deletePlan = async _iplan => {
-  try {
-    const res = await axiosInstance.delete(`/plan/{iplan}?iplan=${_iplan}`);
-    const result = res.data;
-    return result;
-  } catch (err) {
-    console.log(err);
-  }
-};
 const patchItemList = async (_iproduct, _icate, _nm, _cnt, _iunit) => {
   try {
     let data = {
@@ -145,18 +117,6 @@ const patchItemList = async (_iproduct, _icate, _nm, _cnt, _iunit) => {
     console.log(err);
   }
 };
-const patchPlan = async (_planPK, _date) => {
-  try {
-    const res = await axiosInstance.put(`/plan/{iplan}`, {
-      iplan: _planPK,
-      createdAt: _date,
-    });
-    const result = res.data;
-    return result;
-  } catch (err) {
-    console.log(err);
-  }
-};
 const patchCompleteList = async _iproduct => {
   try {
     const res = await axiosInstance.patch(`/pdt/finish?iproduct=${_iproduct}`);
@@ -166,7 +126,26 @@ const patchCompleteList = async _iproduct => {
     console.log(err);
   }
 };
-
+const postItem = async _itemData => {
+  try {
+    const res = await axiosInstance.post("/pdt", _itemData);
+    console.log(_itemData);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+    // console.log(_itemData);
+  }
+};
+const deleteItemList = async _iproduct => {
+  try {
+    const res = await axiosInstance.delete(`/pdt?iproduct=${_iproduct}`);
+    const result = res.data;
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
 export {
   getCate,
   getUnit,
@@ -179,7 +158,5 @@ export {
   postItem,
   patchItemList,
   deleteItemList,
-  deletePlan,
-  patchPlan,
   patchCompleteList,
 };

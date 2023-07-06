@@ -1,4 +1,4 @@
-import { Calendar, Modal, Button } from "antd";
+import { Calendar, Modal } from "antd";
 import dayjs from "dayjs";
 import { useState, useEffect } from "react";
 import locale from "antd/es/calendar/locale/ko_KR";
@@ -42,6 +42,28 @@ const Schedule = ({
     setIsModalOpen(true);
     handleAddItem();
   };
+
+  // const handleOk = async () => {
+  //   setItemList([]);
+  //   setIsModalOpen(false);
+  //   const planData = {
+  //     igroup: userGroupPK,
+  //     iuser: userPK,
+  //     createdAt: selectedValue.format("YYYY-MM-DD"),
+  //   };
+  //   const itemData = {
+  //     iplan: 0,
+  //     icate: 0,
+  //     nm: "string",
+  //     cnt: 0,
+  //     iunit: 0,
+  //     wiuser: 0,
+  //   };
+  //   const postPlanData = await postPlan(planData);
+  //   const postItemData = await postItem(itemData);
+  //   const getData = await getPlan(userGroupPK);
+  //   setPlan(getData);
+  // };
   const handleOk = async () => {
     setItemList([]);
     setIsModalOpen(false);
@@ -67,7 +89,6 @@ const Schedule = ({
       console.log(itemData);
       await postItem(itemData);
     });
-    setOpenShopList(true);
   };
 
   // useEffect(() => {
@@ -108,16 +129,12 @@ const Schedule = ({
       setOpenShopListDate("");
       setOpenShopList(false);
       setPlanPK(null);
-    }
-    else if (openShopList){
-      setOpenShopList(false);
-    }
-    else {
+    } else {
       setOpenShopList(true);
       console.log(result.iplan);
       setPlanPK(result.iplan);
     }
-    
+
     setOpenShopListDate(newValue.format("YYYY/MM/DD"));
   };
 
@@ -156,18 +173,9 @@ const Schedule = ({
         onOk={handleOk}
         onCancel={handleCancel}
         closable={false}
+        okText={"등록"}
+        cancelText={"취소"}
         destroyOnClose={true}
-        footer={[
-          <Button key="back" onClick={handleCancel}>
-            취소
-          </Button>,
-          <Button
-            onClick={handleOk}
-            style={{ backgroundColor: "#1677ff" }}
-            key="submit"
-            type="primary"
-          >등록</Button>,
-        ]}
       >
         <button
           className="block float-right mr-10 text-xl"

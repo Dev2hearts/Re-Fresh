@@ -12,7 +12,7 @@ import {
 import { Link, useParams } from "react-router-dom";
 import { getGroupAll } from "../api/fetch";
 
-const Group = ({ setAppGroups }) => {
+const Group = () => {
   const params = useParams();
   const userPK = parseInt(params.iuser);
   const [groupList, setGroupList] = useState([]);
@@ -30,15 +30,6 @@ const Group = ({ setAppGroups }) => {
   useEffect(() => {
     getAllGroupParse();
   }, [userPK]);
-  const getAllUserParse = async () => {
-    const data = await getGroupAll();
-    // App.js 에 사용자 정보 모두 저장
-    setAppGroups(data);
-  };
-  useEffect(() => {
-    // 서버에서 회원 전체 자료 가져오기
-    getAllUserParse();
-  }, []);
 
   return (
     <GIContainer>

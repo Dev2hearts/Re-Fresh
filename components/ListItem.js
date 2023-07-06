@@ -81,12 +81,6 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
   };
   const handleCancel = () => {
     setIsModalOpen(false);
-    setItemNm(item.nm);
-    setItemCate(item.icate);
-    setItemCateNm(item.cateNm);
-    setItemIUnit(item.uinit);
-    setItemUnitNm(item.unitNm);
-    setItemCnt(item.cnt);
   };
 
   const handleDeleteClick = e => {
@@ -194,7 +188,6 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
       {/* 목록 관련 ============ */}
       <ItemWrap onClick={handleModalClick}>
         <Checkbox
-          style={{ padding: "15px" }}
           onClick={onCheckClick}
           value={item.finishYn}
           defaultChecked={item.completed}

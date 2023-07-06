@@ -1,20 +1,32 @@
-import { DatePicker, Button, Modal, Select, Input, InputNumber } from "antd";
+import {
+  DatePicker,
+  Button,
+  Modal,
+  Select,
+  Input,
+  InputNumber,
+  Space,
+} from "antd";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import {
   ShoppingWrap,
   ShoppingDiv,
   ShoppingListSC,
+  ModalCate,
+  ModalName,
+  ModalUnit,
+  ModalWrap,
+  ModalCnt,
 } from "../style/ShoppingListCss";
 import ListItem from "./ListItem";
 import {
   deleteItemList,
+  getCate,
   getItemList,
+  getUnit,
   patchItemList,
   postItem,
-  patchPlan,
-  getCate,
-  getUnit,
 } from "../api/fetch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -31,8 +43,6 @@ const ShoppingList = ({
   userGroupPK,
   planPK,
   userPK,
-  planDelete,
-  setOpenShopList,
 }) => {
   // 날짜별 장보기 목록 state
   const [shopList, setShopList] = useState([]);
@@ -41,8 +51,8 @@ const ShoppingList = ({
   const [scHeight, setScHeight] = useState(400);
   const [isClicked, setIsClicked] = useState(false);
   // 모달창
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const [selectedDate, setSelectedDate] = useState(
     dayjs(openShopListDate, "YYYY/MM/DD"),
@@ -63,11 +73,9 @@ const ShoppingList = ({
     }
   };
   // 날짜 바뀌는 거
-  const onChange = (date, dateString, planPK) => {
+  const onChange = (date, dateString) => {
     setSelectedDate(date);
     console.log(dateString);
-    console.log(planPK);
-    patchPlan(planPK, dateString);
   };
 
   // 전체선택 삭제
@@ -76,8 +84,6 @@ const ShoppingList = ({
   };
   const handleDeleteOk = () => {
     setIsDeleteModalOpen(false);
-    planDelete(planPK);
-    setOpenShopList(false);
   };
   const handleDeleteCancel = () => {
     setIsDeleteModalOpen(false);
@@ -178,7 +184,7 @@ const ShoppingList = ({
         className={isClicked ? "shopping-div-top" : "shopping-div-middle"}
       >
         <DatePicker
-          onChange={(data, dataStrign) => onChange(data, dataStrign, planPK)}
+          onChange={onChange}
           value={selectedDate}
           defaultValue={dayjs(openShopListDate, "YYYY/MM/DD")}
         />
