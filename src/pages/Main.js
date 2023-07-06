@@ -83,6 +83,7 @@ const Main = ({ appUsers }) => {
           userPK={userPK}
           planDelete={planDelete}
           setOpenShopList={setOpenShopList}
+          fetchPlanData={fetchPlanData}
         />
       </div>
     </div>
