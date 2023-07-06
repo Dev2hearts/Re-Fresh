@@ -20,7 +20,6 @@ const Main = ({ appUsers }) => {
   const planDelete = _iplan => {
     deletePlan(_iplan);
     const newPlan = plan.filter(item => item.iplan !== _iplan);
-    console.log("삭제후:", newPlan);
     setPlan(newPlan);
   };
   const parseUserInfo = () => {
@@ -43,7 +42,6 @@ const Main = ({ appUsers }) => {
   };
   const fetchPlanData = async () => {
     const data = await getPlan(userGroupPK);
-    console.log("Plan Data : ", data);
     setPlan(data);
   };
 

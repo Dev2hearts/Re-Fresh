@@ -61,7 +61,6 @@ const FirstItem = ({ onDelete, itemChange, handleAddItem, item }) => {
   };
 
   useEffect(() => {
-    console.log("갱신된 정보 : ", item);
     setSelecCate(item.icate);
     setItemName(item.nm);
     setSelecUnit(item.iunit);

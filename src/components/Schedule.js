@@ -25,7 +25,6 @@ const Schedule = ({
   const [itemList, setItemList] = useState([]);
 
   const itemChange = _obj => {
-    console.log("itemChange", _obj);
     // itemList 의 state에서 index 에 해당하는 키:값 변경
     const newList = itemList.map(item => {
       if (item.index === _obj.index) {
@@ -107,7 +106,6 @@ const Schedule = ({
       setOpenShopList(false);
     } else {
       setOpenShopList(true);
-      console.log(result.iplan);
       setPlanPK(result.iplan);
     }
 
@@ -124,7 +122,6 @@ const Schedule = ({
     th.forEach((item, index) => {
       item.innerHTML = day[index]; // 캘린더 요일 텍스트 설정
     });
-    console.log(plan);
   }, []);
   const cellRender = date => {
     const dateString = date.format("YYYY-MM-DD");

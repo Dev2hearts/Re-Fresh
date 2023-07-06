@@ -18,13 +18,9 @@ const Group = ({ setAppGroups }) => {
   const [groupList, setGroupList] = useState([]);
 
   const getAllGroupParse = () => {
-    getGroupAll()
-      .then(data => {
-        setGroupList(data);
-      })
-      .catch(error => {
-        console.error("에러 내용:", error);
-      });
+    getGroupAll().then(data => {
+      setGroupList(data);
+    });
   };
 
   useEffect(() => {
@@ -53,7 +49,7 @@ const Group = ({ setAppGroups }) => {
                     <GIDiv>
                       <Link to={`/main/${item.iuser}/${item.igroup}`}>
                         <img
-                          src={`${process.env.PUBLIC_URL}/images/Test.png`}
+                          src={`/img/${item.pic}`}
                         />
                       </Link>
                     </GIDiv>

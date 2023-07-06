@@ -50,6 +50,20 @@ const getUserLogin = async () => {
     console.log(err);
   }
 };
+const getUserPatch = async (_nm, _birth) => {
+  try {
+    let data = {
+      nm: _nm,
+      birth: _birth,
+    };
+
+    const res = await axiosInstance.patch(`/user/user update`, data);
+    const result = res.data;
+    return result;
+  } catch (err) {
+    console.log(err);
+  }
+};
 const getUserAll = async () => {
   try {
     const res = await axiosInstance.get("/user/all/igroup");
@@ -59,6 +73,7 @@ const getUserAll = async () => {
     console.log(err);
   }
 };
+// 그룹 관련 정보
 const getGroupAll = async () => {
   try {
     const res = await axiosInstance.get("/group/all");
@@ -186,6 +201,7 @@ export {
   getCate,
   getUnit,
   getUserLogin,
+  getUserPatch,
   getGroupAll,
   getUserAll,
   getPlan,
