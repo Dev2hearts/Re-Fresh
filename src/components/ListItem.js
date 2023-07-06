@@ -38,6 +38,8 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
   const [itemIUnit, setItemIUnit] = useState("");
   const [itemUnitNm, setItemUnitNm] = useState("");
   const [itemCnt, setItemCnt] = useState(0);
+  const [complete, setComplete] = useState(0);
+  const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
     setItemNm(item.nm);
@@ -46,7 +48,10 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
     setItemIUnit(item.uinit);
     setItemUnitNm(item.unitNm);
     setItemCnt(item.cnt);
-  }, []);
+    if (item.finishYn === 1) {
+      setIsChecked(true);
+    }
+  }, [isChecked]);
 
   const fetchCateData = async () => {
     const data = await getCate();
@@ -64,6 +69,7 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
     e.stopPropagation();
     // console.log(`checked = ${e.target.checked}`);
     patchCompleteList(item.iproduct);
+    setIsChecked(e.target.checked);
   };
 
   const handleOk = () => {
@@ -145,15 +151,15 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
         centered
         destroyOnClose={true}
         footer={[
-          <Button key="back" onClick={handleOk}>
-            <FontAwesomeIcon icon={faCheck} />
-          </Button>,
           <Button
             style={{ backgroundColor: "#1677ff" }}
             key="submit"
             type="primary"
-            onClick={handleCancel}
+            onClick={handleOk}
           >
+            <FontAwesomeIcon icon={faCheck} />
+          </Button>,
+          <Button key="back" onClick={handleCancel}>
             <FontAwesomeIcon icon={faXmark} />
           </Button>,
         ]}
@@ -196,7 +202,7 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
         <Checkbox
           style={{ padding: "15px" }}
           onClick={onCheckClick}
-          value={item.finishYn}
+          checked={isChecked}
           defaultChecked={item.completed}
         ></Checkbox>
         <ItemListCate>{item.cateNm}</ItemListCate>
