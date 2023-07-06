@@ -1,12 +1,19 @@
 import styled from "@emotion/styled";
 
+export const BackImg = styled.img`
+  width: 7%;
+  height: auto;
+`;
+
 export const Header = styled.header`
-  flex-direction: column;
-  text-align: center;
   background: #f9f6f1;
   width: 100%;
   height: 40%;
   min-height: 292px;
+`;
+export const HeaderUSer = styled.div`
+  flex-direction: column;
+  text-align: center;
 `;
 export const Imgdiv = styled.div`
   width: 25%;
@@ -53,4 +60,23 @@ export const Title = styled.h1`
 export const SubTitle = styled.h1`
   font-size: 25px;
   font-weight: 400;
+`;
+export const Userlist = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 0 20%;
+
+  li {
+    width: calc((100% - 30px) / 3);
+    text-align: center;
+
+    span {
+      color: #305569;
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
 `;

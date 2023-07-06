@@ -8,10 +8,18 @@ const Header = ({ nowUser }) => {
   const [userPK, setUserPK] = useState("");
   const [groupPK, setGroupPK] = useState("");
   useEffect(() => {
-    setUserName(nowUser.nm);
-    setUserPic(nowUser.pic);
-    setUserPK(nowUser.iuser);
-    setGroupPK(nowUser.igroup);
+    if (!nowUser) {
+      const timer = setTimeout(() => {
+        window.location.href = "/intro";
+      }, 0);
+
+      return () => clearTimeout(timer);
+    } else {
+      setUserName(nowUser.nm);
+      setUserPic(nowUser.pic);
+      setUserPK(nowUser.iuser);
+      setGroupPK(nowUser.igroup);
+    }
   }, [nowUser]);
 
   return (
