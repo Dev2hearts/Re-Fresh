@@ -1,3 +1,8 @@
 .ant-picker-calendar-date-content {
-    height: 30px !important;
+  height: 30px !important;
+}
+.ant-picker-calendar-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
 }
