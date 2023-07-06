@@ -16,6 +16,7 @@ const Main = ({ appUsers }) => {
   const [nowUser, setNowUser] = useState({});
   const [openShopList, setOpenShopList] = useState(false);
   const [openShopListDate, setOpenShopListDate] = useState("");
+  const [shopList, setShopList] = useState([]);
   const planDelete = _iplan => {
     deletePlan(_iplan);
     const newPlan = plan.filter(item => item.iplan !== _iplan);
@@ -74,6 +75,7 @@ const Main = ({ appUsers }) => {
           setPlanPK={setPlanPK}
           userGroupPK={userGroupPK}
           userPK={userPK}
+          setShopList={setShopList}
         />
         <ShoppingList
           openShopListDate={openShopListDate}
@@ -84,6 +86,8 @@ const Main = ({ appUsers }) => {
           planDelete={planDelete}
           setOpenShopList={setOpenShopList}
           fetchPlanData={fetchPlanData}
+          shopList={shopList}
+          setShopList={setShopList}
         />
       </div>
     </div>

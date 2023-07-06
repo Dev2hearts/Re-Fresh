@@ -37,10 +37,9 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
   const [itemCate, setItemCate] = useState(0);
   const [itemIUnit, setItemIUnit] = useState("");
   const [itemUnitNm, setItemUnitNm] = useState("");
-  const [itemCnt, setItemCnt] = useState(0);
+  const [itemCnt, setItemCnt] = useState(1);
   const [complete, setComplete] = useState(0);
   const [isChecked, setIsChecked] = useState(false);
-
   useEffect(() => {
     setItemNm(item.nm);
     setItemCate(item.icate);
@@ -48,10 +47,12 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
     setItemIUnit(item.uinit);
     setItemUnitNm(item.unitNm);
     setItemCnt(item.cnt);
+    fetchCateData();
+    fetchUnitData();
     if (item.finishYn === 1) {
       setIsChecked(true);
     }
-  }, [isChecked]);
+  }, [isChecked],isModalOpen);
 
   const fetchCateData = async () => {
     const data = await getCate();
@@ -61,10 +62,6 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
     const data = await getUnit();
     setUnitList(data);
   };
-  useEffect(() => {
-    fetchCateData();
-    fetchUnitData();
-  }, []);
   const onCheckClick = e => {
     e.stopPropagation();
     // console.log(`checked = ${e.target.checked}`);

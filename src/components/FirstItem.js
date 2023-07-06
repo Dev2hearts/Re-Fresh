@@ -14,7 +14,7 @@ const FirstItem = ({ onDelete, itemChange, handleAddItem, item }) => {
   const [selecCate, setSelecCate] = useState(null);
   const [itemName, setItemName] = useState("");
   const [selecUnit, setSelecUnit] = useState(null);
-  const [ea, setEa] = useState();
+  const [ea, setEa] = useState(1);
 
   // const [item, setItem] = useState(null);
   const [items, setItems] = useState({});

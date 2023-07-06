@@ -6,7 +6,7 @@ import "../style/schedule.css";
 import FirstItem from "./FirstItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { postPlan, getPlan, postItem } from "../api/fetch";
+import { postPlan, getPlan, postItem, getItemList } from "../api/fetch";
 
 const Schedule = ({
   setOpenShopList,
@@ -17,6 +17,7 @@ const Schedule = ({
   setPlanPK,
   userGroupPK,
   userPK,
+  setShopList
 }) => {
   const [value, setValue] = useState(() => dayjs(Date.now()));
   const [selectedValue, setSelectedValue] = useState(() => dayjs(Date.now()));
@@ -52,8 +53,6 @@ const Schedule = ({
     };
     const postData = await postPlan(planData);
     const getData = await getPlan(userGroupPK);
-    setPlan(getData);
-
     // itemList의 각 객체를 순회하며 postItem 요청 보내기
     itemList.forEach(async item => {
       const itemData = {
@@ -67,6 +66,7 @@ const Schedule = ({
       console.log(itemData);
       await postItem(itemData);
     });
+    setPlan(getData);
     setOpenShopList(true);
   };
   const handleCancel = () => {

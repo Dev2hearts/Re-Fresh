@@ -34,9 +34,10 @@ const ShoppingList = ({
   planDelete,
   setOpenShopList,
   fetchPlanData,
+  shopList,
+  setShopList
 }) => {
   // 날짜별 장보기 목록 state
-  const [shopList, setShopList] = useState([]);
 
   // 스크롤 영역 너비 state
   const [scHeight, setScHeight] = useState(400);
@@ -151,7 +152,11 @@ const ShoppingList = ({
   useEffect(() => {
     fetchCateData();
     fetchUnitData();
+    console.log(shopList);
   }, []);
+  // useEffect(() => {
+  //   fetchItemList();
+  // }, [openShopList]);
   const itemUpdate = _obj => {
     console.log("뭐지", _obj);
     // 아이템 수정 fetch
@@ -199,14 +204,18 @@ const ShoppingList = ({
         </div>
 
         <ShoppingListSC scHeight={scHeight}>
-          {shopList.map((item, index) => (
-            <ListItem
-              key={index}
-              item={item}
-              itemUpdate={itemUpdate}
-              itemDelete={itemDelete}
-            />
-          ))}
+          {shopList.length > 0 ? (
+            shopList.map((item, index) => (
+              <ListItem
+                key={index}
+                item={item}
+                itemUpdate={itemUpdate}
+                itemDelete={itemDelete}
+              />
+            ))
+          ) : (
+            <h1>장바구니가 비어 있습니다.</h1>
+          )}
         </ShoppingListSC>
         <button className="delete-schedule" onClick={showDeleteModal}>
           <FontAwesomeIcon
