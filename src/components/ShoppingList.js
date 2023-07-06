@@ -235,15 +235,15 @@ const ShoppingList = ({
         onCancel={handleDeleteCancel}
         centered
         footer={[
-          <Button key="back" onClick={handleDeleteOk}>
-            <FontAwesomeIcon icon={faCheck} />
-          </Button>,
           <Button
             style={{ backgroundColor: "#1677ff" }}
             key="submit"
             type="primary"
-            onClick={handleDeleteCancel}
+            onClick={handleDeleteOk}
           >
+            <FontAwesomeIcon icon={faCheck} />
+          </Button>,
+          <Button key="back" onClick={handleDeleteCancel}>
             <FontAwesomeIcon icon={faXmark} />
           </Button>,
         ]}
@@ -259,15 +259,15 @@ const ShoppingList = ({
         cancelText={"취소"}
         centered
         footer={[
-          <Button key="back" onClick={handleOk}>
-            <FontAwesomeIcon icon={faCheck} />
-          </Button>,
           <Button
             style={{ backgroundColor: "#1677ff" }}
             key="submit"
             type="primary"
-            onClick={handleCancel}
+            onClick={handleOk}
           >
+            <FontAwesomeIcon icon={faCheck} />
+          </Button>,
+          <Button key="back" onClick={handleCancel}>
             <FontAwesomeIcon icon={faXmark} />
           </Button>,
         ]}
