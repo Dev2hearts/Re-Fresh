@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://192.168.0.144:5007/api/refresh",
+  baseURL: "/api/refresh",
   timeout: 1000,
   headers: {
     "Content-type": "application/json",
@@ -66,6 +66,19 @@ const getGroupAll = async () => {
     return result;
   } catch (err) {
     console.log(err);
+    return [
+      { igroup: 1, iuser: 1, unm: "wonhee", gnm: "A" },
+      { igroup: 1, iuser: 2, unm: "haeun", gnm: "A" },
+      { igroup: 1, iuser: 3, unm: "jjjungmin", gnm: "A" },
+      { igroup: 1, iuser: 30, unm: "jungminy", gnm: "A" },
+      { igroup: 1, iuser: 31, unm: "2hearts", gnm: "A" },
+      { igroup: 1, iuser: 32, unm: "hojin", gnm: "A" },
+      { igroup: 2, iuser: 1, unm: "wonhee", gnm: "B" },
+      { igroup: 3, iuser: 3, unm: "jjjungmin", gnm: "C" },
+      { igroup: 3, iuser: 30, unm: "jungminy", gnm: "C" },
+      { igroup: 3, iuser: 31, unm: "2hearts", gnm: "C" },
+      { igroup: 3, iuser: 32, unm: "hojin", gnm: "C" },
+    ];
   }
 };
 
@@ -88,6 +101,8 @@ const getItemList = async (_group, _plan) => {
     return result;
   } catch (err) {
     console.log(err);
+    console.log("grop",_group,"plan",_plan)
+    return ([])
   }
 };
 // Post
