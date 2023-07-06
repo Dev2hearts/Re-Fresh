@@ -33,6 +33,7 @@ const ShoppingList = ({
   userPK,
   planDelete,
   setOpenShopList,
+  fetchPlanData,
 }) => {
   // 날짜별 장보기 목록 state
   const [shopList, setShopList] = useState([]);
@@ -53,7 +54,20 @@ const ShoppingList = ({
   const [itemName, setItemName] = useState("");
   const [selecUnit, setSelecUnit] = useState("단위");
   const [ea, setEa] = useState();
-
+  const fetchItemList = async () => {
+    const data = await getItemList(userGroupPK, planPK);
+    // axios 아이템 리스트
+    console.log(data);
+    setShopList(data);
+  };
+  const fetchCateData = async () => {
+    const result = await getCate();
+    setCateList(result);
+  };
+  const fetchUnitData = async () => {
+    const result = await getUnit();
+    setUnitList(result);
+  };
   const handleClick = () => {
     setIsClicked(!isClicked);
     if (isClicked) {
@@ -63,11 +77,12 @@ const ShoppingList = ({
     }
   };
   // 날짜 바뀌는 거
-  const onChange = (date, dateString, planPK) => {
+  const onChange = async (date, dateString, planPK) => {
     setSelectedDate(date);
     console.log(dateString);
     console.log(planPK);
-    patchPlan(planPK, dateString);
+    await patchPlan(planPK, dateString);
+    fetchPlanData();
   };
 
   // 전체선택 삭제
@@ -101,6 +116,7 @@ const ShoppingList = ({
       wiuser: userPK,
     };
     postItem(item);
+    fetchItemList();
   };
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -128,25 +144,11 @@ const ShoppingList = ({
   }, [openShopListDate]);
 
   useEffect(() => {
-    const fetchItemList = async () => {
-      const data = await getItemList(userGroupPK, planPK);
-      // axios 아이템 리스트
-      console.log(data);
-      setShopList(data);
-    };
     if (planPK) {
       fetchItemList();
     }
-  }, [planPK,shopList]);
+  }, [planPK]);
   useEffect(() => {
-    const fetchCateData = async () => {
-      const result = await getCate();
-      setCateList(result);
-    };
-    const fetchUnitData = async () => {
-      const result = await getUnit();
-      setUnitList(result);
-    };
     fetchCateData();
     fetchUnitData();
   }, []);

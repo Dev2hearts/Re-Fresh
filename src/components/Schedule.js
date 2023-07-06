@@ -69,11 +69,6 @@ const Schedule = ({
     });
     setOpenShopList(true);
   };
-
-  // useEffect(() => {
-  //   console.log(itemList);
-  // }, [itemList]);
-
   const handleCancel = () => {
     setItemList([]);
     setIsModalOpen(false);
@@ -108,16 +103,14 @@ const Schedule = ({
       setOpenShopListDate("");
       setOpenShopList(false);
       setPlanPK(null);
-    }
-    else if (openShopList){
+    } else if (openShopList) {
       setOpenShopList(false);
-    }
-    else {
+    } else {
       setOpenShopList(true);
       console.log(result.iplan);
       setPlanPK(result.iplan);
     }
-    
+
     setOpenShopListDate(newValue.format("YYYY/MM/DD"));
   };
 
@@ -158,15 +151,17 @@ const Schedule = ({
         closable={false}
         destroyOnClose={true}
         footer={[
-          <Button key="back" onClick={handleCancel}>
-            취소
-          </Button>,
           <Button
             onClick={handleOk}
             style={{ backgroundColor: "#1677ff" }}
             key="submit"
             type="primary"
-          >등록</Button>,
+          >
+            등록
+          </Button>,
+          <Button key="back" onClick={handleCancel}>
+            취소
+          </Button>,
         ]}
       >
         <button
