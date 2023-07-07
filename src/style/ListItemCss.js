@@ -7,17 +7,20 @@ export const ItemWrap = styled.div`
   align-items: center;
   background: #fff;
   border-radius: 10px;
-  height: 70px;
   margin-bottom: 20px;
   padding: 10px;
+  /* width: calc(100 / 5); */
 `;
 export const ItemListCate = styled.span`
-  width: 20%
+  width: 15%;
 `;
+
 export const ItemListName = styled.span`
-  width: 30%
+  width: 50%;
+  text-align: center;
 `;
 export const ItemListUnit = styled.span`
+  width: 30%;
   em {
     font-style: normal;
     color: #000;
@@ -25,8 +28,8 @@ export const ItemListUnit = styled.span`
   }
 `;
 export const ItemDelete = styled.button`
-  position: absolute;
-  right: 70px;
+  /* position: absolute; */
+  right: 70%;
   cursor: pointer;
   padding: 10px;
 `;

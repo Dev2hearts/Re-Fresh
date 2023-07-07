@@ -206,6 +206,7 @@ const ShoppingList = ({
         className={isClicked ? "shopping-div-top" : "shopping-div-middle"}
       >
         <DatePicker
+          style={{ width: "20%"}}
           onChange={(data, dataStrign) => onChange(data, dataStrign, planPK)}
           value={selectedDate}
           defaultValue={dayjs(openShopListDate, "YYYY/MM/DD")}
@@ -260,7 +261,7 @@ const ShoppingList = ({
         centered
         footer={[
           <Button
-            style={{ backgroundColor: "#1677ff" }}
+            style={{ backgroundColor: "#006127" }}
             key="submit"
             type="primary"
             onClick={handleDeleteOk}
@@ -284,7 +285,7 @@ const ShoppingList = ({
         centered
         footer={[
           <Button
-            style={{ backgroundColor: "#1677ff" }}
+            style={{ backgroundColor: "#006127" }}
             key="submit"
             type="primary"
             onClick={handleAddListOk}

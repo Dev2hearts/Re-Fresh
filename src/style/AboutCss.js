@@ -5,9 +5,10 @@ export const BackDiv = styled.div`
   max-width: 50px;
   text-align: center;
   font-size: 25px;
+  padding: 10px;
 `;
 export const Header = styled.header`
-  background: #CCCCCC;
+  background: #cccccc;
   width: 100%;
   height: 35%;
   min-height: 292px;
@@ -81,7 +82,7 @@ export const Grouplist = styled.ul`
   list-style-type: none;
   padding: 0;
   gap: 2%;
-  margin-bottom: 4%;
+  margin-bottom: 15%;
   li {
     font-size: 20px;
   }

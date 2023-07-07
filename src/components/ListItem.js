@@ -179,7 +179,7 @@ const ListItem = ({
         destroyOnClose={true}
         footer={[
           <Button
-            style={{ backgroundColor: "#1677ff" }}
+            style={{ backgroundColor: "#006127" }}
             key="submit"
             type="primary"
             onClick={handleOk}
