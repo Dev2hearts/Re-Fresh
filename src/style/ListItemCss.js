@@ -11,8 +11,12 @@ export const ItemWrap = styled.div`
   margin-bottom: 20px;
   padding: 10px;
 `;
-export const ItemListCate = styled.span``;
-export const ItemListName = styled.span``;
+export const ItemListCate = styled.span`
+  width: 20%
+`;
+export const ItemListName = styled.span`
+  width: 30%
+`;
 export const ItemListUnit = styled.span`
   em {
     font-style: normal;
@@ -21,6 +25,8 @@ export const ItemListUnit = styled.span`
   }
 `;
 export const ItemDelete = styled.button`
+  position: absolute;
+  right: 70px;
   cursor: pointer;
   padding: 10px;
 `;

@@ -17,6 +17,7 @@ const Schedule = ({
   setPlanPK,
   userGroupPK,
   userPK,
+  setShopList,
 }) => {
   const [value, setValue] = useState(() => dayjs(Date.now()));
   const [selectedValue, setSelectedValue] = useState(() => dayjs(Date.now()));
@@ -90,6 +91,9 @@ const Schedule = ({
     const newItemList = itemList.filter(item => item.index !== index);
     setItemList(newItemList);
   };
+
+  // 손정민 날짜를 기록해 둠.
+  const [saveDateStr, setSaveDateStr] = useState("");
 
   const onSelect = newValue => {
     setValue(newValue);

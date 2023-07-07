@@ -34,9 +34,10 @@ const ShoppingList = ({
   planDelete,
   setOpenShopList,
   fetchPlanData,
+  shopList,
+  setShopList,
 }) => {
   // 날짜별 장보기 목록 state
-  const [shopList, setShopList] = useState([]);
 
   // 스크롤 영역 너비 state
   const [scHeight, setScHeight] = useState(400);
@@ -44,7 +45,6 @@ const ShoppingList = ({
   // 모달창
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [selectedDate, setSelectedDate] = useState(
     dayjs(openShopListDate, "YYYY/MM/DD"),
   );
@@ -53,11 +53,43 @@ const ShoppingList = ({
   const [selecCate, setSelecCate] = useState("카테고리");
   const [itemName, setItemName] = useState("");
   const [selecUnit, setSelecUnit] = useState("단위");
-  const [ea, setEa] = useState(1);
+  const [ea, setEa] = useState();
+
+  // 손정민 작업
+  // 아이디 전달 받아서 finishYn 변경하기
+  const itemChecked = _id => {
+    const arr = shopList.map(item => {
+      if (item.iproduct === _id) {
+        item.finishYn = item.finishYn === 0 ? 1 : 0;
+      }
+      return item;
+    });
+    setShopList(arr);
+  };
+  // 아이디 전달 받아서 삭제하기
+  const itemDelete = _iproduct => {
+    // filter 를 이용해서 state 갱신하기
+    const newArr = shopList.filter(item => item.iproduct !== _iproduct);
+    setShopList(newArr);
+  };
+
+  // 아이디 전달 받아서 업데이트
+  const itemUpdate = _obj => {
+    const newArr = shopList.map(item => {
+      if (item.iproduct === _obj.iproduct) {
+        item = { ..._obj };
+      }
+      return item;
+    });
+
+    setShopList(newArr);
+  };
+  // 손정민 작업========================= END
+
   const fetchItemList = async () => {
     const data = await getItemList(userGroupPK, planPK);
     // axios 아이템 리스트
-    console.log(data);
+    console.log("axios 아이템 리스트", data);
     setShopList(data);
   };
   const fetchCateData = async () => {
@@ -79,8 +111,6 @@ const ShoppingList = ({
   // 날짜 바뀌는 거
   const onChange = async (date, dateString, planPK) => {
     setSelectedDate(date);
-    console.log(dateString);
-    console.log(planPK);
     await patchPlan(planPK, dateString);
     fetchPlanData();
   };
@@ -93,6 +123,8 @@ const ShoppingList = ({
     setIsDeleteModalOpen(false);
     planDelete(planPK);
     setOpenShopList(false);
+
+    // fetchItemList();
   };
   const handleDeleteCancel = () => {
     setIsDeleteModalOpen(false);
@@ -100,13 +132,17 @@ const ShoppingList = ({
 
   const handleAddItemList = () => {
     setIsModalOpen(true);
+    // fetchItemList();
   };
-  const handleOk = async () => {
+  // 손정민 추가 리스트 추가 기능
+  const handleAddListOk = async () => {
     setIsModalOpen(false);
+    console.log("목록 추가");
     setSelecCate("카테고리");
     setSelecUnit("단위");
     setEa(1);
     setItemName(null);
+
     const item = {
       iplan: planPK,
       icate: selecCate,
@@ -115,8 +151,16 @@ const ShoppingList = ({
       iunit: selecUnit,
       wiuser: userPK,
     };
+    // console.log("아이템 추가 내용", item);
     await postItem(item);
     fetchItemList();
+  };
+  const handleOk = async () => {
+    setIsModalOpen(false);
+    setSelecCate("카테고리");
+    setSelecUnit("단위");
+    setEa(1);
+    setItemName(null);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -148,30 +192,12 @@ const ShoppingList = ({
       fetchItemList();
     }
   }, [planPK]);
+
   useEffect(() => {
     fetchCateData();
     fetchUnitData();
     console.log(shopList);
   }, []);
-  const itemUpdate = _obj => {
-    console.log("뭐지", _obj);
-    // 아이템 수정 fetch
-    patchItemList(_obj.iproduct, _obj.icate, _obj.nm, _obj.cnt, _obj.iunit);
-    const newArr = shopList.map(item => {
-      if (item.iproduct === _obj.iproduct) {
-        item = { ..._obj };
-      }
-      return item;
-    });
-
-    setShopList(newArr);
-  };
-  const itemDelete = _iproduct => {
-    deleteItemList(_iproduct);
-    // filter 를 이용해서 state 갱신하기
-    const newArr = shopList.filter(item => item.iproduct !== _iproduct);
-    setShopList(newArr);
-  };
 
   return (
     <ShoppingWrap
@@ -201,12 +227,15 @@ const ShoppingList = ({
 
         <ShoppingListSC scHeight={scHeight}>
           {shopList.length > 0 ? (
-            shopList.map((item, index) => (
+            shopList.map(item => (
               <ListItem
-                key={index}
+                key={item.iproduct}
                 item={item}
                 itemUpdate={itemUpdate}
                 itemDelete={itemDelete}
+                itemChecked={itemChecked}
+                cateList={cateList}
+                unitList={unitList}
               />
             ))
           ) : (
@@ -231,15 +260,15 @@ const ShoppingList = ({
         onCancel={handleDeleteCancel}
         centered
         footer={[
-          <Button key="back" onClick={handleDeleteOk}>
-            <FontAwesomeIcon icon={faCheck} />
-          </Button>,
           <Button
             style={{ backgroundColor: "#1677ff" }}
             key="submit"
             type="primary"
-            onClick={handleDeleteCancel}
+            onClick={handleDeleteOk}
           >
+            <FontAwesomeIcon icon={faCheck} />
+          </Button>,
+          <Button key="back" onClick={handleDeleteCancel}>
             <FontAwesomeIcon icon={faXmark} />
           </Button>,
         ]}
@@ -255,15 +284,15 @@ const ShoppingList = ({
         cancelText={"취소"}
         centered
         footer={[
-          <Button key="back" onClick={handleOk}>
-            <FontAwesomeIcon icon={faCheck} />
-          </Button>,
           <Button
             style={{ backgroundColor: "#1677ff" }}
             key="submit"
             type="primary"
-            onClick={handleCancel}
+            onClick={handleAddListOk}
           >
+            <FontAwesomeIcon icon={faCheck} />
+          </Button>,
+          <Button key="back" onClick={handleCancel}>
             <FontAwesomeIcon icon={faXmark} />
           </Button>,
         ]}

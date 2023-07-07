@@ -18,7 +18,13 @@ import {
 } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { getCate, getUnit, patchCompleteList } from "../api/fetch";
+import {
+  deleteItemList,
+  getCate,
+  getUnit,
+  patchCompleteList,
+  patchItemList,
+} from "../api/fetch";
 import {
   ModalCate,
   ModalCnt,
@@ -27,9 +33,16 @@ import {
   ModalWrap,
 } from "../style/ShoppingListCss";
 
-const ListItem = ({ item, itemUpdate, itemDelete }) => {
-  const [cateList, setCateList] = useState();
-  const [unitList, setUnitList] = useState();
+const ListItem = ({
+  item,
+  itemUpdate,
+  itemDelete,
+  itemChecked,
+  cateList,
+  unitList,
+}) => {
+  // const [cateList, setCateList] = useState();
+  // const [unitList, setUnitList] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [itemNm, setItemNm] = useState("");
@@ -40,6 +53,7 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
   const [itemCnt, setItemCnt] = useState(1);
   const [complete, setComplete] = useState(0);
   const [isChecked, setIsChecked] = useState(false);
+
   useEffect(() => {
     setItemNm(item.nm);
     setItemCate(item.icate);
@@ -49,29 +63,32 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
     setItemCnt(item.cnt);
     if (item.finishYn === 1) {
       setIsChecked(true);
+    } else {
+      setIsChecked(false);
     }
   }, [isChecked, isModalOpen]);
   useEffect(() => {
-    fetchCateData();
-    fetchUnitData();
+    // fetchCateData();
+    // fetchUnitData();
   }, []);
-  const fetchCateData = async () => {
-    const data = await getCate();
-    setCateList(data);
-  };
-  const fetchUnitData = async () => {
-    const data = await getUnit();
-    setUnitList(data);
-  };
-  const onCheckClick = e => {
+  // const fetchCateData = async () => {
+  //   const data = await getCate();
+  //   setCateList(data);
+  // };
+  // const fetchUnitData = async () => {
+  //   const data = await getUnit();
+  //   setUnitList(data);
+  // };
+  const onCheckClick = async e => {
     e.stopPropagation();
-    // console.log(`checked = ${e.target.checked}`);
-    patchCompleteList(item.iproduct);
+    itemChecked(item.iproduct);
+    await patchCompleteList(item.iproduct);
     setIsChecked(e.target.checked);
   };
 
   const handleOk = () => {
     setIsModalOpen(false);
+    setIsChecked(false);
     // 데이터를 수정하는 것을 모은다.
     const newObj = {
       ...item,
@@ -79,12 +96,23 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
       nm: itemNm,
       cnt: itemCnt,
       unitNm: itemUnitNm,
+      icate: itemCate,
     };
+    // 아이템 수정 fetch
+    patchItemList(
+      newObj.iproduct,
+      newObj.icate,
+      newObj.nm,
+      newObj.cnt,
+      newObj.iunit,
+    );
 
     itemUpdate(newObj);
   };
+
   const handleCancel = () => {
     setIsModalOpen(false);
+    setIsChecked(false);
     setItemNm(item.nm);
     setItemCate(item.icate);
     setItemCateNm(item.cateNm);
@@ -94,11 +122,13 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
   };
 
   const handleDeleteClick = e => {
-    console.log("삭제클릭");
-    itemDelete(item.iproduct);
-    // 이벤트 전달 안 하기
+    // 클릭 이벤트 아래로 클릭 이벤트 전달 안 하기
     e.stopPropagation();
+    console.log("삭제클릭");
+    deleteItemList(item.iproduct);
+    itemDelete(item.iproduct);
   };
+
   const onChangeCateNm = value => {
     // console.log("changed", value);
     // console.log(`selected ${value}`);
@@ -201,7 +231,8 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
           style={{ padding: "15px" }}
           onClick={onCheckClick}
           checked={isChecked}
-          defaultChecked={item.completed}
+          onChange={e => setIsChecked(e.target.checked)}
+          value={item.finishYn}
         ></Checkbox>
         <ItemListCate>{item.cateNm}</ItemListCate>
         <ItemListName>{item.nm}</ItemListName>
@@ -214,6 +245,7 @@ const ListItem = ({ item, itemUpdate, itemDelete }) => {
         </ItemDelete>
         <ItemUser>{item.wuserNm}</ItemUser>
       </ItemWrap>
+      <div>{isChecked ? <span>true</span> : <span>false</span>}</div>
     </>
   );
 };
