@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   Header,
-  HeaderUSer,
+  HeaderUser,
   UIDdiv,
   BackDiv,
   Imgdiv,
-  BackImg,
   Title,
   Information,
   SubTitle,
@@ -16,107 +15,98 @@ import {
   UserNmBirth,
   Grouplist,
 } from "../style/AboutCss";
-import { getUserAll, getUserPatch } from "../api/fetch";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 
 const About = ({ appUsers, appGroups }) => {
   const params = useParams();
   const userSelectPK = parseInt(params.iuser);
   const userGroupSelectPK = parseInt(params.igroup);
-  const [userName, setUserName] = useState("");
-  const [userPic, setUserPic] = useState("");
-  const [userBirth, setUserBirth] = useState("");
-  const [groupPK, setGroupPK] = useState("");
+  const [user, setUser] = useState({});
   const [groupGnm, setGroupGnm] = useState("");
   const [groupList, setGroupList] = useState([]);
   const [userGroups, setUserGroups] = useState([]);
 
   useEffect(() => {
-    const parseUserInfo = () => {
-      const nowUserFind = appUsers.find(
-        item =>
-          item.iuser === userSelectPK && item.igroup === userGroupSelectPK,
-      );
-      if (nowUserFind) {
-        setUserName(nowUserFind.nm);
-        setUserPic(nowUserFind.pic);
-        setGroupPK(nowUserFind.igroup);
-        setUserBirth(nowUserFind.birth);
-      }
-    };
-
-    parseUserInfo();
+    const nowUserFind = appUsers.find(
+      item => item.iuser === userSelectPK && item.igroup === userGroupSelectPK,
+    );
+    if (nowUserFind) {
+      setUser(nowUserFind);
+      setGroupList(appUsers.filter(item => item.igroup === nowUserFind.igroup));
+    }
+    console.log("사용자 찾기");
   }, [appUsers, userSelectPK, userGroupSelectPK]);
 
   useEffect(() => {
-    const fetchGroupList = async () => {
-      const data = await getUserAll();
-      const filteredList = data.filter(
-        item => item.igroup === userGroupSelectPK,
-      );
-      setGroupList(filteredList);
-    };
-
-    fetchGroupList();
-  }, [userGroupSelectPK]);
-
-  useEffect(() => {
-    const group = appGroups.find(group => group.igroup === groupPK);
+    const group = appGroups.find(group => group.igroup === user.igroup);
     if (group) {
       setGroupGnm(group.gnm);
     }
-  }, [appGroups, groupPK]);
+    console.log("그룹");
+  }, [appGroups, user]);
 
   useEffect(() => {
     const userGroupList = appUsers
-      .filter(user => user.iuser === userSelectPK)
-      .map(user => {
-        const group = appGroups.find(group => group.igroup === user.igroup);
+      .filter(item => item.iuser === userSelectPK)
+      .map(item => {
+        const group = appGroups.find(group => group.igroup === item.igroup);
         return group ? group.gnm : "";
-      });
+      })
+      .sort(); // userGroupList를 알파벳 순서로 정렬합니다.
     setUserGroups(userGroupList);
-  }, [appUsers, userSelectPK, appGroups]);
-  const handleUpdateUser = async () => {
-    try {
-      await getUserPatch(userName, userBirth);
-      console.log("사용자 정보가 업데이트되었습니다.");
-    } catch (error) {
-      console.log("사용자 정보 업데이트 오류:", error);
+
+    //  유저 그룹이 없는 경우 인트로 이동
+    if (userGroupList.length === 0) {
+      timer = setTimeout(() => {
+        window.location.href = "/intro";
+      }, 0);
     }
-  };
+  }, [appUsers, userSelectPK, appGroups]);
+
+  // 유저 정보를 변수로 저장하여 렌더링 시 재사용
+  const userName = user.nm;
+  const userPic = user.pic;
+  const userBirth = user.birth;
+  let timer; // 타이머 아이디
+
+  useEffect(() => {
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       <Header>
         <BackDiv>
           <Link to={`/main/${params.iuser}/${params.igroup}`}>
-            <BackImg src={`${process.env.PUBLIC_URL}/images/backarrow.png`} />
+            <FontAwesomeIcon icon={faAngleLeft} />
           </Link>
         </BackDiv>
-        <HeaderUSer>
+        <HeaderUser>
           <UIDdiv>
             <Imgdiv>
               {userPic && <img src={`/img/${userPic}`} alt={userName} />}
             </Imgdiv>
             <Title>{userName}</Title>
-            <SubTitle>{groupGnm}</SubTitle>
+            <SubTitle>{groupGnm} Group</SubTitle>
           </UIDdiv>
-        </HeaderUSer>
+        </HeaderUser>
       </Header>
       <Information>
         <div>
           <Title>유저 정보</Title>
-          <UserNmBirth>이름 : {userName}</UserNmBirth>
-          <UserNmBirth>생일 : {userBirth}</UserNmBirth>
-          <button onClick={handleUpdateUser}>수정</button>
+          <UserNmBirth>이름: {userName}</UserNmBirth>
+          <UserNmBirth>생일: {userBirth}</UserNmBirth>
         </div>
         <div>
           <Title>그룹 정보</Title>
-          <SubTitle>Group List</SubTitle>
+          <SubTitle>{userName} Group</SubTitle>
           <Grouplist>
             {userGroups.map((item, index) => (
-              <UserLi key={index}>{item}</UserLi>
+              <li key={index}>{item} Group</li>
             ))}
           </Grouplist>
-          <SubTitle>Group Members</SubTitle>
+          <SubTitle>{groupGnm} Group Member List</SubTitle>
           <Userlist>
             {groupList.map((item, index) => (
               <UserLi key={index}>
