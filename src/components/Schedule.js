@@ -17,7 +17,7 @@ const Schedule = ({
   setPlanPK,
   userGroupPK,
   userPK,
-  setShopList
+  setShopList,
 }) => {
   const [value, setValue] = useState(() => dayjs(Date.now()));
   const [selectedValue, setSelectedValue] = useState(() => dayjs(Date.now()));
@@ -91,6 +91,9 @@ const Schedule = ({
     setItemList(newItemList);
   };
 
+  // 손정민 날짜를 기록해 둠.
+  const [saveDateStr, setSaveDateStr] = useState("");
+
   const onSelect = newValue => {
     setValue(newValue);
     setSelectedValue(newValue);
@@ -103,8 +106,17 @@ const Schedule = ({
       setOpenShopList(false);
       setPlanPK(null);
     } else if (openShopList) {
-      setOpenShopList(false);
+      if (dateString != saveDateStr) {
+        // console.log("날짜가 다르므로 데이터를 다시 가져온다.");
+        setSaveDateStr(dateString); // 손정민 날짜보관
+      } else {
+        // console.log("날짜가 같으므로 닫는다.");
+        setOpenShopList(false);
+        setSaveDateStr(""); // 손정민 날짜보관
+      }
     } else {
+      // console.log("샵리스트 열기");
+      setSaveDateStr(dateString); // 손정민 날짜보관
       setOpenShopList(true);
       setPlanPK(result.iplan);
     }
