@@ -45,7 +45,6 @@ const ShoppingList = ({
   // 모달창
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [selectedDate, setSelectedDate] = useState(
     dayjs(openShopListDate, "YYYY/MM/DD"),
   );
@@ -199,10 +198,6 @@ const ShoppingList = ({
     fetchUnitData();
     console.log(shopList);
   }, []);
-
-  // useEffect(() => {
-  //   fetchItemList();
-  // }, [openShopList]);
 
   return (
     <ShoppingWrap

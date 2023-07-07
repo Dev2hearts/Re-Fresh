@@ -6,7 +6,7 @@ import "../style/schedule.css";
 import FirstItem from "./FirstItem";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faPlus } from "@fortawesome/free-solid-svg-icons";
-import { postPlan, getPlan, postItem, getItemList } from "../api/fetch";
+import { postPlan, getPlan, postItem } from "../api/fetch";
 
 const Schedule = ({
   setOpenShopList,
@@ -53,9 +53,9 @@ const Schedule = ({
     const postData = await postPlan(planData);
     const getData = await getPlan(userGroupPK);
     // itemList의 각 객체를 순회하며 postItem 요청 보내기
-    itemList.forEach(async item => {
+    itemList.map(async item => {
       const itemData = {
-        iplan: postData, // 이전에 생성된 plan의 iplan 값을 사용
+        iplan: postData,
         icate: item.icate,
         nm: item.nm,
         cnt: item.cnt,
@@ -64,10 +64,11 @@ const Schedule = ({
       };
       console.log(itemData);
       await postItem(itemData);
-    });
-    setPlan(getData);
+    }),
+      setPlan(getData);
     setOpenShopList(true);
   };
+
   const handleCancel = () => {
     setItemList([]);
     setIsModalOpen(false);
@@ -100,34 +101,29 @@ const Schedule = ({
     const dateString = newValue.format("YYYY-MM-DD");
     const result = plan.find(item => item.createdAt === dateString);
 
-    if ((openShopList && !result) || !result) {
-      handleModalOpen(); // 모달 열기
+    if (openShopList && result && selectedValue.isSame(newValue, "day")) {
+      setOpenShopList(false);
+    } else if (openShopList && result) {
+      setOpenShopList(false);
+      setTimeout(() => {
+        setOpenShopList(true);
+        setPlanPK(result.iplan);
+      }, 300);
+    } else if (!openShopList && result) {
+      setOpenShopList(true);
+      setPlanPK(result.iplan);
+    } else {
+      handleModalOpen();
       setOpenShopListDate("");
       setOpenShopList(false);
       setPlanPK(null);
-    } else if (openShopList) {
-      if (dateString != saveDateStr) {
-        // console.log("날짜가 다르므로 데이터를 다시 가져온다.");
-        setSaveDateStr(dateString); // 손정민 날짜보관
-      } else {
-        // console.log("날짜가 같으므로 닫는다.");
-        setOpenShopList(false);
-        setSaveDateStr(""); // 손정민 날짜보관
-      }
-    } else {
-      // console.log("샵리스트 열기");
-      setSaveDateStr(dateString); // 손정민 날짜보관
-      setOpenShopList(true);
-      setPlanPK(result.iplan);
     }
-
     setOpenShopListDate(newValue.format("YYYY/MM/DD"));
   };
 
   const onPanelChange = newValue => {
     setValue(newValue);
   };
-
   useEffect(() => {
     const th = document.querySelectorAll(".ant-picker-content th");
     const day = ["일", "월", "화", "수", "목", "금", "토"];

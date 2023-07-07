@@ -90,7 +90,9 @@ export const ShoppingListSC = styled.div`
 export const ModalWrap = styled.div`
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
+  flex-direction: column;
   align-items: center;
   height: 80px;
 `;
@@ -98,7 +100,4 @@ export const ModalCate = styled.span``;
 export const ModalName = styled.span``;
 export const ModalCnt = styled.span``;
 export const ModalUnit = styled.span`
-  font-style: normal;
-  color: #000;
-  margin-left: 5px;
 `;
