@@ -53,7 +53,7 @@ const ShoppingList = ({
   const [selecCate, setSelecCate] = useState("카테고리");
   const [itemName, setItemName] = useState("");
   const [selecUnit, setSelecUnit] = useState("단위");
-  const [ea, setEa] = useState();
+  const [ea, setEa] = useState(1);
   const fetchItemList = async () => {
     const data = await getItemList(userGroupPK, planPK);
     // axios 아이템 리스트
@@ -153,9 +153,6 @@ const ShoppingList = ({
     fetchUnitData();
     console.log(shopList);
   }, []);
-  // useEffect(() => {
-  //   fetchItemList();
-  // }, [openShopList]);
   const itemUpdate = _obj => {
     console.log("뭐지", _obj);
     // 아이템 수정 fetch
