@@ -49,7 +49,7 @@ const Group = ({ setAppGroups }) => {
                     <GIDiv>
                       <Link to={`/main/${item.iuser}/${item.igroup}`}>
                         <img
-                          src={`/img/${item.pic}`}
+                          src={`/img/${item.gpic}`}
                         />
                       </Link>
                     </GIDiv>

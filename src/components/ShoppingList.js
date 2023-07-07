@@ -196,7 +196,6 @@ const ShoppingList = ({
   useEffect(() => {
     fetchCateData();
     fetchUnitData();
-    console.log(shopList);
   }, []);
 
   return (
