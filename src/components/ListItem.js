@@ -192,36 +192,30 @@ const ListItem = ({
         ]}
       >
         <ModalWrap>
-          <Space>
-            <ModalCate>
-              <Select
-                // value={cateList}
-                defaultValue={itemCateNm}
-                style={{
-                  width: 120,
-                }}
-                options={cateList}
-                onChange={onChangeCateNm}
-                // handleCateChange={setCateList}
-              />
-            </ModalCate>
-            <ModalName>
-              {" "}
-              <Input defaultValue={itemNm} onChange={onChangeNm} />
-            </ModalName>
-            <ModalCnt>
-              <InputNumber defaultValue={itemCnt} onChange={onChangeCnt} />
-            </ModalCnt>
-            <ModalUnit>
-              <Select
-                // value={unitList}
-                defaultValue={itemUnitNm}
-                options={unitList}
-                onChange={onChangeUnitNm}
-                // handleUnitChange={setUnitList}
-              />
-            </ModalUnit>
-          </Space>
+          <div className="flex justify-between">
+            <Select
+              defaultValue={itemCateNm}
+              style={{
+                width: 205,
+              }}
+              options={cateList}
+              onChange={onChangeCateNm}
+            />
+          </div>
+          <div className="flex flex-wrap gap-1">
+            <Input defaultValue={itemNm} onChange={onChangeNm} />
+            <InputNumber
+              className="flex-1"
+              defaultValue={itemCnt}
+              onChange={onChangeCnt}
+            />
+            <Select
+              className="flex-1"
+              defaultValue={itemUnitNm}
+              options={unitList}
+              onChange={onChangeUnitNm}
+            />
+          </div>
         </ModalWrap>
       </Modal>
       {/* 목록 관련 ============ */}

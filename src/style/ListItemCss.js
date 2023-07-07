@@ -12,10 +12,10 @@ export const ItemWrap = styled.div`
   padding: 10px;
 `;
 export const ItemListCate = styled.span`
-  width: 20%
+  width: 20%;
 `;
 export const ItemListName = styled.span`
-  width: 30%
+  width: 30%;
 `;
 export const ItemListUnit = styled.span`
   em {

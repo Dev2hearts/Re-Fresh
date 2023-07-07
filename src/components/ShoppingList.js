@@ -1,6 +1,6 @@
 import { DatePicker, Button, Modal, Select, Input, InputNumber } from "antd";
 import dayjs from "dayjs";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   ShoppingWrap,
   ShoppingDiv,
@@ -54,7 +54,7 @@ const ShoppingList = ({
   const [itemName, setItemName] = useState("");
   const [selecUnit, setSelecUnit] = useState("단위");
   const [ea, setEa] = useState();
-
+  const shoppingListRef = useRef(null);
   // 손정민 작업
   // 아이디 전달 받아서 finishYn 변경하기
   const itemChecked = _id => {
@@ -105,7 +105,7 @@ const ShoppingList = ({
     if (isClicked) {
       setScHeight(400);
     } else {
-      setScHeight(800);
+      setScHeight(700);
     }
   };
   // 날짜 바뀌는 거

@@ -17,7 +17,6 @@ const Schedule = ({
   setPlanPK,
   userGroupPK,
   userPK,
-  setShopList,
 }) => {
   const [value, setValue] = useState(() => dayjs(Date.now()));
   const [selectedValue, setSelectedValue] = useState(() => dayjs(Date.now()));
@@ -149,6 +148,10 @@ const Schedule = ({
   return (
     <div>
       <Modal
+        bodyStyle={{
+          maxHeight: "calc(100vh - 500px)",
+          overflowY: "auto",
+        }}
         title={`${selectedValue?.format("YYYY-MM-DD")}`}
         open={isModalOpen}
         onOk={handleOk}

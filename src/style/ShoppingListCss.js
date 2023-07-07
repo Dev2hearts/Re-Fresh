@@ -90,14 +90,10 @@ export const ShoppingListSC = styled.div`
 export const ModalWrap = styled.div`
   position: relative;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  gap: 5px;
   flex-direction: column;
-  align-items: center;
-  height: 80px;
 `;
 export const ModalCate = styled.span``;
 export const ModalName = styled.span``;
 export const ModalCnt = styled.span``;
-export const ModalUnit = styled.span`
-`;
+export const ModalUnit = styled.span``;
