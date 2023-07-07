@@ -51,7 +51,6 @@ const ListItem = ({
   const [itemIUnit, setItemIUnit] = useState("");
   const [itemUnitNm, setItemUnitNm] = useState("");
   const [itemCnt, setItemCnt] = useState(1);
-  const [complete, setComplete] = useState(0);
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
@@ -245,7 +244,6 @@ const ListItem = ({
         </ItemDelete>
         <ItemUser>{item.wuserNm}</ItemUser>
       </ItemWrap>
-      <div>{isChecked ? <span>true</span> : <span>false</span>}</div>
     </>
   );
 };
