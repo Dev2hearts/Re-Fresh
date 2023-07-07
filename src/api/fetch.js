@@ -133,8 +133,8 @@ const postPlan = async _planData => {
 const postItem = async _itemData => {
   try {
     const res = await axiosInstance.post("/pdt", _itemData);
-    const result = res.data;
-    return result;
+    console.log(_itemData);
+    return res.data;
   } catch (err) {
     console.log(err);
     // console.log(_itemData);

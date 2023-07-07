@@ -245,6 +245,7 @@ const ListItem = ({
         </ItemDelete>
         <ItemUser>{item.wuserNm}</ItemUser>
       </ItemWrap>
+      <div>{isChecked ? <span>true</span> : <span>false</span>}</div>
     </>
   );
 };

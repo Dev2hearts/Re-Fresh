@@ -34,17 +34,13 @@ const ShoppingList = ({
   planDelete,
   setOpenShopList,
   fetchPlanData,
-<<<<<<< HEAD
   shopList,
   setShopList,
-=======
->>>>>>> 66955f1c4db7a52468ab069702afc0d0cceeb718
 }) => {
   // 날짜별 장보기 목록 state
-  const [shopList, setShopList] = useState([]);
 
   // 스크롤 영역 너비 state
-  const [scHeight, setScHeight] = useState(400); 
+  const [scHeight, setScHeight] = useState(400);
   const [isClicked, setIsClicked] = useState(false);
   // 모달창
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -94,11 +90,7 @@ const ShoppingList = ({
   const fetchItemList = async () => {
     const data = await getItemList(userGroupPK, planPK);
     // axios 아이템 리스트
-<<<<<<< HEAD
     console.log("axios 아이템 리스트", data);
-=======
-    console.log(data);
->>>>>>> 66955f1c4db7a52468ab069702afc0d0cceeb718
     setShopList(data);
   };
   const fetchCateData = async () => {
@@ -120,8 +112,6 @@ const ShoppingList = ({
   // 날짜 바뀌는 거
   const onChange = async (date, dateString, planPK) => {
     setSelectedDate(date);
-    console.log(dateString);
-    console.log(planPK);
     await patchPlan(planPK, dateString);
     fetchPlanData();
   };
@@ -213,28 +203,6 @@ const ShoppingList = ({
   // useEffect(() => {
   //   fetchItemList();
   // }, [openShopList]);
-<<<<<<< HEAD
-=======
-  const itemUpdate = _obj => {
-    console.log("뭐지", _obj);
-    // 아이템 수정 fetch
-    patchItemList(_obj.iproduct, _obj.icate, _obj.nm, _obj.cnt, _obj.iunit);
-    const newArr = shopList.map(item => {
-      if (item.iproduct === _obj.iproduct) {
-        item = { ..._obj };
-      }
-      return item;
-    });
-
-    setShopList(newArr);
-  };
-  const itemDelete = _iproduct => {
-    deleteItemList(_iproduct);
-    // filter 를 이용해서 state 갱신하기
-    const newArr = shopList.filter(item => item.iproduct !== _iproduct);
-    setShopList(newArr);
-  };
->>>>>>> 66955f1c4db7a52468ab069702afc0d0cceeb718
 
   return (
     <ShoppingWrap
@@ -297,15 +265,15 @@ const ShoppingList = ({
         onCancel={handleDeleteCancel}
         centered
         footer={[
-          <Button key="back" onClick={handleDeleteOk}>
-            <FontAwesomeIcon icon={faCheck} />
-          </Button>,
           <Button
             style={{ backgroundColor: "#1677ff" }}
             key="submit"
             type="primary"
-            onClick={handleDeleteCancel}
+            onClick={handleDeleteOk}
           >
+            <FontAwesomeIcon icon={faCheck} />
+          </Button>,
+          <Button key="back" onClick={handleDeleteCancel}>
             <FontAwesomeIcon icon={faXmark} />
           </Button>,
         ]}
@@ -321,19 +289,15 @@ const ShoppingList = ({
         cancelText={"취소"}
         centered
         footer={[
-          <Button key="back" onClick={handleOk}>
-            <FontAwesomeIcon icon={faCheck} />
-          </Button>,
           <Button
             style={{ backgroundColor: "#1677ff" }}
             key="submit"
             type="primary"
-<<<<<<< HEAD
             onClick={handleAddListOk}
-=======
-            onClick={handleCancel}
->>>>>>> 66955f1c4db7a52468ab069702afc0d0cceeb718
           >
+            <FontAwesomeIcon icon={faCheck} />
+          </Button>,
+          <Button key="back" onClick={handleCancel}>
             <FontAwesomeIcon icon={faXmark} />
           </Button>,
         ]}
