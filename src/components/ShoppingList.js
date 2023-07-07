@@ -34,10 +34,9 @@ const ShoppingList = ({
   planDelete,
   setOpenShopList,
   fetchPlanData,
-  shopList,
-  setShopList
 }) => {
   // 날짜별 장보기 목록 state
+  const [shopList, setShopList] = useState([]);
 
   // 스크롤 영역 너비 state
   const [scHeight, setScHeight] = useState(400);
@@ -58,6 +57,7 @@ const ShoppingList = ({
   const fetchItemList = async () => {
     const data = await getItemList(userGroupPK, planPK);
     // axios 아이템 리스트
+    console.log(data);
     setShopList(data);
   };
   const fetchCateData = async () => {
@@ -79,6 +79,8 @@ const ShoppingList = ({
   // 날짜 바뀌는 거
   const onChange = async (date, dateString, planPK) => {
     setSelectedDate(date);
+    console.log(dateString);
+    console.log(planPK);
     await patchPlan(planPK, dateString);
     fetchPlanData();
   };
@@ -155,6 +157,7 @@ const ShoppingList = ({
   //   fetchItemList();
   // }, [openShopList]);
   const itemUpdate = _obj => {
+    console.log("뭐지", _obj);
     // 아이템 수정 fetch
     patchItemList(_obj.iproduct, _obj.icate, _obj.nm, _obj.cnt, _obj.iunit);
     const newArr = shopList.map(item => {
@@ -231,15 +234,15 @@ const ShoppingList = ({
         onCancel={handleDeleteCancel}
         centered
         footer={[
+          <Button key="back" onClick={handleDeleteOk}>
+            <FontAwesomeIcon icon={faCheck} />
+          </Button>,
           <Button
             style={{ backgroundColor: "#1677ff" }}
             key="submit"
             type="primary"
-            onClick={handleDeleteOk}
+            onClick={handleDeleteCancel}
           >
-            <FontAwesomeIcon icon={faCheck} />
-          </Button>,
-          <Button key="back" onClick={handleDeleteCancel}>
             <FontAwesomeIcon icon={faXmark} />
           </Button>,
         ]}
@@ -255,15 +258,15 @@ const ShoppingList = ({
         cancelText={"취소"}
         centered
         footer={[
+          <Button key="back" onClick={handleOk}>
+            <FontAwesomeIcon icon={faCheck} />
+          </Button>,
           <Button
             style={{ backgroundColor: "#1677ff" }}
             key="submit"
             type="primary"
-            onClick={handleOk}
+            onClick={handleCancel}
           >
-            <FontAwesomeIcon icon={faCheck} />
-          </Button>,
-          <Button key="back" onClick={handleCancel}>
             <FontAwesomeIcon icon={faXmark} />
           </Button>,
         ]}

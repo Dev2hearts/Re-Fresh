@@ -116,8 +116,8 @@ const getItemList = async (_group, _plan) => {
     return result;
   } catch (err) {
     console.log(err);
-    console.log("grop",_group,"plan",_plan)
-    return ([])
+    console.log("grop", _group, "plan", _plan);
+    return [];
   }
 };
 // Post
@@ -133,8 +133,8 @@ const postPlan = async _planData => {
 const postItem = async _itemData => {
   try {
     const res = await axiosInstance.post("/pdt", _itemData);
-    console.log(_itemData);
-    return res.data;
+    const result = res.data;
+    return result;
   } catch (err) {
     console.log(err);
     // console.log(_itemData);
