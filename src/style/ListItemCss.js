@@ -11,7 +11,9 @@ export const ItemWrap = styled.div`
   padding: 10px;
   /* width: calc(100 / 5); */
   &.completed {
-    text-decoration: line-through;
+    z-index: 1000;
+    /* height: 100%; */
+    background-color: rgba(0, 0, 0, 0.05);
   }
 `;
 export const ItemListCate = styled.span`
