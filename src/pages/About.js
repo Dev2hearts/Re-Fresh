@@ -88,7 +88,7 @@ const About = ({ appUsers, appGroups }) => {
               {userPic && <img src={`/img/${userPic}`} alt={userName} />}
             </Imgdiv>
             <Title>{userName}</Title>
-            <SubTitle>{groupGnm} Group</SubTitle>
+            <SubTitle>{groupGnm}</SubTitle>
           </UIDdiv>
         </HeaderUser>
       </Header>
@@ -100,13 +100,13 @@ const About = ({ appUsers, appGroups }) => {
         </div>
         <div>
           <Title>그룹 정보</Title>
-          <SubTitle>{userName} Group</SubTitle>
+          <SubTitle>{userName}</SubTitle>
           <Grouplist>
             {userGroups.map((item, index) => (
-              <li key={index}>{item} Group</li>
+              <li key={index}>-{item}</li>
             ))}
           </Grouplist>
-          <SubTitle>{groupGnm} Group Member List</SubTitle>
+          <SubTitle>{groupGnm} Member List</SubTitle>
           <Userlist>
             {groupList.map((item, index) => (
               <UserLi key={index}>

@@ -12,6 +12,6 @@ export const IntroWrap = styled.div`
   );
 
   img {
-    width: 250px;
+    width: 55%;
   }
 `;

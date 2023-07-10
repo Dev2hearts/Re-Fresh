@@ -64,8 +64,15 @@ const ShoppingList = ({
       }
       return item;
     });
-    setShopList(arr);
+    const checkedItem = arr.find(item => item.iproduct === _id);
+    if (checkedItem.finishYn === 0) {
+      const filteredArr = arr.filter(item => item.iproduct !== _id);
+      setShopList([checkedItem, ...filteredArr]);
+    } else {
+      setShopList(arr);
+    }
   };
+
   // 아이디 전달 받아서 삭제하기
   const itemDelete = _iproduct => {
     // filter 를 이용해서 state 갱신하기
@@ -74,15 +81,29 @@ const ShoppingList = ({
   };
 
   // 아이디 전달 받아서 업데이트
-  const itemUpdate = _obj => {
-    const newArr = shopList.map(item => {
-      if (item.iproduct === _obj.iproduct) {
-        item = { ..._obj };
-      }
-      return item;
-    });
+  // const itemUpdate = _obj => {
+  //   const newArr = shopList.map(item => {
+  //     if (item.iproduct === _obj.iproduct) {
+  //       item = { ..._obj };
+  //     }
+  //     return item;
+  //   });
 
-    setShopList(newArr);
+  //   setShopList(newArr);
+  // };
+  const itemUpdate = async _obj => {
+    if (_obj.finishYn === 0) {
+      const updatedList = shopList.map(item => {
+        if (item.iproduct === _obj.iproduct) {
+          return { ...item, ..._obj };
+        }
+        return item;
+      });
+      setShopList(updatedList);
+    } else {
+      const newArr = shopList.filter(item => item.iproduct !== _obj.iproduct);
+      setShopList([...newArr, _obj]);
+    }
   };
   // 손정민 작업========================= END
 

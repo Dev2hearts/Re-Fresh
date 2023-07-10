@@ -80,9 +80,10 @@ const ListItem = ({
   // };
   const onCheckClick = async e => {
     e.stopPropagation();
-    itemChecked(item.iproduct);
+    await itemChecked(item.iproduct);
     await patchCompleteList(item.iproduct);
     setIsChecked(e.target.checked);
+    itemUpdate(item);
   };
 
   const handleOk = () => {
@@ -152,7 +153,9 @@ const ListItem = ({
     setItemCnt(parseInt(value));
   };
   const handleModalClick = () => {
-    showModal();
+    if (!isChecked) {
+      showModal();
+    }
   };
   const showModal = () => {
     setIsModalOpen(true);

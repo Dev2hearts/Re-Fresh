@@ -8,10 +8,11 @@ export const BackDiv = styled.div`
   padding: 10px;
 `;
 export const Header = styled.header`
-  background: #cccccc;
+  background: #f9f6f1;
   width: 100%;
   height: 35%;
   min-height: 292px;
+  border-radius: 0 0 20px 20px;
 `;
 export const HeaderUser = styled.div`
   flex-direction: column;
@@ -80,6 +81,7 @@ export const Userlist = styled.ul`
 export const Grouplist = styled.ul`
   display: flex;
   list-style-type: none;
+  flex-wrap: wrap;
   padding: 0;
   gap: 2%;
   margin-bottom: 15%;

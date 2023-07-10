@@ -9,6 +9,7 @@ export const ItemWrap = styled.div`
   border-radius: 10px;
   margin-bottom: 20px;
   padding: 10px;
+  cursor: pointer;
   /* width: calc(100 / 5); */
   &.completed {
     z-index: 1000;
