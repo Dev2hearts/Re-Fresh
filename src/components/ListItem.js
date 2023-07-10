@@ -225,7 +225,10 @@ const ListItem = ({
         </ModalWrap>
       </Modal>
       {/* 목록 관련 ============ */}
-      <ItemWrap onClick={handleModalClick}>
+      <ItemWrap
+        className={`ItemWrap ${isChecked ? "completed" : ""}`}
+        onClick={handleModalClick}
+      >
         <Checkbox
           style={{ padding: "15px" }}
           onClick={onCheckClick}

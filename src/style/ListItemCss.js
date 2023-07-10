@@ -10,6 +10,9 @@ export const ItemWrap = styled.div`
   margin-bottom: 20px;
   padding: 10px;
   /* width: calc(100 / 5); */
+  &.completed {
+    text-decoration: line-through;
+  }
 `;
 export const ItemListCate = styled.span`
   width: 15%;

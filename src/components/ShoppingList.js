@@ -206,7 +206,7 @@ const ShoppingList = ({
         className={isClicked ? "shopping-div-top" : "shopping-div-middle"}
       >
         <DatePicker
-          style={{ width: "20%"}}
+          style={{ width: "20%" }}
           onChange={(data, dataStrign) => onChange(data, dataStrign, planPK)}
           value={selectedDate}
           defaultValue={dayjs(openShopListDate, "YYYY/MM/DD")}
