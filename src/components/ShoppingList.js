@@ -8,9 +8,7 @@ import {
 } from "../style/ShoppingListCss";
 import ListItem from "./ListItem";
 import {
-  deleteItemList,
   getItemList,
-  patchItemList,
   postItem,
   patchPlan,
   getCate,
