@@ -48,9 +48,7 @@ const Group = ({ setAppGroups }) => {
                   <GILi key={index}>
                     <GIDiv>
                       <Link to={`/main/${item.iuser}/${item.igroup}`}>
-                        <img
-                          src={`/img/${item.gpic}`}
-                        />
+                        <img src={`/img/${item.gpic}`} />
                       </Link>
                     </GIDiv>
                     <span>{item.gnm}</span>
@@ -64,7 +62,7 @@ const Group = ({ setAppGroups }) => {
         </div>
       </GIStyles>
       <GILogoDiv>
-        <GILogo src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="logo" />
+        <GILogo src={`${process.env.PUBLIC_URL}/images/Logo.png`} alt="logo" />
       </GILogoDiv>
     </GIContainer>
   );

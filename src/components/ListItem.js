@@ -47,10 +47,10 @@ const ListItem = ({
 
   const [itemNm, setItemNm] = useState("");
   const [itemCateNm, setItemCateNm] = useState("");
-  const [itemCate, setItemCate] = useState(0);
-  const [itemIUnit, setItemIUnit] = useState("");
+  const [itemCate, setItemCate] = useState();
+  const [itemIUnit, setItemIUnit] = useState();
   const [itemUnitNm, setItemUnitNm] = useState("");
-  const [itemCnt, setItemCnt] = useState(1);
+  const [itemCnt, setItemCnt] = useState();
   const [isChecked, setIsChecked] = useState(false);
 
   useEffect(() => {
@@ -97,6 +97,7 @@ const ListItem = ({
       cnt: itemCnt,
       unitNm: itemUnitNm,
       icate: itemCate,
+      iunit: itemIUnit,
     };
     // 아이템 수정 fetch
     patchItemList(

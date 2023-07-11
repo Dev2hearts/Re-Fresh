@@ -10,7 +10,7 @@ const Intro = () => {
   return (
     <>
       <IntroWrap onClick={handleClick}>
-        <img src={`${process.env.PUBLIC_URL}/images/logo.png`} alt="로고" />
+        <img src={`${process.env.PUBLIC_URL}/images/Logo.png`} alt="logo" />
       </IntroWrap>
     </>
   );
