@@ -11,7 +11,7 @@ export const Wrap = styled.header`
   border-radius: 0 0 3px 3px;
   a {
     color: #006127;
-    font-weight: 400;
+    font-weight: 600;
   }
 `;
 export const Imgdiv = styled.div`

@@ -86,7 +86,7 @@ const About = ({ appUsers, appGroups }) => {
             <Imgdiv>
               {userPic && <img src={`/img/${userPic}`} alt={userName} />}
             </Imgdiv>
-            <TitleUser>{userName}</TitleUser>
+            <Title>{userName}</Title>
             <SubTitle>{groupGnm}</SubTitle>
           </UIDdiv>
         </HeaderUser>

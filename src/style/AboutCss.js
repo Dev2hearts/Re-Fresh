@@ -5,12 +5,14 @@ export const BackDiv = styled.div`
   max-width: 50px;
   text-align: center;
   font-size: 25px;
+  padding: 10px;
 `;
 export const Header = styled.header`
-  background: #F9F6F1;
+  background: #f9f6f1;
   width: 100%;
   height: 35%;
   min-height: 292px;
+  border-radius: 0 0 20px 20px;
 `;
 export const HeaderUser = styled.div`
   flex-direction: column;
