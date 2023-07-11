@@ -54,7 +54,6 @@ const ShoppingList = ({
   const [itemName, setItemName] = useState("");
   const [selecUnit, setSelecUnit] = useState("단위");
   const [ea, setEa] = useState();
-  const shoppingListRef = useRef(null);
   // 손정민 작업
   // 아이디 전달 받아서 finishYn 변경하기
   const itemChecked = _id => {

@@ -8,7 +8,7 @@
 
 ## 2. 활용 모듈
 
-- React 18
+- react18
 - React Router 6
 - Emotion
 - SCSS

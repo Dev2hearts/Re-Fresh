@@ -89,6 +89,7 @@ export const ShoppingListSC = styled.div`
     background: rgba(128, 128, 128, 0.1); /*스크롤바 뒷 배경 색상*/
   }
 `;
+
 export const ModalWrap = styled.div`
   position: relative;
   display: flex;
