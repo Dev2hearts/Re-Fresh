@@ -13,18 +13,18 @@ export const ShoppingWrap = styled.div`
   .delete-schedule {
     position: absolute;
     top: 20px;
-    left: 180px;
+    left: 25%;
     z-index: 9999;
     height: 32px;
   }
   .add-schedule {
     position: absolute;
     top: 20px;
-    right: 30px;
+    right: 3%;
     height: 32px;
   }
   &.shopping-list-open {
-    top: 475px;
+    top: 520px;
     border-radius: 15px 15px 0 0;
   }
   &.shopping-list-close {
@@ -44,6 +44,7 @@ export const ShoppingWrap = styled.div`
     }
   }
 `;
+
 export const ShoppingDiv = styled.div`
   position: absolute;
   left: 0;
@@ -53,7 +54,7 @@ export const ShoppingDiv = styled.div`
   background: #f9f6f1;
   transition: top 0.5s;
   &.shopping-div-top {
-    top: -475px;
+    top: -480px;
     padding: 20px;
   }
   &.shopping-div-middle {
@@ -74,13 +75,14 @@ export const ShoppingListSC = styled.div`
 
   /* 아래의 모든 코드는 영역::코드로 사용 */
   &::-webkit-scrollbar {
-    width: 2px; /* 스크롤바의 너비 */
+    width: 5px; /* 스크롤바의 너비 */
   }
 
   &::-webkit-scrollbar-thumb {
     height: 40%; /* 스크롤바의 길이 */
     background: #006127; /* 스크롤바의 색상 */
     border-radius: 10px;
+    opacity: 1;
   }
 
   &::-webkit-scrollbar-track {

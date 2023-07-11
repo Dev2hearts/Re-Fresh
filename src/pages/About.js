@@ -4,6 +4,7 @@ import {
   Header,
   HeaderUser,
   UIDdiv,
+  TitleUser,
   BackDiv,
   Imgdiv,
   Title,
@@ -35,7 +36,6 @@ const About = ({ appUsers, appGroups }) => {
       setUser(nowUserFind);
       setGroupList(appUsers.filter(item => item.igroup === nowUserFind.igroup));
     }
-    console.log("사용자 찾기");
   }, [appUsers, userSelectPK, userGroupSelectPK]);
 
   useEffect(() => {
@@ -43,7 +43,6 @@ const About = ({ appUsers, appGroups }) => {
     if (group) {
       setGroupGnm(group.gnm);
     }
-    console.log("그룹");
   }, [appGroups, user]);
 
   useEffect(() => {
@@ -88,25 +87,30 @@ const About = ({ appUsers, appGroups }) => {
               {userPic && <img src={`/img/${userPic}`} alt={userName} />}
             </Imgdiv>
             <Title>{userName}</Title>
-            <SubTitle>{groupGnm} Group</SubTitle>
+            <SubTitle>{groupGnm}</SubTitle>
           </UIDdiv>
         </HeaderUser>
       </Header>
       <Information>
         <div>
           <Title>유저 정보</Title>
-          <UserNmBirth>이름: {userName}</UserNmBirth>
-          <UserNmBirth>생일: {userBirth}</UserNmBirth>
+          <UserNmBirth>
+            이름: <span>{userName}</span>
+          </UserNmBirth>
+          <UserNmBirth>
+            생일: <span>{userBirth}</span>
+          </UserNmBirth>
         </div>
         <div>
-          <Title>그룹 정보</Title>
-          <SubTitle>{userName} Group</SubTitle>
+          <Title>{userName}의 그룹 리스트</Title>
           <Grouplist>
             {userGroups.map((item, index) => (
-              <li key={index}>{item} Group</li>
+              <li key={index}>- {item}</li>
             ))}
           </Grouplist>
-          <SubTitle>{groupGnm} Group Member List</SubTitle>
+        </div>
+        <div>
+          <Title>{groupGnm} Group Member List</Title>
           <Userlist>
             {groupList.map((item, index) => (
               <UserLi key={index}>

@@ -80,9 +80,10 @@ const ListItem = ({
   // };
   const onCheckClick = async e => {
     e.stopPropagation();
-    itemChecked(item.iproduct);
+    await itemChecked(item.iproduct);
     await patchCompleteList(item.iproduct);
     setIsChecked(e.target.checked);
+    itemUpdate(item);
   };
 
   const handleOk = () => {
@@ -152,7 +153,9 @@ const ListItem = ({
     setItemCnt(parseInt(value));
   };
   const handleModalClick = () => {
-    showModal();
+    if (!isChecked) {
+      showModal();
+    }
   };
   const showModal = () => {
     setIsModalOpen(true);
@@ -179,7 +182,7 @@ const ListItem = ({
         destroyOnClose={true}
         footer={[
           <Button
-            style={{ backgroundColor: "#1677ff" }}
+            style={{ backgroundColor: "#006127" }}
             key="submit"
             type="primary"
             onClick={handleOk}
@@ -219,7 +222,10 @@ const ListItem = ({
         </ModalWrap>
       </Modal>
       {/* 목록 관련 ============ */}
-      <ItemWrap onClick={handleModalClick}>
+      <ItemWrap
+        className={`ItemWrap ${isChecked ? "completed" : ""}`}
+        onClick={handleModalClick}
+      >
         <Checkbox
           style={{ padding: "15px" }}
           onClick={onCheckClick}

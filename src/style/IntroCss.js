@@ -10,8 +10,8 @@ export const IntroWrap = styled.div`
     rgba(249, 246, 241, 0.65) 0%,
     rgba(249, 246, 241, 0) 80%
   );
+
   img {
-    width: 250px;
+    width: 55%;
   }
 `;
-

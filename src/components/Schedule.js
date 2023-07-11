@@ -161,7 +161,7 @@ const Schedule = ({
         footer={[
           <Button
             onClick={handleOk}
-            style={{ backgroundColor: "#1677ff" }}
+            style={{ backgroundColor: "#006127" }}
             key="submit"
             type="primary"
           >
