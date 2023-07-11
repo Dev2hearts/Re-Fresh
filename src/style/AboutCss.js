@@ -22,6 +22,7 @@ export const Imgdiv = styled.div`
   width: 25%;
   height: 25%;
   border-radius: 20%;
+  border: 2px solid rgb(0, 97, 39);
   background: #fff;
   overflow: hidden;
   text-align: center;
@@ -52,7 +53,7 @@ export const Information = styled.div`
   width: 80%;
   margin: 5% auto;
   display: flex;
-  gap: 20px;
+  gap: 35px;
   flex-direction: column;
 `;
 export const Title = styled.h1`
@@ -60,6 +61,11 @@ export const Title = styled.h1`
   font-weight: 700;
   color: #333333;
 `;
+export const TitleUser = styled.h1`
+  font-size: 30px;
+  font-weight: 700;
+  color: #333333;
+`
 export const SubTitle = styled.h1`
   font-size: 25px;
   font-weight: 500;
@@ -67,8 +73,10 @@ export const SubTitle = styled.h1`
 `;
 export const UserNmBirth = styled.p`
   font-size: 20px;
-  font-weight: 500;
-  color: #333333;
+  span {
+    color: #333333;
+    font-weight: 500;
+  }
 `;
 export const Userlist = styled.ul`
   display: flex;
@@ -79,12 +87,6 @@ export const Userlist = styled.ul`
   padding: 3% 5% 0;
 `;
 export const Grouplist = styled.ul`
-  display: flex;
-  list-style-type: none;
-  flex-wrap: wrap;
-  padding: 0;
-  gap: 2%;
-  margin-bottom: 15%;
   li {
     font-size: 20px;
   }
@@ -94,7 +96,7 @@ export const UserLi = styled.li`
   text-align: center;
 
   span {
-    color: #305569;
+    color: #333333;
     font-size: 16px;
     font-weight: 500;
   }
@@ -103,7 +105,7 @@ export const UserImgdiv = styled.div`
   width: 100%;
   height: auto;
   border-radius: 20%;
-  border: 1px solid rgb(0, 97, 39);
+  border: 2px solid rgb(0, 97, 39);
   background: #fff;
   overflow: hidden;
   text-align: center;

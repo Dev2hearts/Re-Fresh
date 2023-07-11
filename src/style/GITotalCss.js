@@ -86,7 +86,7 @@ export const GILi = styled.li`
 export const GIDiv = styled.div`
   min-height: 50px;
   min-width: 50px;
-  border: 1px solid rgb(0, 97, 39);
+  border: 2px solid rgb(0, 97, 39);
   border-radius: 20%;
   background: #fff;
   overflow: hidden;
