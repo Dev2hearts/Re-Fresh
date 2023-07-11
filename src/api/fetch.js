@@ -102,7 +102,6 @@ const getItemList = async (_group, _plan) => {
     return result;
   } catch (err) {
     console.log(err);
-    console.log("grop", _group, "plan", _plan);
     return [];
   }
 };
@@ -110,7 +109,6 @@ const getItemList = async (_group, _plan) => {
 const postPlan = async _planData => {
   try {
     const res = await axiosInstance.post("/plan", _planData);
-    // console.log(res.data);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -119,7 +117,6 @@ const postPlan = async _planData => {
 const postItem = async _itemData => {
   try {
     const res = await axiosInstance.post("/pdt", _itemData);
-    console.log(_itemData);
     return res.data;
   } catch (err) {
     console.log(err);
@@ -145,7 +142,6 @@ const deletePlan = async _iplan => {
   }
 };
 const patchItemList = async (_iproduct, _icate, _nm, _cnt, _iunit) => {
-  console.log("카테고리 : ", _icate);
   try {
     let data = {
       iproduct: _iproduct,

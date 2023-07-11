@@ -63,8 +63,9 @@ const Schedule = ({
       };
       console.log(itemData);
       await postItem(itemData);
-    }),
-      setPlan(getData);
+    });
+    setPlan(getData);
+    setPlanPK(postData);
     setOpenShopList(true);
   };
 
