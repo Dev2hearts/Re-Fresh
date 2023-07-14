@@ -52,18 +52,18 @@ const Schedule = ({
     const postData = await postPlan(planData);
     const getData = await getPlan(userGroupPK);
     // itemList의 각 객체를 순회하며 postItem 요청 보내기
-    itemList.map(async item => {
-      const itemData = {
-        iplan: postData,
-        icate: item.icate,
-        nm: item.nm,
-        cnt: item.cnt,
-        iunit: item.iunit,
-        wiuser: userPK,
-      };
-      console.log(itemData);
-      await postItem(itemData);
-    });
+      itemList.map(async item => {
+        const itemData = {
+          iplan: postData,
+          icate: item.icate,
+          nm: item.nm,
+          cnt: item.cnt,
+          iunit: item.iunit,
+          wiuser: userPK,
+        };
+        console.log(itemData);
+        await postItem(itemData);
+      });
     setPlan(getData);
     setPlanPK(postData);
     setOpenShopList(true);
@@ -91,9 +91,6 @@ const Schedule = ({
     const newItemList = itemList.filter(item => item.index !== index);
     setItemList(newItemList);
   };
-
-  // 손정민 날짜를 기록해 둠.
-  const [saveDateStr, setSaveDateStr] = useState("");
 
   const onSelect = newValue => {
     setValue(newValue);
