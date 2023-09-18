@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://capsule-render.vercel.app/api?type=Waving&color=auto&height=200&section=header&text=First%20Colabo%20Project&fontSize=60&fontColor=fff" alt="First Colabo Project" />
+<img src="https://capsule-render.vercel.app/api?type=Waving&color=auto&height=200&section=header&text=First%20Collabo%20Project&fontSize=60&fontColor=fff" alt="First Collabo Project" />
 </div>
 <br/>
 <br/>
