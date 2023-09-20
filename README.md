@@ -22,7 +22,8 @@
   <h4>2023.06.21 ~ 2023.07.13
 </h4>
 
-[ <img src="https://img.shields.io/badge/notion-181717?style=flat&logo=notion&logoColor=fff" />](https://www.notion.so/1-Re-Fresh-6989bdd8122e4c10bc766c6aa68bc91f)
+[ <img src="https://img.shields.io/badge/notion-181717?style=flat&logo=notion&logoColor=fff" />](https://www.notion.so/1-Re-Fresh-6989bdd8122e4c10bc766c6aa68bc91f)&nbsp;&nbsp;&nbsp;[<img src="https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=Figma&logoColor=fff" />](https://www.figma.com/file/0W9b8cdZ4huQ1sGAHMMqme/Re%3AFresh?type=design&node-id=0-1&mode=design&t=8YLTk6kFseSVA6t2-0)
+
 </div>
 <br/>
 <br/>
@@ -37,7 +38,7 @@
 <img src="https://img.shields.io/badge/Axios-5A29E4?style=flat&logo=axios&logoColor=white">
 <img src="https://img.shields.io/badge/Eslint-4B32C3?style=flat&logo=eslint&logoColor=white"><br/>
 <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat&logo=prettier&logoColor=white">
-<img src="https://img.shields.io/badge/Scss-CC6699?style=flat&logo=Scss&logoColor=fff"/>
+<img src="https://img.shields.io/badge/StyledComponent-DB7093?style=flat&logo=styledcomponents&logoColor=white">
 </div>
 <br/>
 <br/>
@@ -65,4 +66,3 @@
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=150&section=footer" alt="" />
 </div>
-
